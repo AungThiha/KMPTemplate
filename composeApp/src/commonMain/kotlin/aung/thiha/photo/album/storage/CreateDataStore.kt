@@ -11,5 +11,5 @@ fun createDataStore(producePath: () -> String): DataStore<Preferences> =
             produceFile = { producePath().toPath() }
         )
 
-internal const val PREF_AUTHENTICATION = "auth.preferences_datastore"
+internal const val PREF_AUTHENTICATION = "auth.preferences_pb"
 val NAMED_AUTHENTICATION_PREFERENCE = named(PREF_AUTHENTICATION)

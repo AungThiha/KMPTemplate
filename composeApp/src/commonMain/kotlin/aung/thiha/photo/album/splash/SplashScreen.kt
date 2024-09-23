@@ -27,7 +27,7 @@ fun SplashScreen(
         Button(
             onClick = {
                 // TODO edit. Splash Screen should look for authentication token to determine where to go next
-                navHostController.navigate(Route.Login.name) {
+                navHostController.navigate(Route.Signin.name) {
                     popUpTo(Route.Splash.name) {
                         inclusive = true
                     }
@@ -37,7 +37,7 @@ fun SplashScreen(
                 .fillMaxWidth()
                 .height(50.dp)
         ) {
-            Text(text = "Sign up", color = Color.White)
+            Text(text = "Sign in", color = Color.White)
         }
     }
 

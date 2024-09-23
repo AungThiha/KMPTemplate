@@ -9,7 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import aung.thiha.photo.album.di.appModule
-import aung.thiha.photo.album.authentication.presentation.login.LoginScreen
+import aung.thiha.photo.album.authentication.presentation.signin.SigninScreen
 import aung.thiha.photo.album.navigation.Route
 import aung.thiha.photo.album.splash.SplashScreen
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -33,8 +33,8 @@ fun App() {
                 composable(route = Route.Splash.name) {
                     SplashScreen(navController)
                 }
-                composable(route = Route.Login.name) {
-                    LoginScreen(navController)
+                composable(route = Route.Signin.name) {
+                    SigninScreen(navController)
                 }
             }
         }
