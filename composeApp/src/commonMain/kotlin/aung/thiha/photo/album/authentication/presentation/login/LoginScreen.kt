@@ -1,4 +1,4 @@
-package aung.thiha.photo.album.login
+package aung.thiha.photo.album.authentication.presentation.login
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
