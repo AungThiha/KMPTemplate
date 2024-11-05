@@ -12,6 +12,7 @@ import aung.thiha.photo.album.di.appModule
 import aung.thiha.photo.album.authentication.presentation.signin.SigninScreen
 import aung.thiha.photo.album.authentication.presentation.signup.SignupScreen
 import aung.thiha.photo.album.navigation.Route
+import aung.thiha.photo.album.photos.presentation.PhotoListScreen
 import aung.thiha.photo.album.splash.SplashScreen
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.KoinApplication
@@ -39,6 +40,9 @@ fun App() {
                 }
                 composable(route = Route.Signup.name) {
                     SignupScreen(navController)
+                }
+                composable(route = Route.PhotoList.name) {
+                    PhotoListScreen(navController)
                 }
             }
         }

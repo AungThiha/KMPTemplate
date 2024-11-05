@@ -40,6 +40,18 @@ fun SigninScreen(
         }
     }
 
+    LaunchedEffect(Unit) {
+        viewModel.events.collect { event ->
+            when (event) {
+                SigninEvent.NavigateToPhotoList -> {
+                    navHostController.navigate(Route.PhotoList.name) {
+                        popUpTo(0)
+                    }
+                }
+            }
+        }
+    }
+
     Scaffold(
         snackbarHost = {
             SnackbarHost(hostState = snackbarHostState)

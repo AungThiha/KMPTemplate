@@ -11,16 +11,16 @@ import aung.thiha.photo.album.authentication.domain.model.SignupInput
 import aung.thiha.photo.album.coroutines.AppDispatchers
 import aung.thiha.photo.album.operation.Outcome
 import aung.thiha.photo.album.operation.SuspendOperation
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class SignupViewModel(
     private val sigup: SuspendOperation<SignupInput, Unit>,
     private val authenticationRepository: AuthenticationRepository
 ) : ViewModel() {
+
+    private val _events = MutableSharedFlow<SignupEvent>()
+    val events: SharedFlow<SignupEvent> = _events.asSharedFlow()
 
     var email by mutableStateOf("")
         private set
@@ -69,10 +69,7 @@ class SignupViewModel(
                 }
                 is Outcome.Success<Unit> -> {
                     authenticationRepository.getAuthenticationSession().let {
-                        // TODO redirect to Photo List Screen
-                        _messages.update { currentMessags ->
-                            currentMessags + "Success"
-                        }
+                        _events.emit(SignupEvent.NavigateToPhotoList)
                         _signupState.value = SignupState.Content
                     }
                 }

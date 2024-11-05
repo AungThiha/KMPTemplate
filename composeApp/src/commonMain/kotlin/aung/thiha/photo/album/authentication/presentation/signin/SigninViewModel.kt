@@ -11,16 +11,17 @@ import aung.thiha.photo.album.authentication.domain.model.SigninInput
 import aung.thiha.photo.album.coroutines.AppDispatchers
 import aung.thiha.photo.album.operation.Outcome
 import aung.thiha.photo.album.operation.SuspendOperation
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class SigninViewModel(
     private val sigin: SuspendOperation<SigninInput, Unit>,
     private val authenticationRepository: AuthenticationRepository
 ) : ViewModel() {
+
+    private val _events = MutableSharedFlow<SigninEvent>()
+    val events: SharedFlow<SigninEvent> = _events.asSharedFlow()
 
     var email by mutableStateOf("")
         private set
@@ -55,10 +56,7 @@ class SigninViewModel(
                 }
                 is Outcome.Success<Unit> -> {
                     authenticationRepository.getAuthenticationSession().let {
-                        // TODO redirect to Photo List Screen
-                        _messages.update { currentMessags ->
-                            currentMessags + "Success"
-                        }
+                        _events.emit(SigninEvent.NavigateToPhotoList)
                         _signinState.value = SigninState.Content
                     }
                 }

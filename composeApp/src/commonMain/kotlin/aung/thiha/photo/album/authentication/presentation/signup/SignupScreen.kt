@@ -19,6 +19,7 @@ import androidx.navigation.NavHostController
 import aung.thiha.photo.album.design.AlbumTopAppBar
 import aung.thiha.photo.album.koin.getViewModel
 import aung.thiha.photo.album.loading.LoadingOverlay
+import aung.thiha.photo.album.navigation.Route
 
 @Composable
 fun SignupScreen(
@@ -37,6 +38,18 @@ fun SignupScreen(
         LaunchedEffect(key1 = message) {
             snackbarHostState.showSnackbar(message = message)
             viewModel.setMessageShown(message)
+        }
+    }
+
+    LaunchedEffect(Unit) {
+        viewModel.events.collect { event ->
+            when (event) {
+                SignupEvent.NavigateToPhotoList -> {
+                    navHostController.navigate(Route.PhotoList.name) {
+                        popUpTo(0)
+                    }
+                }
+            }
         }
     }
 
