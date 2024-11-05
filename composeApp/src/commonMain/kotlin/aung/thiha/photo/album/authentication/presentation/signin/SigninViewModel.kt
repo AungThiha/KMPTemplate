@@ -11,6 +11,10 @@ import aung.thiha.photo.album.authentication.domain.model.SigninInput
 import aung.thiha.photo.album.coroutines.AppDispatchers
 import aung.thiha.photo.album.operation.Outcome
 import aung.thiha.photo.album.operation.SuspendOperation
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class SigninViewModel(
@@ -24,15 +28,16 @@ class SigninViewModel(
     var password by mutableStateOf("")
         private set
 
+    private val _messages: MutableStateFlow<List<String>> = MutableStateFlow(emptyList())
+    val messages: StateFlow<List<String>> = _messages.asStateFlow()
+
     /*
-    1. Add Loading Screen
-    2. Error handling: Show some form of erro to the user. Definitely not popup
     3. Navigate to a blank Photo List Screen
 
     Move to Signup Screen once all three are done
     */
-    private val _signinState = mutableStateOf("nothing")
-    val signinState: State<String> = _signinState
+    private val _signinState = mutableStateOf(SigninState.Content)
+    val signinState: State<SigninState> = _signinState
 
     fun updateEmail(email: String) {
         // TODO email validation
@@ -45,18 +50,31 @@ class SigninViewModel(
 
     fun signin() {
         viewModelScope.launch(AppDispatchers.io) {
-            _signinState.value = "loading"
+            _signinState.value = SigninState.OverlayLoading
             val result = sigin(SigninInput(email = email, password = password))
             when (result) {
                 is Outcome.Failure<Unit> -> {
-                    _signinState.value = "failed"
+                    _messages.update { currentMessags ->
+                        currentMessags + "Failed"
+                    }
+                    _signinState.value = SigninState.Content
                 }
                 is Outcome.Success<Unit> -> {
                     authenticationRepository.getAuthenticationSession().let {
-                        _signinState.value = it?.userId ?: "no user id"
+                        // TODO redirect to Photo List Screen
+                        _messages.update { currentMessags ->
+                            currentMessags + "Success"
+                        }
+                        _signinState.value = SigninState.Content
                     }
                 }
             }
+        }
+    }
+
+    fun setMessageShown(message: String) {
+        _messages.update { currentMessages ->
+            currentMessages.filter { it != message }
         }
     }
 }
