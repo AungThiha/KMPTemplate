@@ -1,7 +1,9 @@
 package aung.thiha.photo.album.authentication.presentation.signin
 
 import androidx.compose.runtime.State
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import aung.thiha.photo.album.authentication.domain.AuthenticationRepository
@@ -16,6 +18,12 @@ class SigninViewModel(
     private val authenticationRepository: AuthenticationRepository
 ) : ViewModel() {
 
+    var email by mutableStateOf("")
+        private set
+
+    var password by mutableStateOf("")
+        private set
+
     /*
     1. Add Loading Screen
     2. Error handling: Show some form of erro to the user. Definitely not popup
@@ -26,10 +34,19 @@ class SigninViewModel(
     private val _signinState = mutableStateOf("nothing")
     val signinState: State<String> = _signinState
 
+    fun updateEmail(email: String) {
+        // TODO email validation
+        this.email = email
+    }
+
+    fun updatePassword(password: String) {
+        this.password = password
+    }
+
     fun signin() {
         viewModelScope.launch(AppDispatchers.io) {
             _signinState.value = "loading"
-            val result = sigin(SigninInput(email = "example@example.com", password = "your_password"))
+            val result = sigin(SigninInput(email = email, password = password))
             when (result) {
                 is Outcome.Failure<Unit> -> {
                     _signinState.value = "failed"

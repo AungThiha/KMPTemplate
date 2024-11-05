@@ -42,10 +42,9 @@ fun SigninScreen(
             modifier = Modifier.padding(bottom = 32.dp)
         )
 
-        // TODO remove the prefilled value
         OutlinedTextField(
-            value = "example@example.com",
-            onValueChange = {},
+            value = viewModel.email,
+            onValueChange = { viewModel.updateEmail(it) },
             label = { Text("email") },
             placeholder = { Text("example@example.com") },
             modifier = Modifier.fillMaxWidth(),
@@ -54,10 +53,9 @@ fun SigninScreen(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // TODO remove the prefilled value
         OutlinedTextField(
-            value = "your_password",
-            onValueChange = {},
+            value = viewModel.password,
+            onValueChange = { viewModel.updatePassword(it) },
             label = { Text("password") },
             placeholder = { Text("your password") },
             modifier = Modifier.fillMaxWidth(),
@@ -82,7 +80,9 @@ fun SigninScreen(
         Spacer(modifier = Modifier.height(16.dp))
 
         Button(
-            onClick = { /* Handle Signup */ },
+            onClick = {
+            /* TODO Handle Signup */
+            },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(50.dp),
