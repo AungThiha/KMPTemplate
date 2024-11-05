@@ -6,18 +6,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import aung.thiha.photo.album.authentication.domain.AuthenticationRepository
 import aung.thiha.photo.album.authentication.domain.model.SigninInput
 import aung.thiha.photo.album.coroutines.AppDispatchers
 import aung.thiha.photo.album.operation.Outcome
 import aung.thiha.photo.album.operation.SuspendOperation
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class SigninViewModel(
-    private val sigin: SuspendOperation<SigninInput, Unit>,
-    private val authenticationRepository: AuthenticationRepository
+    private val sigin: SuspendOperation<SigninInput, Unit>
 ) : ViewModel() {
 
     private val _events = MutableSharedFlow<SigninEvent>()
@@ -55,10 +52,7 @@ class SigninViewModel(
                     _signinState.value = SigninState.Content
                 }
                 is Outcome.Success<Unit> -> {
-                    authenticationRepository.getAuthenticationSession().let {
-                        _events.emit(SigninEvent.NavigateToPhotoList)
-                        _signinState.value = SigninState.Content
-                    }
+                    _events.emit(SigninEvent.NavigateToPhotoList)
                 }
             }
         }

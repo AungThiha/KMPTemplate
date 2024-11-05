@@ -15,8 +15,7 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class SignupViewModel(
-    private val sigup: SuspendOperation<SignupInput, Unit>,
-    private val authenticationRepository: AuthenticationRepository
+    private val sigup: SuspendOperation<SignupInput, Unit>
 ) : ViewModel() {
 
     private val _events = MutableSharedFlow<SignupEvent>()
@@ -68,10 +67,7 @@ class SignupViewModel(
                     _signupState.value = SignupState.Content
                 }
                 is Outcome.Success<Unit> -> {
-                    authenticationRepository.getAuthenticationSession().let {
-                        _events.emit(SignupEvent.NavigateToPhotoList)
-                        _signupState.value = SignupState.Content
-                    }
+                    _events.emit(SignupEvent.NavigateToPhotoList)
                 }
             }
         }

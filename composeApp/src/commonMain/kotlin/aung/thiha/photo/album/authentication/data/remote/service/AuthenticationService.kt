@@ -5,9 +5,12 @@ import aung.thiha.photo.album.authentication.data.remote.response.Authentication
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.plugins.*
+import io.ktor.client.plugins.auth.*
+import io.ktor.client.plugins.auth.providers.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.plugins.logging.*
 import io.ktor.client.request.*
+import io.ktor.client.request.forms.*
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.json.Json
@@ -35,6 +38,41 @@ class AuthenticationService {
                 }
             }
         }
+        /*install(Auth){
+                bearer {
+                    // TODO get access token and refresh here
+                    *//*loadTokens {
+                        BearerTokens(accessToken!!, refreshToken!!)
+                    }*//*
+
+                    refreshTokens {
+
+
+                        val refreshTokenInfo = client.submitForm(
+                            url = "token",
+                            formParameters = Parameters.build {
+                                append("refreshToken", "refreshToken")
+//                                append("x-access-token", userManager.get().refreshToken ?: "")
+                            }
+                        ) { markAsRefreshTokenRequest() }.body<AuthenticationResponse>()
+
+                        userManager.connect(
+                            SessionData(
+                                accessToken = refreshTokenInfo
+                                    .accessToken,
+                                idToken = refreshTokenInfo.idToken,
+                                refreshToken = refreshTokenInfo.refreshToken
+                            )
+                        )
+
+                        val accessToken = refreshTokenInfo.accessToken
+                        val refreshToken = userManager.get().refreshToken
+
+                        BearerTokens(accessToken, refreshToken!!)
+                    }
+                }
+            }*/
+
     }
 
     suspend fun signin(
