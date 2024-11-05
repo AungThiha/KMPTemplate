@@ -46,4 +46,13 @@ class AuthenticationService {
         }.body()
     }
 
+    suspend fun signup(
+        authenticationRequest: AuthenticationRequest
+    ): AuthenticationResponse {
+        return httpClient.post("api/auth/signup") {
+            contentType(ContentType.Application.Json)
+            setBody(authenticationRequest)
+        }.body()
+    }
+
 }

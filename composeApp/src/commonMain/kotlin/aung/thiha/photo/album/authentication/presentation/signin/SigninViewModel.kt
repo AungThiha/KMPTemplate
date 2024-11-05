@@ -30,12 +30,6 @@ class SigninViewModel(
 
     private val _messages: MutableStateFlow<List<String>> = MutableStateFlow(emptyList())
     val messages: StateFlow<List<String>> = _messages.asStateFlow()
-
-    /*
-    3. Navigate to a blank Photo List Screen
-
-    Move to Signup Screen once all three are done
-    */
     private val _signinState = mutableStateOf(SigninState.Content)
     val signinState: State<SigninState> = _signinState
 

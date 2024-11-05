@@ -8,6 +8,7 @@ import aung.thiha.photo.album.authentication.data.remote.service.AuthenticationS
 import aung.thiha.photo.album.authentication.domain.model.AuthenticationSession
 import aung.thiha.photo.album.authentication.domain.AuthenticationRepository
 import aung.thiha.photo.album.authentication.domain.model.SigninInput
+import aung.thiha.photo.album.authentication.domain.model.SignupInput
 import aung.thiha.photo.album.operation.SuspendOperation
 import aung.thiha.photo.album.operation.suspendOperation
 import co.touchlab.kermit.Logger
@@ -72,9 +73,24 @@ class AuthenticationRepositoryImpl(
 
     override val signin: SuspendOperation<SigninInput, Unit> = suspendOperation {
         val result = authenticationService.signin(AuthenticationRequest.fromSigninInput(it))
-        Logger.d("API successful")
+        Logger.d("signin API successful")
         with(result) {
-            Logger.d("API accessToken: $accessToken")
+            Logger.d("accessToken from signin: $accessToken")
+            setAuthenticationSession(
+                AuthenticationSession(
+                    accessToken = accessToken,
+                    refreshToken = refreshToken,
+                    userId = userId,
+                )
+            )
+        }
+    }
+
+    override val signup: SuspendOperation<SignupInput, Unit> = suspendOperation {
+        val result = authenticationService.signup(AuthenticationRequest.fromSignupInput(it))
+        Logger.d("signup API successful")
+        with(result) {
+            Logger.d("accessToken from signup API: $accessToken")
             setAuthenticationSession(
                 AuthenticationSession(
                     accessToken = accessToken,
