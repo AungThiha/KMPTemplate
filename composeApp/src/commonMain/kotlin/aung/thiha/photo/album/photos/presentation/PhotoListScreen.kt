@@ -10,9 +10,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import aung.thiha.photo.album.photos.data.remote.service.PhotosService
+import aung.thiha.photo.album.restartApp
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.koin.compose.getKoin
+import org.koin.core.context.stopKoin
 
 @Composable
 fun PhotoListScreen(

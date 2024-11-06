@@ -1,3 +1,4 @@
+import ComposeApp
 import SwiftUI
 
 @main
