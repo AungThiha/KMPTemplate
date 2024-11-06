@@ -1,6 +1,6 @@
 package aung.thiha.photo.album.authentication.data
 
-import aung.thiha.photo.album.authentication.data.remote.response.AuthenticationRequest
+import aung.thiha.photo.album.authentication.data.remote.request.AuthenticationRequest
 import aung.thiha.photo.album.authentication.data.remote.service.AuthenticationService
 import aung.thiha.photo.album.authentication.domain.AuthenticationRepository
 import aung.thiha.photo.album.authentication.domain.AuthenticationStorage

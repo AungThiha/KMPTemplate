@@ -5,5 +5,7 @@ import org.koin.core.module.Module
 val appModule : List<Module> = listOf(
     platformModule,
     dataStorageModule,
+    networkModule,
     authenticationModule,
+    photoModule
 )

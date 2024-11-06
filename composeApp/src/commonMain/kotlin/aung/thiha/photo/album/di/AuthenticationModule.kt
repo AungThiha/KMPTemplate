@@ -22,7 +22,11 @@ val authenticationModule = module {
             authenticationService = get(),
         )
     }
-    single { AuthenticationService() }
+    single {
+        AuthenticationService(
+            httpClient = get()
+        )
+    }
     factory {
         SigninViewModel(
             sigin = get<AuthenticationRepository>().signin,

@@ -1,4 +1,4 @@
-package aung.thiha.photo.album.authentication.data.remote.response
+package aung.thiha.photo.album.authentication.data.remote.request
 
 import aung.thiha.photo.album.authentication.domain.model.SigninInput
 import aung.thiha.photo.album.authentication.domain.model.SignupInput
