@@ -4,8 +4,6 @@ import ComposeApp
 
 struct ComposeView: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> UIViewController {
-        let restartImpl = ResartiOSAppImpl()
-        RestartHolder.shared.restarter = restartImpl
         return MainViewControllerKt.MainViewController()
     }
 
