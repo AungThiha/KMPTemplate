@@ -1,5 +1,6 @@
 package aung.thiha.photo.album.authentication.data
 
+import aung.thiha.photo.album.AppRestartListener
 import aung.thiha.photo.album.authentication.data.remote.request.AuthenticationRequest
 import aung.thiha.photo.album.authentication.data.remote.service.AuthenticationService
 import aung.thiha.photo.album.authentication.domain.AuthenticationRepository
@@ -22,9 +23,7 @@ class AuthenticationRepositoryImpl(
 
     override val signin: SuspendOperation<SigninInput, Unit> = suspendOperation {
         val result = authenticationService.signin(AuthenticationRequest.fromSigninInput(it))
-        Logger.d("signin API successful")
         with(result) {
-            Logger.d("accessToken from signin: $accessToken")
             authenticationStorage.setAuthenticationSession(
                 AuthenticationSession(
                     accessToken = accessToken,
@@ -51,9 +50,8 @@ class AuthenticationRepositoryImpl(
     }
     override val signout = suspend {
         authenticationStorage.setAuthenticationSession(null)
-        stopKoin()
         withContext(AppDispatchers.main) {
-            restartApp()
+            AppRestartListener.listener.invoke()
         }
     }
 

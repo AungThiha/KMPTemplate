@@ -32,7 +32,6 @@ class SigninViewModel(
     val signinState: State<SigninState> = _signinState
 
     fun updateEmail(email: String) {
-        // TODO email validation
         this.email = email
     }
 

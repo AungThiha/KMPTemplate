@@ -26,6 +26,13 @@ fun App() {
         MaterialTheme {
             val navController: NavHostController = rememberNavController()
 
+            AppRestartListener.listener = {
+                navController.navigate(Route.Splash.name) {
+                    popUpTo(Route.Splash.name) {
+                        inclusive = true
+                    }
+                }
+            }
             NavHost(
                 navController = navController,
                 startDestination = Route.Splash.name,
