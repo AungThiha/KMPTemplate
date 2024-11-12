@@ -53,6 +53,9 @@ kotlin {
             implementation(libs.androidx.navigation)
             implementation(libs.androidx.datastore)
 
+            implementation(libs.coil.compose)
+            implementation(libs.coil.network)
+
             implementation(libs.kermit)
 
             implementation(libs.koin.core)

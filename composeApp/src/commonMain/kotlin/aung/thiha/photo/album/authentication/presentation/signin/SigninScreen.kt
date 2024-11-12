@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import aung.thiha.photo.album.koin.getViewModel
-import aung.thiha.photo.album.loading.LoadingOverlay
+import aung.thiha.photo.album.design.LoadingOverlay
 import aung.thiha.photo.album.navigation.Route
 
 @Composable

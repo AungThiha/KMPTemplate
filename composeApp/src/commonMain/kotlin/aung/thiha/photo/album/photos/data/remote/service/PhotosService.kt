@@ -1,16 +1,17 @@
 package aung.thiha.photo.album.photos.data.remote.service
 
-import aung.thiha.photo.album.authentication.domain.AuthenticationStorage
+import aung.thiha.photo.album.photos.data.remote.response.PhotoResponse
 import io.ktor.client.*
+import io.ktor.client.call.*
 import io.ktor.client.request.*
-import io.ktor.client.statement.*
+import io.ktor.http.*
 
 class PhotosService(
-    private val httpClient: HttpClient,
-    private val authenticationStorage: AuthenticationStorage
+    private val httpClient: HttpClient
 ) {
-
-    suspend fun justChecking(): HttpResponse {
-        return httpClient.get("api/is_token_valid")
+    suspend fun photos(): List<PhotoResponse> {
+        return httpClient.get("photos") {
+            contentType(ContentType.Application.Json)
+        }.body()
     }
 }

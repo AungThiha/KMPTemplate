@@ -1,26 +1,88 @@
 package aung.thiha.photo.album.photos.presentation
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material.Button
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import aung.thiha.photo.album.photos.data.remote.service.PhotosService
-import aung.thiha.photo.album.restartApp
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import org.koin.compose.getKoin
-import org.koin.core.context.stopKoin
+import aung.thiha.photo.album.koin.getViewModel
+import aung.thiha.photo.album.photos.domain.model.Photo
+import coil3.compose.AsyncImage
 
 @Composable
 fun PhotoListScreen(
     navHostController: NavHostController
 ) {
-    val photosService = getKoin().get<PhotosService>()
+    val viewModel = getViewModel<PhotoListViewModel>()
+    val photoListState by remember { viewModel.photoListState }
+
+    // TODO add toolbar
+    // TODO Add signout button
+
+    LaunchedEffect(Unit) {
+        viewModel.load()
+    }
+
+    when (photoListState) {
+        is PhotoListState.Content -> {
+            if ((photoListState as PhotoListState.Content).photos.isEmpty()) {
+                EmptyPhotoGrid()
+            } else {
+                PhotoGrid((photoListState as PhotoListState.Content).photos)
+            }
+        }
+        PhotoListState.Loading -> {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color.Black.copy(alpha = 0.5f)) // Semi-transparent background
+                    .clickable(enabled = false) {} // Disables clicks on the overlay
+            ) {
+                CircularProgressIndicator(
+                    modifier = Modifier
+                        .align(Alignment.Center)
+                )
+            }
+        }
+        PhotoListState.LoadingFailed -> {
+            PhotoLoadingFailed(onRetry = { viewModel.load() })
+        }
+    }
+}
+
+@Composable
+fun PhotoGrid(photos: List<Photo>) {
+    LazyVerticalGrid(
+            columns = GridCells.Fixed(2),
+            modifier = Modifier.fillMaxSize(),
+            contentPadding = PaddingValues(8.dp)
+        ) {
+            items(photos.size) { index ->
+                val photo = photos[index]
+                Box(modifier = Modifier.padding(8.dp)) {
+                    AsyncImage(
+                        model = photo.url,
+                        contentDescription = "photo",
+                    )
+                }
+            }
+        }
+}
+
+@Composable
+fun PhotoLoadingFailed(onRetry: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -29,18 +91,31 @@ fun PhotoListScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Text(text = "Photo List")
+        Text(text = "Loading Photos Failed!")
+
+        Spacer(modifier = Modifier.height(16.dp))
+
         Button(
-            onClick = {
-                GlobalScope.launch {
-                    photosService.justChecking()
-                }
-            },
+            onClick = onRetry,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(50.dp)
         ) {
-            Text(text = "Just Check", color = Color.White)
+            Text(text = "Retry", color = Color.White)
         }
+    }
+}
+
+@Composable
+fun EmptyPhotoGrid() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+            .imePadding(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(text = "No Photos")
     }
 }
