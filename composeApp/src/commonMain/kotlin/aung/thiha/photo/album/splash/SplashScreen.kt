@@ -28,7 +28,7 @@ fun SplashScreen(
             onClick = {
                 // TODO edit. Splash Screen should look for authentication token to determine where to go next
                 navHostController.navigate(Route.Signin.name) {
-                    popUpTo(Route.Signin.name) {
+                    popUpTo(Route.Splash.name) {
                         inclusive = true
                     }
                 }

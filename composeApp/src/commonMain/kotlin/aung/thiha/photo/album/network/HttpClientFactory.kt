@@ -3,6 +3,7 @@ package aung.thiha.photo.album.network
 import aung.thiha.photo.album.authentication.data.remote.response.AuthenticationResponse
 import aung.thiha.photo.album.authentication.domain.AuthenticationStorage
 import aung.thiha.photo.album.authentication.domain.model.AuthenticationSession
+import aung.thiha.photo.album.coroutines.AppDispatchers
 import aung.thiha.photo.album.restartApp
 import io.ktor.client.*
 import io.ktor.client.call.*
@@ -17,12 +18,14 @@ import io.ktor.serialization.kotlinx.json.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
 import okio.IOException
 import org.koin.core.context.stopKoin
 
 class HttpClientFactory(
     private val authenticationStorage: AuthenticationStorage,
+    private val signoutProvider: () -> (suspend () -> Unit),
 ) {
     fun createHttpClient(): HttpClient = HttpClient {
         defaultRequest {
@@ -76,11 +79,7 @@ class HttpClientFactory(
                                return@refreshTokens BearerTokens(accessToken, refreshToken)
                             }
                         } catch (e: Exception) {
-                            authenticationStorage.setAuthenticationSession(null)
-                            stopKoin()
-                            GlobalScope.launch(Dispatchers.Main) {
-                                restartApp()
-                            }
+                            signoutProvider().invoke()
                             return@refreshTokens null
                         }
                     }

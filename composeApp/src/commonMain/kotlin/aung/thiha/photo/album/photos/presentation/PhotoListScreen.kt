@@ -5,9 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.material.Button
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -20,6 +18,9 @@ import androidx.navigation.NavHostController
 import aung.thiha.photo.album.koin.getViewModel
 import aung.thiha.photo.album.photos.domain.model.Photo
 import coil3.compose.AsyncImage
+import org.jetbrains.compose.resources.painterResource
+import photoalbum.composeapp.generated.resources.Res
+import photoalbum.composeapp.generated.resources.ic_action_signout
 
 @Composable
 fun PhotoListScreen(
@@ -28,37 +29,56 @@ fun PhotoListScreen(
     val viewModel = getViewModel<PhotoListViewModel>()
     val photoListState by remember { viewModel.photoListState }
 
-    // TODO add toolbar
-    // TODO Add signout button
-
     LaunchedEffect(Unit) {
         viewModel.load()
     }
 
-    when (photoListState) {
-        is PhotoListState.Content -> {
-            if ((photoListState as PhotoListState.Content).photos.isEmpty()) {
-                EmptyPhotoGrid()
-            } else {
-                PhotoGrid((photoListState as PhotoListState.Content).photos)
-            }
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { },
+                backgroundColor = Color.White,
+                elevation = 0.dp,
+                actions = {
+                    IconButton(onClick = {
+                        viewModel.signout()
+                    }) {
+                        Icon(
+                            painter = painterResource(Res.drawable.ic_action_signout),
+                            contentDescription = "Signout Button"
+                        )
+                    }
+                }
+            )
         }
-        PhotoListState.Loading -> {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(Color.Black.copy(alpha = 0.5f)) // Semi-transparent background
-                    .clickable(enabled = false) {} // Disables clicks on the overlay
-            ) {
-                CircularProgressIndicator(
+    ) { contentPadding ->
+
+        when (photoListState) {
+            is PhotoListState.Content -> {
+                if ((photoListState as PhotoListState.Content).photos.isEmpty()) {
+                    EmptyPhotoGrid()
+                } else {
+                    PhotoGrid((photoListState as PhotoListState.Content).photos)
+                }
+            }
+            PhotoListState.Loading -> {
+                Box(
                     modifier = Modifier
-                        .align(Alignment.Center)
-                )
+                        .fillMaxSize()
+                        .background(Color.Black.copy(alpha = 0.5f)) // Semi-transparent background
+                        .clickable(enabled = false) {} // Disables clicks on the overlay
+                ) {
+                    CircularProgressIndicator(
+                        modifier = Modifier
+                            .align(Alignment.Center)
+                    )
+                }
+            }
+            PhotoListState.LoadingFailed -> {
+                PhotoLoadingFailed(onRetry = { viewModel.load() })
             }
         }
-        PhotoListState.LoadingFailed -> {
-            PhotoLoadingFailed(onRetry = { viewModel.load() })
-        }
+
     }
 }
 

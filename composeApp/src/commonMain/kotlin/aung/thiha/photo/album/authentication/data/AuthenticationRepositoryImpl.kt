@@ -7,9 +7,13 @@ import aung.thiha.photo.album.authentication.domain.AuthenticationStorage
 import aung.thiha.photo.album.authentication.domain.model.AuthenticationSession
 import aung.thiha.photo.album.authentication.domain.model.SigninInput
 import aung.thiha.photo.album.authentication.domain.model.SignupInput
+import aung.thiha.photo.album.coroutines.AppDispatchers
 import aung.thiha.photo.album.operation.SuspendOperation
 import aung.thiha.photo.album.operation.suspendOperation
+import aung.thiha.photo.album.restartApp
 import co.touchlab.kermit.Logger
+import kotlinx.coroutines.withContext
+import org.koin.core.context.stopKoin
 
 class AuthenticationRepositoryImpl(
     private val authenticationStorage: AuthenticationStorage,
@@ -43,6 +47,13 @@ class AuthenticationRepositoryImpl(
                     userId = userId,
                 )
             )
+        }
+    }
+    override val signout = suspend {
+        authenticationStorage.setAuthenticationSession(null)
+        stopKoin()
+        withContext(AppDispatchers.main) {
+            restartApp()
         }
     }
 

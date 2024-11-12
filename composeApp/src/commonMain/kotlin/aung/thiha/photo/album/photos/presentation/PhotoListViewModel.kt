@@ -5,12 +5,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import aung.thiha.photo.album.coroutines.AppDispatchers
+import aung.thiha.photo.album.operation.Operation
 import aung.thiha.photo.album.operation.Outcome
 import aung.thiha.photo.album.operation.SuspendOperation
 import aung.thiha.photo.album.photos.domain.model.Photo
 import kotlinx.coroutines.launch
 
 class PhotoListViewModel(
+    private val _signout: suspend () -> Unit,
     private val photos: SuspendOperation<Unit, List<Photo>>
 ) : ViewModel() {
 
@@ -31,4 +33,9 @@ class PhotoListViewModel(
         }
     }
 
+    fun signout() {
+        viewModelScope.launch {
+            _signout()
+        }
+    }
 }
