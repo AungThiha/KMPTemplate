@@ -1,6 +1,6 @@
 package aung.thiha.photo.album.di
 
-import aung.thiha.photo.album.authentication.domain.AuthenticationRepository
+import aung.thiha.photo.album.authentication.domain.usecase.Signout
 import aung.thiha.photo.album.photos.data.PhotosRepositoryImpl
 import aung.thiha.photo.album.photos.data.remote.service.PhotosService
 import aung.thiha.photo.album.photos.domain.PhotosRepository
@@ -20,7 +20,7 @@ val photoModule = module {
     }
     factory {
         PhotoListViewModel(
-            _signout = get<AuthenticationRepository>().signout,
+            _signout = get<Signout>(),
             photos = get<PhotosRepository>().photos
         )
     }

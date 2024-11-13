@@ -3,6 +3,7 @@ package aung.thiha.photo.album.network
 import aung.thiha.photo.album.authentication.data.remote.response.AuthenticationResponse
 import aung.thiha.photo.album.authentication.domain.AuthenticationStorage
 import aung.thiha.photo.album.authentication.domain.model.AuthenticationSession
+import aung.thiha.photo.album.operation.SuspendOperation
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.plugins.*
@@ -17,7 +18,7 @@ import kotlinx.serialization.json.Json
 
 class HttpClientFactory(
     private val authenticationStorage: AuthenticationStorage,
-    private val signoutProvider: () -> (suspend () -> Unit),
+    private val signoutProvider: () -> (SuspendOperation<Unit, Unit>),
 ) {
     fun createHttpClient(): HttpClient = HttpClient {
         defaultRequest {
@@ -76,7 +77,7 @@ class HttpClientFactory(
                                return@refreshTokens BearerTokens(accessToken, refreshToken)
                             }
                         } catch (e: Exception) {
-                            signoutProvider().invoke()
+                            signoutProvider().invoke(Unit)
                             return@refreshTokens null
                         }
                     }

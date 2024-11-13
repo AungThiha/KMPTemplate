@@ -11,7 +11,6 @@ import aung.thiha.photo.album.authentication.domain.model.SignupInput
 import aung.thiha.photo.album.coroutines.AppDispatchers
 import aung.thiha.photo.album.operation.SuspendOperation
 import aung.thiha.photo.album.operation.suspendOperation
-import co.touchlab.kermit.Logger
 import kotlinx.coroutines.withContext
 
 class AuthenticationRepositoryImpl(
@@ -42,12 +41,6 @@ class AuthenticationRepositoryImpl(
                     userId = userId,
                 )
             )
-        }
-    }
-    override val signout = suspend {
-        authenticationStorage.setAuthenticationSession(null)
-        withContext(AppDispatchers.main) {
-            AppRestartListener.listener.invoke()
         }
     }
 

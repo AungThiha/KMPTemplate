@@ -7,6 +7,5 @@ import aung.thiha.photo.album.operation.SuspendOperation
 interface AuthenticationRepository {
     val signin: SuspendOperation<SigninInput, Unit>
     val signup: SuspendOperation<SignupInput, Unit>
-    val signout: suspend () -> Unit
     val isTokenValid: SuspendOperation<Unit, Unit>
 }

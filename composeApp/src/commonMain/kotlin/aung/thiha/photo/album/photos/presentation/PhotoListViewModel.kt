@@ -11,7 +11,7 @@ import aung.thiha.photo.album.photos.domain.model.Photo
 import kotlinx.coroutines.launch
 
 class PhotoListViewModel(
-    private val _signout: suspend () -> Unit,
+    private val _signout: SuspendOperation<Unit, Unit>,
     private val photos: SuspendOperation<Unit, List<Photo>>
 ) : ViewModel() {
 
@@ -34,7 +34,7 @@ class PhotoListViewModel(
 
     fun signout() {
         viewModelScope.launch {
-            _signout()
+            _signout(Unit)
         }
     }
 }
