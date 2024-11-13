@@ -10,7 +10,7 @@ class PhotosService(
     private val httpClient: HttpClient
 ) {
     suspend fun photos(): List<PhotoResponse> {
-        return httpClient.get("photos") {
+        return httpClient.get("photos/") {
             contentType(ContentType.Application.Json)
         }.body()
     }
