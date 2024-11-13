@@ -7,5 +7,6 @@ val appModule : List<Module> = listOf(
     dataStorageModule,
     networkModule,
     authenticationModule,
-    photoModule
+    splashModule,
+    photoModule,
 )

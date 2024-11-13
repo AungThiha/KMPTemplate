@@ -5,6 +5,7 @@ import aung.thiha.photo.album.authentication.data.local.AuthenticationStorageImp
 import aung.thiha.photo.album.authentication.data.remote.service.AuthenticationService
 import aung.thiha.photo.album.authentication.domain.AuthenticationRepository
 import aung.thiha.photo.album.authentication.domain.AuthenticationStorage
+import aung.thiha.photo.album.authentication.domain.usecase.IsSignedIn
 import aung.thiha.photo.album.authentication.presentation.signin.SigninViewModel
 import aung.thiha.photo.album.authentication.presentation.signup.SignupViewModel
 import aung.thiha.photo.album.storage.NAMED_AUTHENTICATION_PREFERENCE
@@ -35,6 +36,12 @@ val authenticationModule = module {
     factory {
         SignupViewModel(
             sigup = get<AuthenticationRepository>().signup,
+        )
+    }
+    factory {
+        IsSignedIn(
+            authenticationRepository = get(),
+            authenticationStorage = get(),
         )
     }
 }

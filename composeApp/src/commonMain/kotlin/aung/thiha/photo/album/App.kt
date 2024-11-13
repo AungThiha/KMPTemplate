@@ -28,9 +28,7 @@ fun App() {
 
             AppRestartListener.listener = {
                 navController.navigate(Route.Splash.name) {
-                    popUpTo(Route.Splash.name) {
-                        inclusive = true
-                    }
+                    popUpTo(0)
                 }
             }
             NavHost(

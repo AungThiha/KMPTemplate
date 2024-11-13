@@ -11,10 +11,8 @@ import aung.thiha.photo.album.authentication.domain.model.SignupInput
 import aung.thiha.photo.album.coroutines.AppDispatchers
 import aung.thiha.photo.album.operation.SuspendOperation
 import aung.thiha.photo.album.operation.suspendOperation
-import aung.thiha.photo.album.restartApp
 import co.touchlab.kermit.Logger
 import kotlinx.coroutines.withContext
-import org.koin.core.context.stopKoin
 
 class AuthenticationRepositoryImpl(
     private val authenticationStorage: AuthenticationStorage,
@@ -36,9 +34,7 @@ class AuthenticationRepositoryImpl(
 
     override val signup: SuspendOperation<SignupInput, Unit> = suspendOperation {
         val result = authenticationService.signup(AuthenticationRequest.fromSignupInput(it))
-        Logger.d("signup API successful")
         with(result) {
-            Logger.d("accessToken from signup API: $accessToken")
             authenticationStorage.setAuthenticationSession(
                 AuthenticationSession(
                     accessToken = accessToken,
@@ -53,6 +49,10 @@ class AuthenticationRepositoryImpl(
         withContext(AppDispatchers.main) {
             AppRestartListener.listener.invoke()
         }
+    }
+
+    override val isTokenValid: SuspendOperation<Unit, Unit> = suspendOperation {
+        authenticationService.isTokenValid()
     }
 
 }

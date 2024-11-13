@@ -12,7 +12,6 @@ import co.touchlab.kermit.Logger
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.first
 
-
 class AuthenticationStorageImpl(
     private val dataStore: DataStore<Preferences>,
 ) : AuthenticationStorage {
@@ -46,15 +45,12 @@ class AuthenticationStorageImpl(
     }
 
     override suspend fun setAuthenticationSession(authenticationSession: AuthenticationSession?) {
-        Logger.d("Preference accessToken: ${authenticationSession?.accessToken ?: "nothing"}")
         try {
             dataStore.edit { mutablePreferences ->
-                Logger.d("Preference mutablePreferences retrieved")
                 authenticationSession?.let { session ->
                     mutablePreferences[PreferencesKeys.ACCESS_TOKEN] = session.accessToken
                     mutablePreferences[PreferencesKeys.REFRESH_TOKEN] = session.refreshToken
                     mutablePreferences[PreferencesKeys.USER_ID] = session.userId
-                    Logger.d("Preference saved successfully")
                 } ?: run {
                     mutablePreferences.remove(PreferencesKeys.ACCESS_TOKEN)
                     mutablePreferences.remove(PreferencesKeys.REFRESH_TOKEN)
