@@ -22,10 +22,18 @@ class HttpClientFactory(
 ) {
     fun createHttpClient(): HttpClient = HttpClient {
         defaultRequest {
+            host = "quiet-citadel-44720-935ed12c52b6.herokuapp.com"
+            url {
+                protocol = URLProtocol.HTTPS
+            }
+            /*
+            to connect with Aung's machine.
+            beware that this works only if you're on the same local network as his
             host = "192.168.1.34:8080"
             url {
                 protocol = URLProtocol.HTTP
             }
+            */
         }
         install(ContentNegotiation) {
             json(Json {
