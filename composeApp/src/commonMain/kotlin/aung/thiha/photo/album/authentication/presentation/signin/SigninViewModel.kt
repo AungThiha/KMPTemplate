@@ -7,6 +7,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import aung.thiha.photo.album.authentication.domain.model.SigninInput
+import aung.thiha.photo.album.authentication.domain.usecase.isEmailValid
 import aung.thiha.photo.album.coroutines.AppDispatchers
 import aung.thiha.photo.album.operation.Outcome
 import aung.thiha.photo.album.operation.SuspendOperation
@@ -40,6 +41,13 @@ class SigninViewModel(
     }
 
     fun signin() {
+        if (isEmailValid(email).not()) {
+            _messages.update { currentMessags ->
+                currentMessags + "Invalid Email"
+            }
+            return
+        }
+
         viewModelScope.launch(AppDispatchers.io) {
             _signinState.value = SigninState.OverlayLoading
             val result = sigin(SigninInput(email = email, password = password))

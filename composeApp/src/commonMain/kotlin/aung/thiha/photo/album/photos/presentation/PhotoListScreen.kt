@@ -65,7 +65,7 @@ fun PhotoListScreen(
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(Color.Black.copy(alpha = 0.5f)) // Semi-transparent background
+                        .background(Color.White)
                         .clickable(enabled = false) {} // Disables clicks on the overlay
                 ) {
                     CircularProgressIndicator(

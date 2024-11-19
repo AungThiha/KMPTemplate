@@ -6,8 +6,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import aung.thiha.photo.album.authentication.domain.AuthenticationRepository
 import aung.thiha.photo.album.authentication.domain.model.SignupInput
+import aung.thiha.photo.album.authentication.domain.usecase.isEmailValid
 import aung.thiha.photo.album.coroutines.AppDispatchers
 import aung.thiha.photo.album.operation.Outcome
 import aung.thiha.photo.album.operation.SuspendOperation
@@ -47,16 +47,26 @@ class SignupViewModel(
     }
 
     fun signup() {
+
+        if (isEmailValid(email).not()) {
+            _messages.update { currentMessags ->
+                currentMessags + "Invalid Email"
+            }
+            return
+        }
+
+        if (password != confirmPassword) {
+            _messages.update { currentMessags ->
+                currentMessags + "Passwords do not match"
+            }
+            _signupState.value = SignupState.Content
+            return
+        }
+
         viewModelScope.launch(AppDispatchers.io) {
             _signupState.value = SignupState.OverlayLoading
 
-            if (password != confirmPassword) {
-                _messages.update { currentMessags ->
-                    currentMessags + "Passwords do not match"
-                }
-                _signupState.value = SignupState.Content
-                return@launch
-            }
+
 
             val result = sigup(SignupInput(email = email, password = password))
             when (result) {
