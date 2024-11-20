@@ -7,7 +7,7 @@ import aung.thiha.photo.album.photos.domain.PhotosRepository
 import aung.thiha.photo.album.photos.presentation.PhotoListViewModel
 import org.koin.dsl.module
 
-val photoModule = module {
+val photosModule = module {
     factory<PhotosService> {
         PhotosService(
             httpClient = get()

@@ -8,5 +8,5 @@ val appModule : List<Module> = listOf(
     networkModule,
     authenticationModule,
     splashModule,
-    photoModule,
+    photosModule,
 )
