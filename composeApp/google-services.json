@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "881414752157",
+    "project_id": "photo-album-edc22",
+    "storage_bucket": "photo-album-edc22.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:881414752157:android:f44d27b8d1c04a896ed174",
+        "android_client_info": {
+          "package_name": "aung.thiha.photo.album"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwFKIdgqUHu5hVGxIp5qJEvL_mz7K_bGI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

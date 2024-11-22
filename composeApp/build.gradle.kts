@@ -7,7 +7,7 @@ plugins {
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlinxSerialization)
-    id("com.google.gms.google-services")
+    alias(libs.plugins.googleServices)
 }
 
 kotlin {
