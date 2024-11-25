@@ -1,6 +1,7 @@
 package aung.thiha.photo.album.authentication.presentation.signup
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -10,6 +11,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
@@ -31,6 +33,8 @@ fun SignupScreen(
 
     val messages by viewModel.messages.collectAsStateWithLifecycle()
     val snackbarHostState = remember { SnackbarHostState() }
+
+    val keyboard = LocalSoftwareKeyboardController.current
 
     if (messages.isNotEmpty()) {
         val message = messages.first()
@@ -82,6 +86,7 @@ fun SignupScreen(
                 label = { Text("email") },
                 placeholder = { Text("example@example.com") },
                 modifier = Modifier.fillMaxWidth(),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
                 singleLine = true
             )
 
@@ -115,6 +120,7 @@ fun SignupScreen(
 
             Button(
                 onClick = {
+                    keyboard?.hide()
                     viewModel.signup()
                 },
                 modifier = Modifier

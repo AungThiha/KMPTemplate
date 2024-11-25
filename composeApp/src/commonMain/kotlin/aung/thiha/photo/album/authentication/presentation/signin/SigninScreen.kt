@@ -10,6 +10,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
@@ -30,6 +31,8 @@ fun SigninScreen(
 
     val messages by viewModel.messages.collectAsStateWithLifecycle()
     val snackbarHostState = remember { SnackbarHostState() }
+
+    val keyboard = LocalSoftwareKeyboardController.current
 
     if (messages.isNotEmpty()) {
         val message = messages.first()
@@ -77,6 +80,7 @@ fun SigninScreen(
                 onValueChange = { viewModel.updateEmail(it) },
                 label = { Text("email") },
                 placeholder = { Text("example@example.com") },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = true
             )
@@ -98,6 +102,7 @@ fun SigninScreen(
 
             Button(
                 onClick = {
+                    keyboard?.hide()
                     viewModel.signin()
                 },
                 modifier = Modifier
