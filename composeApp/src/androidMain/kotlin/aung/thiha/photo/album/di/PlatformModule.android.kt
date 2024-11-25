@@ -6,7 +6,7 @@ import org.koin.core.module.Module
 import org.koin.dsl.module
 
 actual val platformModule: Module = module {
-    single<Context> {
-        ContextHolder.context
-    }
+//    single<Context> {
+//        ContextHolder.context
+//    }
 }

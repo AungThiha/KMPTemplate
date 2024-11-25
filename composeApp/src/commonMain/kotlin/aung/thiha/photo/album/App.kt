@@ -20,10 +20,7 @@ import org.koin.compose.KoinApplication
 @Composable
 @Preview
 fun App() {
-    KoinApplication(application = {
-        modules(appModule)
-    }) {
-        MaterialTheme {
+    MaterialTheme {
             val navController: NavHostController = rememberNavController()
 
             AppRestartListener.listener = {
@@ -51,5 +48,4 @@ fun App() {
                 }
             }
         }
-    }
 }
