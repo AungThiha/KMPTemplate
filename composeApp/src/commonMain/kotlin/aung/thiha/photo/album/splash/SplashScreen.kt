@@ -2,20 +2,18 @@ package aung.thiha.photo.album.splash
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import aung.thiha.photo.album.koin.getViewModel
 import aung.thiha.photo.album.navigation.Route
 import org.jetbrains.compose.resources.painterResource
 import photoalbum.composeapp.generated.resources.Res
-import photoalbum.composeapp.generated.resources.compose_multiplatform
+import photoalbum.composeapp.generated.resources.ic_waffles
 
 @Composable
 fun SplashScreen(
@@ -54,9 +52,13 @@ fun SplashScreen(
         verticalArrangement = Arrangement.Center
     ) {
         Image(
-            painter = painterResource(Res.drawable.compose_multiplatform),
+            painter = painterResource(Res.drawable.ic_waffles),
             contentDescription = null
         )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Text(text = "Photo Album")
     }
 
 }
