@@ -3,6 +3,7 @@ package aung.thiha.photo.album.splash
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -59,5 +60,7 @@ fun SplashScreen(
             fontSize = 24.sp,
             modifier = Modifier.padding(bottom = 32.dp)
         )
+        Spacer(modifier = Modifier.height(8.dp))
+        LinearProgressIndicator()
     }
 }
