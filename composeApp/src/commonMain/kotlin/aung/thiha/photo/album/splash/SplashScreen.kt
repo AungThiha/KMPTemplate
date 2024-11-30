@@ -1,13 +1,17 @@
 package aung.thiha.photo.album.splash
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import aung.thiha.photo.album.koin.getViewModel
 import aung.thiha.photo.album.navigation.Route
@@ -46,19 +50,14 @@ fun SplashScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
             .imePadding(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Image(
-            painter = painterResource(Res.drawable.ic_waffles),
-            contentDescription = null
+        Text(
+            text = "Photo Album",
+            fontSize = 24.sp,
+            modifier = Modifier.padding(bottom = 32.dp)
         )
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Text(text = "Photo Album")
     }
-
 }
