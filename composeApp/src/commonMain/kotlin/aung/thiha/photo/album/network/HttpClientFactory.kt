@@ -22,15 +22,15 @@ class HttpClientFactory(
 ) {
     fun createHttpClient(): HttpClient = HttpClient {
         defaultRequest {
-//            host = "quiet-citadel-44720-935ed12c52b6.herokuapp.com" // https://github.com/AungThiha/PhotoAlbumServer
-//            url {
-//                protocol = URLProtocol.HTTPS
-//            }
-            // to connect local server. your app needs to be on the same local network as the server
-            host = "192.168.1.34:8080" // IP:PORT of your local server
+            host = "quiet-citadel-44720-935ed12c52b6.herokuapp.com" // https://github.com/AungThiha/PhotoAlbumServer
             url {
-                protocol = URLProtocol.HTTP
+                protocol = URLProtocol.HTTPS
             }
+            // to connect local server. your app needs to be on the same local network as the server
+//            host = "192.168.1.34:8080" // IP:PORT of your local server
+//            url {
+//                protocol = URLProtocol.HTTP
+//            }
         }
         install(ContentNegotiation) {
             json(Json {
