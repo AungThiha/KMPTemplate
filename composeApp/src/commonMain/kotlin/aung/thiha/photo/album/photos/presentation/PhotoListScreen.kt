@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -36,17 +37,18 @@ fun PhotoListScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { },
+                title = {
+                    Text("Photos")
+                },
+                modifier = Modifier.padding(end = 16.dp),
                 backgroundColor = Color.White,
                 elevation = 0.dp,
                 actions = {
-                    IconButton(onClick = {
-                        viewModel.signout()
-                    }) {
-                        Icon(
-                            painter = painterResource(Res.drawable.ic_action_signout),
-                            contentDescription = "Signout Button"
-                        )
+                    OutlinedButton(
+                        shape = RoundedCornerShape(16.dp),
+                        onClick = { viewModel.signout() }
+                    ) {
+                        Text("Sign out")
                     }
                 }
             )
