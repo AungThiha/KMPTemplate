@@ -1,5 +1,6 @@
 package aung.thiha.photo.album.photos.presentation
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -15,13 +16,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import aung.thiha.photo.album.koin.getViewModel
 import aung.thiha.photo.album.photos.domain.model.Photo
-import coil3.compose.AsyncImage
-import org.jetbrains.compose.resources.painterResource
-import photoalbum.composeapp.generated.resources.Res
-import photoalbum.composeapp.generated.resources.ic_action_signout
+import coil3.compose.AsyncImagePainter
+import coil3.compose.rememberAsyncImagePainter
+import com.valentinilk.shimmer.shimmer
 
 @Composable
 fun PhotoListScreen(
@@ -91,13 +92,23 @@ fun PhotoGrid(photos: List<Photo>) {
             modifier = Modifier.fillMaxSize(),
             contentPadding = PaddingValues(8.dp)
         ) {
-            items(photos.size) { index ->
+            items(photos.size, key = { index -> photos[index].id }) { index ->
                 val photo = photos[index]
+                val painter = rememberAsyncImagePainter(model = photo.url)
                 Box(modifier = Modifier.padding(8.dp)) {
-                    AsyncImage(
-                        model = photo.url,
+                    Image(
+                        painter = painter,
                         contentDescription = "photo",
                     )
+                    if (painter.state.collectAsStateWithLifecycle().value is AsyncImagePainter.State.Loading) {
+                        Box(modifier = Modifier
+                            .aspectRatio(1f)
+                            .shimmer()
+                        ) {
+                            Box(modifier = Modifier.fillMaxSize().background(Color.LightGray))
+                        }
+                    }
+
                 }
             }
         }
