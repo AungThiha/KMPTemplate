@@ -1,4 +1,4 @@
-package aung.thiha.photo.album.operation
+package aung.thiha.operation
 
 sealed interface Outcome<D> {
     data class Failure<D>(val type: FailureType, val e: Exception) : Outcome<D>

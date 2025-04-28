@@ -9,8 +9,8 @@ import androidx.lifecycle.viewModelScope
 import aung.thiha.photo.album.authentication.domain.model.SigninInput
 import aung.thiha.photo.album.authentication.domain.usecase.isEmailValid
 import aung.thiha.photo.album.coroutines.AppDispatchers
-import aung.thiha.photo.album.operation.Outcome
-import aung.thiha.photo.album.operation.SuspendOperation
+import aung.thiha.operation.Outcome
+import aung.thiha.operation.SuspendOperation
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 

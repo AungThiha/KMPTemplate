@@ -1,6 +1,5 @@
 package aung.thiha.photo.album.authentication.data
 
-import aung.thiha.photo.album.AppRestartListener
 import aung.thiha.photo.album.authentication.data.remote.request.AuthenticationRequest
 import aung.thiha.photo.album.authentication.data.remote.service.AuthenticationService
 import aung.thiha.photo.album.authentication.domain.AuthenticationRepository
@@ -8,10 +7,8 @@ import aung.thiha.photo.album.authentication.domain.AuthenticationStorage
 import aung.thiha.photo.album.authentication.domain.model.AuthenticationSession
 import aung.thiha.photo.album.authentication.domain.model.SigninInput
 import aung.thiha.photo.album.authentication.domain.model.SignupInput
-import aung.thiha.photo.album.coroutines.AppDispatchers
-import aung.thiha.photo.album.operation.SuspendOperation
-import aung.thiha.photo.album.operation.suspendOperation
-import kotlinx.coroutines.withContext
+import aung.thiha.operation.SuspendOperation
+import aung.thiha.operation.suspendOperation
 
 class AuthenticationRepositoryImpl(
     private val authenticationStorage: AuthenticationStorage,
