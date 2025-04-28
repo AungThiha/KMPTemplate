@@ -1,7 +1,7 @@
 package aung.thiha.photo.album.photos.data
 
-import aung.thiha.photo.album.operation.SuspendOperation
-import aung.thiha.photo.album.operation.suspendOperation
+import aung.thiha.operation.SuspendOperation
+import aung.thiha.operation.suspendOperation
 import aung.thiha.photo.album.photos.data.remote.service.PhotosService
 import aung.thiha.photo.album.photos.domain.PhotosRepository
 import aung.thiha.photo.album.photos.domain.model.Photo

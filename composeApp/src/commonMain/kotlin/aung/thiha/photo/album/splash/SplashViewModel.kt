@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import aung.thiha.photo.album.authentication.domain.usecase.IsSignedIn
 import aung.thiha.photo.album.coroutines.AppDispatchers
-import aung.thiha.photo.album.operation.Outcome
+import aung.thiha.operation.Outcome
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow

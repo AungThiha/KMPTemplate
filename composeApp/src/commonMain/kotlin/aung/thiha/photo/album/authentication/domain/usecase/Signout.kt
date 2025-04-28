@@ -3,8 +3,8 @@ package aung.thiha.photo.album.authentication.domain.usecase
 import aung.thiha.photo.album.AppRestartListener
 import aung.thiha.photo.album.authentication.domain.AuthenticationStorage
 import aung.thiha.photo.album.coroutines.AppDispatchers
-import aung.thiha.photo.album.operation.Outcome
-import aung.thiha.photo.album.operation.SuspendOperation
+import aung.thiha.operation.Outcome
+import aung.thiha.operation.SuspendOperation
 import kotlinx.coroutines.withContext
 
 class Signout(

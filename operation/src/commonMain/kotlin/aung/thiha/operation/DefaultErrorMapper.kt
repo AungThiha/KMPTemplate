@@ -1,4 +1,4 @@
-package aung.thiha.photo.album.operation
+package aung.thiha.operation
 
 import io.ktor.utils.io.errors.IOException
 

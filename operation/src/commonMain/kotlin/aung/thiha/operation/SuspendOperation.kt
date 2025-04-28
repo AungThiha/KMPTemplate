@@ -1,4 +1,4 @@
-package aung.thiha.photo.album.operation
+package aung.thiha.operation
 
 fun interface SuspendOperation<I, O> : suspend (I) -> Outcome<O>
 
