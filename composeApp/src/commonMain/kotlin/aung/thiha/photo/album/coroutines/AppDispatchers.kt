@@ -1,6 +1,5 @@
 package aung.thiha.photo.album.coroutines
 
-import androidx.compose.runtime.TestOnly
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO

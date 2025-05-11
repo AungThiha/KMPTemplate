@@ -2,14 +2,13 @@ package aung.thiha.photo.album.di
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
-import aung.thiha.photo.album.storage.NAMED_AUTHENTICATION_PREFERENCE
-import aung.thiha.photo.album.storage.createDataStore
+import aung.thiha.storage.createKeyValueStorage
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
-actual val dataStorageModule: Module
+actual val sessionStorageModule: Module
     get() = module {
         single<DataStore<Preferences>>(NAMED_AUTHENTICATION_PREFERENCE) {
-            createDataStore(context = get())
+            createKeyValueStorage(PREF_AUTHENTICATION)
         }
     }
