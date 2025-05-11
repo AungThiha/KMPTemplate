@@ -1,6 +1,6 @@
 package aung.thiha.photo.album.di
 
-import aung.thiha.photo.album.authentication.di.authenticationDataModule
+import aung.thiha.photo.album.authentication.data.di.authenticationDataModule
 import aung.thiha.photo.album.authentication.di.authenticationDomainModule
 import aung.thiha.photo.album.authentication.presentation.di.authenticationPresentationModule
 import aung.thiha.session.data.di.sessionStorageModule

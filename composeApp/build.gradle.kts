@@ -48,6 +48,7 @@ kotlin {
 
             implementation(projects.coroutines)
 
+            implementation(projects.authentication.data)
             implementation(projects.authentication.domain)
 
             implementation(projects.session.data)
