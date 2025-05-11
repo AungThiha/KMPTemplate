@@ -3,6 +3,7 @@ plugins {
 }
 
 kotlin {
+    jvmToolchain(11)
     jvm()
     iosX64()
     iosArm64()
@@ -15,10 +16,5 @@ kotlin {
             }
         }
     }
-}
-
-java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
 }
 

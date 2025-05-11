@@ -8,3 +8,7 @@ sealed interface Outcome<D> {
 enum class FailureType {
     NETWORK, GENERAL;
 }
+
+inline fun <reified T> Outcome<T>.getOrNull(): T? {
+    return (this as? Outcome.Success)?.data
+}
