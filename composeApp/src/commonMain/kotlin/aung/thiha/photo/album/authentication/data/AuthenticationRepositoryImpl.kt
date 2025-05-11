@@ -12,8 +12,11 @@ import aung.thiha.operation.suspendOperation
 
 class AuthenticationRepositoryImpl(
     private val authenticationStorage: AuthenticationStorage,
-    private val authenticationService: AuthenticationService,
+    private val authenticationServiceProvider: Lazy<AuthenticationService>,
 ) : AuthenticationRepository {
+
+    private val authenticationService: AuthenticationService
+        get() = authenticationServiceProvider.value
 
     override val signin: SuspendOperation<SigninInput, Unit> = suspendOperation {
         val result = authenticationService.signin(AuthenticationRequest.fromSigninInput(it))
@@ -43,6 +46,14 @@ class AuthenticationRepositoryImpl(
 
     override val isTokenValid: SuspendOperation<Unit, Unit> = suspendOperation {
         authenticationService.isTokenValid()
+    }
+
+    override val getAuthenticationSession: SuspendOperation<Unit, AuthenticationSession?> = suspendOperation {
+        authenticationStorage.getAuthenticationSession()
+    }
+
+    override val setAuthenticationSession: SuspendOperation<AuthenticationSession?, Unit> = suspendOperation {
+        authenticationStorage.setAuthenticationSession(it)
     }
 
 }

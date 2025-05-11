@@ -12,3 +12,11 @@ fun <I, O> suspendOperation(
         mapError(e)
     }
 }
+
+suspend inline fun <reified O> SuspendOperation<Unit, O>.getOrNull(): O? {
+    return invoke(Unit).getOrNull()
+}
+
+suspend inline fun <I, reified O> SuspendOperation<I, O>.getOrNull(input: I): O? {
+    return invoke(input).getOrNull()
+}

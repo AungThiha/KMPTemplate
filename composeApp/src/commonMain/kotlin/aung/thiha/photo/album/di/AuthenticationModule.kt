@@ -21,7 +21,7 @@ val authenticationModule = module {
     factory<AuthenticationRepository> {
         AuthenticationRepositoryImpl(
             authenticationStorage = get(),
-            authenticationService = get(),
+            authenticationServiceProvider = lazy(LazyThreadSafetyMode.NONE) { get() },
         )
     }
     single {

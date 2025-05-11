@@ -8,11 +8,13 @@ import org.koin.dsl.module
 
 val networkModule = module {
     factory<HttpClientFactory> {
+        val authenticationRepository = get<AuthenticationRepository>()
         HttpClientFactory(
+            getAuthenticationSession = authenticationRepository.getAuthenticationSession,
+            setAuthenticationSession = authenticationRepository.setAuthenticationSession,
             signoutProvider = {
                 get<Signout>()
-            },
-            authenticationStorage = get(),
+            }
         )
     }
     factory<HttpClient> {
