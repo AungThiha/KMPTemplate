@@ -29,7 +29,8 @@ dependencyResolutionManagement {
 }
 
 include(
-    ":authentication:domain"
+    ":authentication:data",
+    ":authentication:domain",
 )
 include(":coroutines")
 include(":composeApp")
@@ -38,5 +39,5 @@ include(":operation")
 include(":storage")
 include(
     ":session:data",
-    ":session:domain"
+    ":session:domain",
 )

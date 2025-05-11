@@ -1,4 +1,4 @@
-package aung.thiha.photo.album.authentication.di
+package aung.thiha.photo.album.authentication.data.di
 
 import aung.thiha.photo.album.authentication.data.AuthenticationRepositoryImpl
 import aung.thiha.photo.album.authentication.data.plugin.AuthPlugin
