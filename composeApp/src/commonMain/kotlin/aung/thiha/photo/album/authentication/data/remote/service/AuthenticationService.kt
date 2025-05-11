@@ -3,8 +3,10 @@ package aung.thiha.photo.album.authentication.data.remote.service
 import aung.thiha.photo.album.authentication.data.remote.request.AuthenticationRequest
 import aung.thiha.photo.album.authentication.data.remote.response.AuthenticationResponse
 import aung.thiha.photo.album.authentication.data.remote.response.TokenCheckResponse
+import aung.thiha.photo.album.authentication.data.remote.request.RefreshTokenRequest
 import io.ktor.client.*
 import io.ktor.client.call.*
+import io.ktor.client.plugins.auth.providers.RefreshTokensParams
 import io.ktor.client.request.*
 import io.ktor.http.*
 
@@ -40,4 +42,11 @@ class AuthenticationService(
         return httpResponse.body()
     }
 
+    suspend fun refreshTokens(refreshTokensParams: RefreshTokensParams, refreshToken: String) = refreshTokensParams.run {
+        client.post("api/auth/refreshtoken") {
+            contentType(ContentType.Application.Json)
+            setBody(RefreshTokenRequest(refreshToken))
+            markAsRefreshTokenRequest()
+        }
+    }
 }

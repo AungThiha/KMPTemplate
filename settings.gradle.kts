@@ -28,6 +28,10 @@ dependencyResolutionManagement {
     }
 }
 
+include(
+    ":authentication:domain"
+)
+include(":coroutines")
 include(":composeApp")
 include(":design")
 include(":operation")

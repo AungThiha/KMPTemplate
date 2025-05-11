@@ -1,4 +1,4 @@
-package aung.thiha.photo.album.network
+package aung.thiha.photo.album.authentication.data.remote.request
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
