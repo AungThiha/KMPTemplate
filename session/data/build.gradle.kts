@@ -17,22 +17,26 @@ kotlin {
     iosX64()
     iosArm64()
     iosSimulatorArm64()
-    
+
     sourceSets {
-        
+
         androidMain.dependencies {
         }
         iosMain.dependencies {
         }
         commonMain.dependencies {
+            implementation(projects.storage)
+            implementation(projects.session.domain)
+
             implementation(libs.androidx.datastore)
             implementation(libs.koin.core)
+            implementation(libs.kermit)
         }
     }
 }
 
 android {
-    namespace = "aung.thiha.storage"
+    namespace = "aung.thiha.session"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")

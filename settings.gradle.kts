@@ -32,4 +32,7 @@ include(":composeApp")
 include(":design")
 include(":operation")
 include(":storage")
-include(":session:domain")
+include(
+    ":session:data",
+    ":session:domain"
+)

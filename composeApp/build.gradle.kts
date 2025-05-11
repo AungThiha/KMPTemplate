@@ -46,6 +46,7 @@ kotlin {
             implementation(projects.operation)
             implementation(projects.storage)
 
+            implementation(projects.session.data)
             implementation(projects.session.domain)
 
             implementation(compose.runtime)

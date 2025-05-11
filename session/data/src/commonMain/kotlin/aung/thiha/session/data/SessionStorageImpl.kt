@@ -1,4 +1,4 @@
-package aung.thiha.photo.album.authentication.data.local
+package aung.thiha.session.data
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.core.IOException
@@ -6,22 +6,22 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.stringPreferencesKey
-import aung.thiha.photo.album.authentication.domain.AuthenticationStorage
-import aung.thiha.photo.album.authentication.domain.model.AuthenticationSession
+import aung.thiha.session.domain.SessionStorage
+import aung.thiha.session.domain.model.Session
 import co.touchlab.kermit.Logger
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.first
 
-class AuthenticationStorageImpl(
+class SessionStorageImpl(
     private val dataStore: DataStore<Preferences>,
-) : AuthenticationStorage {
+) : SessionStorage {
     private object PreferencesKeys {
         val ACCESS_TOKEN = stringPreferencesKey("ACCESS_TOKEN")
         val USER_ID = stringPreferencesKey("USER_ID")
         val REFRESH_TOKEN = stringPreferencesKey("REFRESH_TOKEN")
     }
 
-    override suspend fun getAuthenticationSession() : AuthenticationSession? {
+    override suspend fun getAuthenticationSession() : Session? {
         val preferences = dataStore.data
             .catch { exception ->
                 if (exception is IOException) {
@@ -34,7 +34,7 @@ class AuthenticationStorageImpl(
         val refreshToken = preferences[PreferencesKeys.REFRESH_TOKEN]
         val userId = preferences[PreferencesKeys.USER_ID]
         return if (accessToken != null && refreshToken != null && userId != null) {
-            AuthenticationSession(
+            Session(
                 accessToken = accessToken,
                 refreshToken = refreshToken,
                 userId = userId,
@@ -44,10 +44,10 @@ class AuthenticationStorageImpl(
         }
     }
 
-    override suspend fun setAuthenticationSession(authenticationSession: AuthenticationSession?) {
+    override suspend fun setAuthenticationSession(session: Session?) {
         try {
             dataStore.edit { mutablePreferences ->
-                authenticationSession?.let { session ->
+                session?.let { session ->
                     mutablePreferences[PreferencesKeys.ACCESS_TOKEN] = session.accessToken
                     mutablePreferences[PreferencesKeys.REFRESH_TOKEN] = session.refreshToken
                     mutablePreferences[PreferencesKeys.USER_ID] = session.userId

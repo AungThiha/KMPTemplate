@@ -4,6 +4,6 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 
-fun createKeyValueStorage(context: Context, prefFileName: String): DataStore<Preferences> = createKeyValueStorage(
+fun createPrefDataStore(context: Context, prefFileName: String): DataStore<Preferences> = createPrefDataStore(
     producePath = { context.filesDir.resolve(prefFileName).absolutePath }
 )
