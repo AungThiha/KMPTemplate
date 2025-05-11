@@ -8,8 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.painterResource
-import photoalbum.composeapp.generated.resources.Res
-import photoalbum.composeapp.generated.resources.ic_action_arrow_back_ios
+import photoalbum.design.generated.resources.Res
+import photoalbum.design.generated.resources.ic_action_arrow_back_ios
 
 @Composable
 fun AlbumTopAppBar(
@@ -22,6 +22,7 @@ fun AlbumTopAppBar(
         navigationIcon = {
             IconButton(onClick = onUpButtonClick) {
                 Icon(
+                    // TODO update to material 3 back button and delete ic_action_arrow_back_ios
                     painter = painterResource(Res.drawable.ic_action_arrow_back_ios),
                     contentDescription = "Up Button"
                 )
