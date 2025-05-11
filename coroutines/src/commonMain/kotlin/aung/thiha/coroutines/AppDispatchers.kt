@@ -1,4 +1,4 @@
-package aung.thiha.photo.album.coroutines
+package aung.thiha.coroutines
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers

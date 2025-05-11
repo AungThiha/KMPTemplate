@@ -1,7 +1,6 @@
-package aung.thiha.photo.album.authentication.domain.usecase
+package aung.thiha.photo.album.authentication.usecase
 
-import aung.thiha.photo.album.AppRestartListener
-import aung.thiha.photo.album.coroutines.AppDispatchers
+import aung.thiha.coroutines.AppDispatchers
 import aung.thiha.operation.Outcome
 import aung.thiha.operation.SuspendOperation
 import aung.thiha.session.domain.SessionStorage

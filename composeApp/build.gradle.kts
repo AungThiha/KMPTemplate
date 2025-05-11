@@ -46,6 +46,10 @@ kotlin {
             implementation(projects.operation)
             implementation(projects.storage)
 
+            implementation(projects.coroutines)
+
+            implementation(projects.authentication.domain)
+
             implementation(projects.session.data)
             implementation(projects.session.domain)
 

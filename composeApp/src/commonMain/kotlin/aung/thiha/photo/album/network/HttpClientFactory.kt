@@ -1,39 +1,26 @@
 package aung.thiha.photo.album.network
 
-import aung.thiha.operation.SuspendOperation
-import aung.thiha.operation.getOrNull
-import aung.thiha.photo.album.authentication.data.remote.response.AuthenticationResponse
-import aung.thiha.session.domain.model.Session
+import aung.thiha.photo.album.authentication.data.plugin.AuthPlugin
 import io.ktor.client.HttpClient
-import io.ktor.client.call.body
 import io.ktor.client.plugins.auth.Auth
-import io.ktor.client.plugins.auth.providers.BearerAuthConfig
-import io.ktor.client.plugins.auth.providers.BearerTokens
-import io.ktor.client.plugins.auth.providers.RefreshTokensParams
-import io.ktor.client.plugins.auth.providers.bearer
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.plugins.logging.DEFAULT
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
-import io.ktor.client.request.post
-import io.ktor.client.request.setBody
-import io.ktor.http.ContentType
-import io.ktor.http.HttpStatusCode
 import io.ktor.http.URLProtocol
-import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
+private const val HOST = "quiet-citadel-44720-935ed12c52b6.herokuapp.com" // https://github.com/AungThiha/PhotoAlbumServer
+
 class HttpClientFactory(
-    private val getAuthenticationSession: SuspendOperation<Unit, Session?>,
-    private val setAuthenticationSession: SuspendOperation<Session?, Unit>,
-    private val signoutProvider: () -> (SuspendOperation<Unit, Unit>),
+    private val authPlugin: AuthPlugin
 ) {
     fun createHttpClient(): HttpClient = HttpClient {
         defaultRequest {
-            host = "quiet-citadel-44720-935ed12c52b6.herokuapp.com" // https://github.com/AungThiha/PhotoAlbumServer
+            host = HOST
             url {
                 protocol = URLProtocol.HTTPS
             }
@@ -59,69 +46,8 @@ class HttpClientFactory(
             }
         }
         install(Auth) {
-            authPlugin()
+            authPlugin.plug(this)
         }
-    }
-
-    private fun Auth.authPlugin() {
-        bearer {
-            loadTokensPlugin()
-            refreshTokensPlugin()
-        }
-    }
-
-    private fun BearerAuthConfig.loadTokensPlugin() {
-        loadTokens {
-            getAuthenticationSession.getOrNull()?.let { session: Session ->
-                BearerTokens(session.accessToken, session.refreshToken)
-            }
-        }
-    }
-
-    private fun BearerAuthConfig.refreshTokensPlugin() {
-        refreshTokens {
-            val currentSession = getAuthenticationSession.getOrNull()
-            if (currentSession != null) {
-                refreshTokens(currentSession)
-            } else {
-                null
-            }
-        }
-    }
-
-    private suspend fun RefreshTokensParams.refreshTokens(currentSession: Session): BearerTokens? {
-        val httpResponse = httpsRefreshTokens(currentSession.refreshToken)
-
-        return try {
-
-            if (httpResponse.status != HttpStatusCode.OK) {
-                throw Exception()
-            }
-
-            with(httpResponse.body<AuthenticationResponse>()) {
-                storeAuthenticationSession()
-                BearerTokens(accessToken, refreshToken)
-            }
-        } catch (e: Exception) {
-            signoutProvider().invoke(Unit)
-            null
-        }
-    }
-
-    private suspend fun AuthenticationResponse.storeAuthenticationSession() {
-        setAuthenticationSession(
-            Session(
-                accessToken,
-                refreshToken,
-                userId
-            )
-        )
-    }
-
-    private suspend fun RefreshTokensParams.httpsRefreshTokens(refreshToken: String) = client.post("api/auth/refreshtoken") {
-        contentType(ContentType.Application.Json)
-        setBody(RefreshTokenRequest(refreshToken))
-        markAsRefreshTokenRequest()
     }
 
 }

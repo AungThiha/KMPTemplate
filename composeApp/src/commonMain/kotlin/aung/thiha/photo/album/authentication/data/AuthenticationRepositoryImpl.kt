@@ -3,8 +3,8 @@ package aung.thiha.photo.album.authentication.data
 import aung.thiha.photo.album.authentication.data.remote.request.AuthenticationRequest
 import aung.thiha.photo.album.authentication.data.remote.service.AuthenticationService
 import aung.thiha.photo.album.authentication.domain.AuthenticationRepository
-import aung.thiha.photo.album.authentication.domain.model.SigninInput
-import aung.thiha.photo.album.authentication.domain.model.SignupInput
+import aung.thiha.photo.album.authentication.model.SigninInput
+import aung.thiha.photo.album.authentication.model.SignupInput
 import aung.thiha.session.domain.model.Session
 import aung.thiha.operation.SuspendOperation
 import aung.thiha.operation.suspendOperation
@@ -47,13 +47,4 @@ class AuthenticationRepositoryImpl(
     override val isTokenValid: SuspendOperation<Unit, Unit> = suspendOperation {
         authenticationService.isTokenValid()
     }
-
-    override val getSession: SuspendOperation<Unit, Session?> = suspendOperation {
-        sessionStorage.getAuthenticationSession()
-    }
-
-    override val setSession: SuspendOperation<Session?, Unit> = suspendOperation {
-        sessionStorage.setAuthenticationSession(it)
-    }
-
 }

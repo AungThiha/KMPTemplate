@@ -2,8 +2,8 @@ package aung.thiha.photo.album.splash
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import aung.thiha.photo.album.authentication.domain.usecase.IsSignedIn
-import aung.thiha.photo.album.coroutines.AppDispatchers
+import aung.thiha.photo.album.authentication.usecase.IsSignedIn
+import aung.thiha.coroutines.AppDispatchers
 import aung.thiha.operation.Outcome
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow

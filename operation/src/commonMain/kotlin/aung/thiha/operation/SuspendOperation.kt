@@ -13,6 +13,10 @@ fun <I, O> suspendOperation(
     }
 }
 
+suspend inline operator fun <reified O>SuspendOperation<Unit, O>.invoke(): Outcome<O> {
+    return invoke(Unit)
+}
+
 suspend inline fun <reified O> SuspendOperation<Unit, O>.getOrNull(): O? {
     return invoke(Unit).getOrNull()
 }

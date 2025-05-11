@@ -1,4 +1,4 @@
-package aung.thiha.photo.album.authentication.domain.model
+package aung.thiha.photo.album.authentication.model
 
 data class SigninInput(
     val email: String,
