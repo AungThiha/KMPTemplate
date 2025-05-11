@@ -29,4 +29,5 @@ dependencyResolutionManagement {
 }
 
 include(":composeApp")
+include(":design")
 include(":operation")
