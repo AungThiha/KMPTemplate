@@ -3,7 +3,7 @@ package aung.thiha.photo.album.network
 import aung.thiha.operation.SuspendOperation
 import aung.thiha.operation.getOrNull
 import aung.thiha.photo.album.authentication.data.remote.response.AuthenticationResponse
-import aung.thiha.photo.album.authentication.domain.model.AuthenticationSession
+import aung.thiha.session.domain.model.Session
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.auth.Auth
@@ -27,8 +27,8 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
 class HttpClientFactory(
-    private val getAuthenticationSession: SuspendOperation<Unit, AuthenticationSession?>,
-    private val setAuthenticationSession: SuspendOperation<AuthenticationSession?, Unit>,
+    private val getAuthenticationSession: SuspendOperation<Unit, Session?>,
+    private val setAuthenticationSession: SuspendOperation<Session?, Unit>,
     private val signoutProvider: () -> (SuspendOperation<Unit, Unit>),
 ) {
     fun createHttpClient(): HttpClient = HttpClient {
@@ -72,7 +72,7 @@ class HttpClientFactory(
 
     private fun BearerAuthConfig.loadTokensPlugin() {
         loadTokens {
-            getAuthenticationSession.getOrNull()?.let { session: AuthenticationSession ->
+            getAuthenticationSession.getOrNull()?.let { session: Session ->
                 BearerTokens(session.accessToken, session.refreshToken)
             }
         }
@@ -89,7 +89,7 @@ class HttpClientFactory(
         }
     }
 
-    private suspend fun RefreshTokensParams.refreshTokens(currentSession: AuthenticationSession): BearerTokens? {
+    private suspend fun RefreshTokensParams.refreshTokens(currentSession: Session): BearerTokens? {
         val httpResponse = httpsRefreshTokens(currentSession.refreshToken)
 
         return try {
@@ -110,7 +110,7 @@ class HttpClientFactory(
 
     private suspend fun AuthenticationResponse.storeAuthenticationSession() {
         setAuthenticationSession(
-            AuthenticationSession(
+            Session(
                 accessToken,
                 refreshToken,
                 userId

@@ -10,8 +10,8 @@ val networkModule = module {
     factory<HttpClientFactory> {
         val authenticationRepository = get<AuthenticationRepository>()
         HttpClientFactory(
-            getAuthenticationSession = authenticationRepository.getAuthenticationSession,
-            setAuthenticationSession = authenticationRepository.setAuthenticationSession,
+            getAuthenticationSession = authenticationRepository.getSession,
+            setAuthenticationSession = authenticationRepository.setSession,
             signoutProvider = {
                 get<Signout>()
             }
