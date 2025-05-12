@@ -1,18 +1,20 @@
 package aung.thiha.photo.album.authentication.presentation.signin
 
-import androidx.compose.runtime.State
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import aung.thiha.photo.album.authentication.model.SigninInput
-import aung.thiha.photo.album.authentication.usecase.isEmailValid
 import aung.thiha.coroutines.AppDispatchers
 import aung.thiha.operation.Outcome
 import aung.thiha.operation.SuspendOperation
-import kotlinx.coroutines.flow.*
+import aung.thiha.photo.album.authentication.model.SigninInput
+import aung.thiha.photo.album.authentication.usecase.isEmailValid
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 private const val EMAIL = "EMAIL"
@@ -24,13 +26,14 @@ class SigninViewModel(
 ) : ViewModel() {
 
     private val _events = MutableSharedFlow<SigninEvent>()
-    val events: SharedFlow<SigninEvent> = _events.asSharedFlow()
+    val events: SharedFlow<SigninEvent> = _events
 
     val email = savedStateHandle.getStateFlow(key = EMAIL, initialValue = "")
     var password = savedStateHandle.getStateFlow(key = PASSWORD, initialValue = "")
 
     private val _messages: MutableStateFlow<List<String>> = MutableStateFlow(emptyList())
-    val messages: StateFlow<List<String>> = _messages.asStateFlow()
+    val messages: StateFlow<List<String>> = _messages
+
     private val _signinState = MutableStateFlow(SigninState.Content)
     val signinState: StateFlow<SigninState> = _signinState
 
