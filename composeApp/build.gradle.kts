@@ -65,7 +65,6 @@ kotlin {
 
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
-            implementation(libs.androidx.lifecycle.runtime.compose)
             implementation(libs.androidx.navigation)
             implementation(libs.androidx.datastore)
 
@@ -84,6 +83,9 @@ kotlin {
             implementation(libs.ktor.client.auth)
             implementation(libs.ktor.serialization.kotlinx.json)
             implementation(libs.ktor.logging)
+        }
+        commonTest.dependencies {
+            implementation(kotlin("test"))
         }
     }
 }

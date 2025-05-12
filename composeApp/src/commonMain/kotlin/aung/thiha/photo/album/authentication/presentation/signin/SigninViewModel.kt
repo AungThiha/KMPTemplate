@@ -4,6 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import aung.thiha.coroutines.AppDispatchers
+import aung.thiha.design.snackbar.SnackbarChannel
 import aung.thiha.operation.Outcome
 import aung.thiha.operation.SuspendOperation
 import aung.thiha.photo.album.authentication.model.SigninInput
@@ -12,7 +13,6 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 private const val EMAIL = "EMAIL"
@@ -29,8 +29,8 @@ class SigninViewModel(
     val email = savedStateHandle.getStateFlow(key = EMAIL, initialValue = "")
     var password = savedStateHandle.getStateFlow(key = PASSWORD, initialValue = "")
 
-    private val _messages: MutableStateFlow<List<String>> = MutableStateFlow(emptyList())
-    val messages: StateFlow<List<String>> = _messages
+    private val snackbarChannel = SnackbarChannel(viewModelScope)
+    val snackbarFlow = snackbarChannel.receiveAsFlow()
 
     private val _signinState = MutableStateFlow(SigninState.Content)
     val signinState: StateFlow<SigninState> = _signinState
@@ -47,9 +47,7 @@ class SigninViewModel(
         // TODO prevent continuous click
 
         if (isEmailValid(email.value).not()) {
-            _messages.update { currentMessags ->
-                currentMessags + "Invalid Email"
-            }
+            snackbarChannel.showSnackBar("Invalid Email")
             return
         }
 
@@ -58,11 +56,10 @@ class SigninViewModel(
             val result = sigin(SigninInput(email = email.value, password = password.value))
             when (result) {
                 is Outcome.Failure<Unit> -> {
-                    _messages.update { currentMessags ->
-                        currentMessags + "Failed"
-                    }
+                    snackbarChannel.showSnackBar("Failed")
                     _signinState.value = SigninState.Content
                 }
+
                 is Outcome.Success<Unit> -> {
                     _events.emit(SigninEvent.NavigateToPhotoList)
                 }
@@ -70,9 +67,4 @@ class SigninViewModel(
         }
     }
 
-    fun setMessageShown(message: String) {
-        _messages.update { currentMessages ->
-            currentMessages.filter { it != message }
-        }
-    }
 }
