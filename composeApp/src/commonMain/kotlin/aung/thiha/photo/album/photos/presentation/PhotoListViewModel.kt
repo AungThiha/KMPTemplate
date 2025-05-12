@@ -8,6 +8,8 @@ import aung.thiha.coroutines.AppDispatchers
 import aung.thiha.operation.Outcome
 import aung.thiha.operation.SuspendOperation
 import aung.thiha.photo.album.photos.domain.model.Photo
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class PhotoListViewModel(
@@ -15,8 +17,8 @@ class PhotoListViewModel(
     private val photos: SuspendOperation<Unit, List<Photo>>
 ) : ViewModel() {
 
-    private val _photoListState = mutableStateOf<PhotoListState>(PhotoListState.Loading)
-    val photoListState: State<PhotoListState> = _photoListState
+    private val _photoListState = MutableStateFlow<PhotoListState>(PhotoListState.Loading)
+    val photoListState: StateFlow<PhotoListState> = _photoListState
 
     fun load() {
         viewModelScope.launch(AppDispatchers.io) {

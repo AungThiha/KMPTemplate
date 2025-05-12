@@ -29,7 +29,7 @@ fun PhotoListScreen(
     navHostController: NavHostController
 ) {
     val viewModel = getViewModel<PhotoListViewModel>()
-    val photoListState by remember { viewModel.photoListState }
+    val photoListState by viewModel.photoListState.collectAsStateWithLifecycle()
 
     LaunchedEffect(Unit) {
         viewModel.load()
