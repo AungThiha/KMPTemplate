@@ -5,6 +5,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -28,19 +29,22 @@ fun SignupScreen(
 ) {
 
     val viewModel = getViewModel<SignupViewModel>()
-    val signupState by remember { viewModel.signupState }
+
+    val email by viewModel.email.collectAsStateWithLifecycle()
+    val password by viewModel.password.collectAsStateWithLifecycle()
+    val confirmPassword by viewModel.confirmPassword.collectAsStateWithLifecycle()
+    val signupState by viewModel.signupState.collectAsStateWithLifecycle()
 
     val messages by viewModel.messages.collectAsStateWithLifecycle()
     val snackbarHostState = remember { SnackbarHostState() }
 
     val keyboard = LocalSoftwareKeyboardController.current
 
-    if (messages.isNotEmpty()) {
-        val message = messages.first()
-
-        LaunchedEffect(key1 = message) {
-            snackbarHostState.showSnackbar(message = message)
-            viewModel.setMessageShown(message)
+    val message = derivedStateOf { messages.firstOrNull() }
+    message.value?.let {
+        LaunchedEffect(key1 = it) {
+            snackbarHostState.showSnackbar(message = it)
+            viewModel.setMessageShown(it)
         }
     }
 
@@ -80,8 +84,8 @@ fun SignupScreen(
             )
 
             OutlinedTextField(
-                value = viewModel.email,
-                onValueChange = { viewModel.updateEmail(it) },
+                value = email,
+                onValueChange = viewModel::updateEmail,
                 label = { Text("email") },
                 placeholder = { Text("example@example.com") },
                 modifier = Modifier.fillMaxWidth(),
@@ -92,8 +96,8 @@ fun SignupScreen(
             Spacer(modifier = Modifier.height(16.dp))
 
             OutlinedTextField(
-                value = viewModel.password,
-                onValueChange = { viewModel.updatePassword(it) },
+                value = password,
+                onValueChange = viewModel::updatePassword,
                 label = { Text("password") },
                 placeholder = { Text("your password") },
                 modifier = Modifier.fillMaxWidth(),
@@ -105,8 +109,8 @@ fun SignupScreen(
             Spacer(modifier = Modifier.height(16.dp))
 
             OutlinedTextField(
-                value = viewModel.confirmPassword,
-                onValueChange = { viewModel.updateConfirmPassword(it) },
+                value = confirmPassword,
+                onValueChange = viewModel::updateConfirmPassword,
                 label = { Text("confirm password") },
                 placeholder = { Text("confirm your password") },
                 modifier = Modifier.fillMaxWidth(),
