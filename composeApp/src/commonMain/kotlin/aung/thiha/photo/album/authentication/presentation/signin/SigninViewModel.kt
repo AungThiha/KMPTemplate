@@ -4,6 +4,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import aung.thiha.photo.album.authentication.model.SigninInput
@@ -14,34 +15,35 @@ import aung.thiha.operation.SuspendOperation
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
+private const val EMAIL = "EMAIL"
+private const val PASSWORD = "PASSWORD"
+
 class SigninViewModel(
-    private val sigin: SuspendOperation<SigninInput, Unit>
+    private val sigin: SuspendOperation<SigninInput, Unit>,
+    private val savedStateHandle: SavedStateHandle = SavedStateHandle()
 ) : ViewModel() {
 
     private val _events = MutableSharedFlow<SigninEvent>()
     val events: SharedFlow<SigninEvent> = _events.asSharedFlow()
 
-    var email by mutableStateOf("")
-        private set
-
-    var password by mutableStateOf("")
-        private set
+    val email = savedStateHandle.getStateFlow(key = EMAIL, initialValue = "")
+    var password = savedStateHandle.getStateFlow(key = PASSWORD, initialValue = "")
 
     private val _messages: MutableStateFlow<List<String>> = MutableStateFlow(emptyList())
     val messages: StateFlow<List<String>> = _messages.asStateFlow()
-    private val _signinState = mutableStateOf(SigninState.Content)
-    val signinState: State<SigninState> = _signinState
+    private val _signinState = MutableStateFlow(SigninState.Content)
+    val signinState: StateFlow<SigninState> = _signinState
 
     fun updateEmail(email: String) {
-        this.email = email
+        savedStateHandle[EMAIL] = email
     }
 
     fun updatePassword(password: String) {
-        this.password = password
+        savedStateHandle[PASSWORD] = password
     }
 
     fun signin() {
-        if (isEmailValid(email).not()) {
+        if (isEmailValid(email.value).not()) {
             _messages.update { currentMessags ->
                 currentMessags + "Invalid Email"
             }
@@ -50,7 +52,7 @@ class SigninViewModel(
 
         viewModelScope.launch(AppDispatchers.io) {
             _signinState.value = SigninState.OverlayLoading
-            val result = sigin(SigninInput(email = email, password = password))
+            val result = sigin(SigninInput(email = email.value, password = password.value))
             when (result) {
                 is Outcome.Failure<Unit> -> {
                     _messages.update { currentMessags ->
