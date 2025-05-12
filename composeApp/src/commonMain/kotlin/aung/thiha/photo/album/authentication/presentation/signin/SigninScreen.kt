@@ -1,11 +1,23 @@
 package aung.thiha.photo.album.authentication.presentation.signin
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.*
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.OutlinedTextField
+import androidx.compose.material.Scaffold
+import androidx.compose.material.SnackbarHost
+import androidx.compose.material.SnackbarHostState
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -18,8 +30,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
-import aung.thiha.photo.album.koin.getViewModel
+import aung.thiha.design.snackbar.SnackbarHandler
 import aung.thiha.photo.album.design.LoadingOverlay
+import aung.thiha.photo.album.koin.getViewModel
 import aung.thiha.photo.album.navigation.Route
 
 @Composable
@@ -33,18 +46,11 @@ fun SigninScreen(
     val password by viewModel.password.collectAsStateWithLifecycle()
     val signinState by viewModel.signinState.collectAsStateWithLifecycle()
 
-    val messages by viewModel.messages.collectAsStateWithLifecycle()
     val snackbarHostState = remember { SnackbarHostState() }
 
     val keyboard = LocalSoftwareKeyboardController.current
 
-    val message = derivedStateOf { messages.firstOrNull() }
-    message.value?.let {
-        LaunchedEffect(key1 = it) {
-            snackbarHostState.showSnackbar(message = it)
-            viewModel.setMessageShown(it)
-        }
-    }
+    SnackbarHandler(snackbarHostState, viewModel.snackbarFlow)
 
     LaunchedEffect(Unit) {
         viewModel.events.collect { event ->
@@ -63,7 +69,7 @@ fun SigninScreen(
             SnackbarHost(hostState = snackbarHostState)
         },
     ) { contentPadding ->
-        
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -135,9 +141,9 @@ fun SigninScreen(
 
         }
 
+
         if (signinState == SigninState.OverlayLoading) {
             LoadingOverlay()
         }
     }
 }
-
