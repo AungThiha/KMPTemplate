@@ -33,8 +33,8 @@ class SignupViewModel(
     var password = savedStateHandle.getStateFlow(key = PASSWORD, initialValue = "")
     var confirmPassword = savedStateHandle.getStateFlow(key = CONFIRM_PASSWORD, initialValue = "")
 
-    private val _signupState = MutableStateFlow(SignupState.Content)
-    val signupState: StateFlow<SignupState> = _signupState
+    private val mutableOverlayLoading = MutableStateFlow(true)
+    val overlayLoading: StateFlow<Boolean> = mutableOverlayLoading
 
     fun updateEmail(email: String) {
         savedStateHandle[EMAIL] = email
@@ -59,23 +59,30 @@ class SignupViewModel(
 
         if (password != confirmPassword) {
             viewModelScope.showSnackBar("Passwords do not match")
-            _signupState.value = SignupState.Content
             return
         }
 
         viewModelScope.launch(AppDispatchers.io) {
-            _signupState.value = SignupState.OverlayLoading
+            showOverlayLoading()
 
             val result = sigup(SignupInput(email = email.value, password = password.value))
             when (result) {
                 is Outcome.Failure<Unit> -> {
                     showSnackBar("Failed")
-                    _signupState.value = SignupState.Content
+                    hideOverlayLoading()
                 }
                 is Outcome.Success<Unit> -> {
                     _events.emit(SignupEvent.NavigateToPhotoList)
                 }
             }
         }
+    }
+
+    private inline fun showOverlayLoading() {
+        mutableOverlayLoading.value = true
+    }
+
+    private inline fun hideOverlayLoading() {
+        mutableOverlayLoading.value = false
     }
 }
