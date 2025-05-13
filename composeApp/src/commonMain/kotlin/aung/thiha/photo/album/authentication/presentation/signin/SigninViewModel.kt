@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import aung.thiha.coroutines.AppDispatchers
 import aung.thiha.design.snackbar.SnackbarChannel
+import aung.thiha.design.snackbar.SnackbarChannelOwner
 import aung.thiha.operation.Outcome
 import aung.thiha.operation.SuspendOperation
 import aung.thiha.photo.album.authentication.model.SigninInput
@@ -20,17 +21,15 @@ private const val PASSWORD = "PASSWORD"
 
 class SigninViewModel(
     private val sigin: SuspendOperation<SigninInput, Unit>,
-    private val savedStateHandle: SavedStateHandle = SavedStateHandle()
-) : ViewModel() {
+    private val savedStateHandle: SavedStateHandle = SavedStateHandle(),
+    private val snackbarChannel: SnackbarChannel = SnackbarChannel()
+) : ViewModel(), SnackbarChannelOwner by snackbarChannel {
 
     private val _events = MutableSharedFlow<SigninEvent>()
     val events: SharedFlow<SigninEvent> = _events
 
     val email = savedStateHandle.getStateFlow(key = EMAIL, initialValue = "")
     var password = savedStateHandle.getStateFlow(key = PASSWORD, initialValue = "")
-
-    private val snackbarChannel = SnackbarChannel(viewModelScope)
-    val snackbarFlow = snackbarChannel.receiveAsFlow()
 
     private val _signinState = MutableStateFlow(SigninState.Content)
     val signinState: StateFlow<SigninState> = _signinState
@@ -47,7 +46,7 @@ class SigninViewModel(
         // TODO prevent continuous click
 
         if (isEmailValid(email.value).not()) {
-            snackbarChannel.showSnackBar("Invalid Email")
+            viewModelScope.showSnackBar("Invalid Email")
             return
         }
 
@@ -56,7 +55,7 @@ class SigninViewModel(
             val result = sigin(SigninInput(email = email.value, password = password.value))
             when (result) {
                 is Outcome.Failure<Unit> -> {
-                    snackbarChannel.showSnackBar("Failed")
+                    showSnackBar("Failed")
                     _signinState.value = SigninState.Content
                 }
 
