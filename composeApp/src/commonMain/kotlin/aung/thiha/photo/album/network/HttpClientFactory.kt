@@ -46,6 +46,11 @@ class HttpClientFactory(
             }
         }
         install(Auth) {
+            /**
+             * The reason AuthPlugin is in authentication module instead of directly implementing the plugin to enable multiple squad ownership
+             * one squad can own the composeApp module and another can own the authentication module
+             * This allows two different squads to work in parallel
+             * */
             authPlugin.plug(this)
         }
     }
