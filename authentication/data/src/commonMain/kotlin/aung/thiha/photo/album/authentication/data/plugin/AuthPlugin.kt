@@ -14,8 +14,23 @@ import io.ktor.client.plugins.auth.providers.RefreshTokensParams
 import io.ktor.client.plugins.auth.providers.bearer
 import io.ktor.http.HttpStatusCode
 
+/**
+ * The reason AuthPlugin is here instead of HttpClientFactory directly implementing this is to enable multiple squad ownership
+ * one squad can own the composeApp module and another can own the authentication module
+ * This allows two different squads to work in parallel
+ * */
 class AuthPlugin(
     private val sessionStorage: SessionStorage,
+    /**
+     * Even though refreshToken API is written in AuthenticationService, it's not in AuthenticationDataSource
+     * That's why this class directly uses AuthenticationService
+     *
+     * The reason AuthenticationDataSource doesn't have refreshToken API is that it requires RefreshTokensParams, a third party dependency
+     *
+     * An interface shouldn't depend on third-party dependencies so that they can be easily mocked
+     * Plus, if we need to switch to a different library, we can do it without affecting the downstream classes
+     * That's possible only if the interface doesn't have any third-party dependencies
+    * */
     private val authenticationServiceProvider: Lazy<AuthenticationService>,
     private val signoutProvider: Lazy<SuspendOperation<Unit, Unit>>,
 ) {

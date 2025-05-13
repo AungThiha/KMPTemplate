@@ -42,7 +42,7 @@ class AuthenticationService(
         return httpResponse.body()
     }
 
-    override suspend fun refreshTokens(refreshTokensParams: RefreshTokensParams, refreshToken: String) = refreshTokensParams.run {
+    suspend fun refreshTokens(refreshTokensParams: RefreshTokensParams, refreshToken: String) = refreshTokensParams.run {
         client.post("api/auth/refreshtoken") {
             contentType(ContentType.Application.Json)
             setBody(RefreshTokenRequest(refreshToken))
