@@ -3,27 +3,31 @@ package aung.thiha.design.snackbar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.StringResource
 import kotlin.jvm.JvmInline
 
-class SnackbarChannel(
-    private val coroutineScope: CoroutineScope
-) {
+class SnackbarChannel : SnackbarChannelOwner {
 
     private val snackbarMessages: Channel<SnackbarMessage> = Channel(Channel.BUFFERED)
+    override val snackbarFlow = snackbarMessages.receiveAsFlow()
 
-    fun showSnackBar(message: String): Job = coroutineScope.launch {
+    override fun CoroutineScope.showSnackBar(message: String) : Job = launch {
         snackbarMessages.send(SnackbarMessage.StringMessage(message))
     }
 
-    fun showSnackBar(message: StringResource): Job = coroutineScope.launch {
+    override fun CoroutineScope.showSnackBar(message: StringResource): Job = launch {
         snackbarMessages.send(SnackbarMessage.ResourceMessage(message))
     }
 
-    fun receiveAsFlow(): Flow<SnackbarMessage> = snackbarMessages.receiveAsFlow()
+    override suspend fun showSnackBar(message: String) {
+        snackbarMessages.send(SnackbarMessage.StringMessage(message))
+    }
+
+    override suspend fun showSnackBar(message: StringResource) {
+        snackbarMessages.send(SnackbarMessage.ResourceMessage(message))
+    }
 
     sealed interface SnackbarMessage {
         @JvmInline
