@@ -44,7 +44,7 @@ fun SigninScreen(
 
     val email by viewModel.email.collectAsStateWithLifecycle()
     val password by viewModel.password.collectAsStateWithLifecycle()
-    val signinState by viewModel.signinState.collectAsStateWithLifecycle()
+    val overlayLoading by viewModel.overlayLoading.collectAsStateWithLifecycle()
 
     val snackbarHostState = remember { SnackbarHostState() }
 
@@ -141,8 +141,7 @@ fun SigninScreen(
 
         }
 
-
-        if (signinState == SigninState.OverlayLoading) {
+        if (overlayLoading) {
             LoadingOverlay()
         }
     }
