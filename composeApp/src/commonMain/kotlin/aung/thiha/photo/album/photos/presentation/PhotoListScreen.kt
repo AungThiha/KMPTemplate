@@ -55,33 +55,33 @@ fun PhotoListScreen(
             )
         }
     ) { contentPadding ->
-
-        when (photoListState) {
-            is PhotoListState.Content -> {
-                if ((photoListState as PhotoListState.Content).photos.isEmpty()) {
-                    EmptyPhotoGrid()
-                } else {
-                    PhotoGrid((photoListState as PhotoListState.Content).photos)
+        Box(modifier = Modifier.padding(contentPadding)) {
+            when (photoListState) {
+                is PhotoListState.Content -> {
+                    if ((photoListState as PhotoListState.Content).photos.isEmpty()) {
+                        EmptyPhotoGrid()
+                    } else {
+                        PhotoGrid((photoListState as PhotoListState.Content).photos)
+                    }
                 }
-            }
-            PhotoListState.Loading -> {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(Color.White)
-                        .clickable(enabled = false) {} // Disables clicks on the overlay
-                ) {
-                    CircularProgressIndicator(
+                PhotoListState.Loading -> {
+                    Box(
                         modifier = Modifier
-                            .align(Alignment.Center)
-                    )
+                            .fillMaxSize()
+                            .background(Color.White)
+                            .clickable(enabled = false) {} // Disables clicks on the overlay
+                    ) {
+                        CircularProgressIndicator(
+                            modifier = Modifier
+                                .align(Alignment.Center)
+                        )
+                    }
                 }
-            }
-            PhotoListState.LoadingFailed -> {
-                PhotoLoadingFailed(onRetry = { viewModel.load() })
+                PhotoListState.LoadingFailed -> {
+                    PhotoLoadingFailed(onRetry = { viewModel.load() })
+                }
             }
         }
-
     }
 }
 
