@@ -45,7 +45,7 @@ fun SignupScreen(
     val email by viewModel.email.collectAsStateWithLifecycle()
     val password by viewModel.password.collectAsStateWithLifecycle()
     val confirmPassword by viewModel.confirmPassword.collectAsStateWithLifecycle()
-    val signupState by viewModel.signupState.collectAsStateWithLifecycle()
+    val overlayLoading by viewModel.overlayLoading.collectAsStateWithLifecycle()
 
     val keyboard = LocalSoftwareKeyboardController.current
 
@@ -141,7 +141,7 @@ fun SignupScreen(
 
         }
     }
-    if (signupState == SignupState.OverlayLoading) {
+    if (overlayLoading) {
         LoadingOverlay()
     }
 }
