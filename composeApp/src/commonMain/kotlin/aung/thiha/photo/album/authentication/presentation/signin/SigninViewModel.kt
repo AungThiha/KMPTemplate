@@ -31,8 +31,8 @@ class SigninViewModel(
     val email = savedStateHandle.getStateFlow(key = EMAIL, initialValue = "")
     var password = savedStateHandle.getStateFlow(key = PASSWORD, initialValue = "")
 
-    private val _signinState = MutableStateFlow(SigninState.Content)
-    val signinState: StateFlow<SigninState> = _signinState
+    private val mutableOverlayLoading = MutableStateFlow(false)
+    val overlayLoading: StateFlow<Boolean> = mutableOverlayLoading
 
     fun updateEmail(email: String) {
         savedStateHandle[EMAIL] = email
@@ -51,12 +51,12 @@ class SigninViewModel(
         }
 
         viewModelScope.launch(AppDispatchers.io) {
-            _signinState.value = SigninState.OverlayLoading
+            showOverlayLoading()
             val result = sigin(SigninInput(email = email.value, password = password.value))
             when (result) {
                 is Outcome.Failure<Unit> -> {
                     showSnackBar("Failed")
-                    _signinState.value = SigninState.Content
+                    hideOverlayLoading()
                 }
 
                 is Outcome.Success<Unit> -> {
@@ -64,6 +64,14 @@ class SigninViewModel(
                 }
             }
         }
+    }
+
+    private inline fun showOverlayLoading() {
+        mutableOverlayLoading.value = true
+    }
+
+    private inline fun hideOverlayLoading() {
+        mutableOverlayLoading.value = false
     }
 
 }
