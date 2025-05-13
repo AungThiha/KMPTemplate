@@ -8,18 +8,19 @@ import aung.thiha.photo.album.authentication.model.SignupInput
 import aung.thiha.session.domain.model.Session
 import aung.thiha.operation.SuspendOperation
 import aung.thiha.operation.suspendOperation
+import aung.thiha.photo.album.authentication.data.remote.service.AuthenticationDataSource
 import aung.thiha.session.domain.SessionStorage
 
 class AuthenticationRepositoryImpl(
     private val sessionStorage: SessionStorage,
-    private val authenticationServiceProvider: Lazy<AuthenticationService>,
+    private val authenticationDataSourceProvider: Lazy<AuthenticationDataSource>,
 ) : AuthenticationRepository {
 
-    private val authenticationService: AuthenticationService
-        get() = authenticationServiceProvider.value
+    private val authenticationDataSource
+        get() = authenticationDataSourceProvider.value
 
     override val signin: SuspendOperation<SigninInput, Unit> = suspendOperation {
-        val result = authenticationService.signin(AuthenticationRequest.fromSigninInput(it))
+        val result = authenticationDataSource.signin(AuthenticationRequest.fromSigninInput(it))
         with(result) {
             sessionStorage.setAuthenticationSession(
                 Session(
@@ -32,7 +33,7 @@ class AuthenticationRepositoryImpl(
     }
 
     override val signup: SuspendOperation<SignupInput, Unit> = suspendOperation {
-        val result = authenticationService.signup(AuthenticationRequest.fromSignupInput(it))
+        val result = authenticationDataSource.signup(AuthenticationRequest.fromSignupInput(it))
         with(result) {
             sessionStorage.setAuthenticationSession(
                 Session(
@@ -45,6 +46,6 @@ class AuthenticationRepositoryImpl(
     }
 
     override val isTokenValid: SuspendOperation<Unit, Unit> = suspendOperation {
-        authenticationService.isTokenValid()
+        authenticationDataSource.isTokenValid()
     }
 }
