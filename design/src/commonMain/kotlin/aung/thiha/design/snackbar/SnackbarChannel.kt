@@ -21,14 +21,6 @@ class SnackbarChannel : SnackbarChannelOwner {
         snackbarMessages.send(SnackbarMessage.ResourceMessage(message))
     }
 
-    override suspend fun showSnackBar(message: String) {
-        snackbarMessages.send(SnackbarMessage.StringMessage(message))
-    }
-
-    override suspend fun showSnackBar(message: StringResource) {
-        snackbarMessages.send(SnackbarMessage.ResourceMessage(message))
-    }
-
     sealed interface SnackbarMessage {
         @JvmInline
         value class StringMessage(val value: String) : SnackbarMessage
