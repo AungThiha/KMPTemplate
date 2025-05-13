@@ -8,8 +8,8 @@ import io.ktor.http.*
 
 class PhotosService(
     private val httpClient: HttpClient
-) {
-    suspend fun photos(): List<PhotoResponse> {
+) : PhotosDataSource {
+    override suspend fun photos(): List<PhotoResponse> {
         return httpClient.get("photos/") {
             contentType(ContentType.Application.Json)
         }.body()
