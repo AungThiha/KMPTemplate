@@ -33,7 +33,7 @@ class SignupViewModel(
     var password = savedStateHandle.getStateFlow(key = PASSWORD, initialValue = "")
     var confirmPassword = savedStateHandle.getStateFlow(key = CONFIRM_PASSWORD, initialValue = "")
 
-    private val mutableOverlayLoading = MutableStateFlow(true)
+    private val mutableOverlayLoading = MutableStateFlow(false)
     val overlayLoading: StateFlow<Boolean> = mutableOverlayLoading
 
     fun updateEmail(email: String) {
