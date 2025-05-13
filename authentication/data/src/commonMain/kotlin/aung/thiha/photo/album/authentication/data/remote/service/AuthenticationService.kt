@@ -12,9 +12,9 @@ import io.ktor.http.*
 
 class AuthenticationService(
     private val httpClient: HttpClient
-) {
+) : AuthenticationDataSource {
 
-    suspend fun signin(
+    override suspend fun signin(
         authenticationRequest: AuthenticationRequest
     ): AuthenticationResponse {
         return httpClient.post("api/auth/signin") {
@@ -23,7 +23,7 @@ class AuthenticationService(
         }.body()
     }
 
-    suspend fun signup(
+    override suspend fun signup(
         authenticationRequest: AuthenticationRequest
     ): AuthenticationResponse {
         return httpClient.post("api/auth/signup") {
@@ -32,7 +32,7 @@ class AuthenticationService(
         }.body()
     }
 
-    suspend fun isTokenValid(): TokenCheckResponse {
+    override suspend fun isTokenValid(): TokenCheckResponse {
         val httpResponse = httpClient.get("api/auth/is_token_valid") {
             contentType(ContentType.Application.Json)
         }
@@ -42,7 +42,7 @@ class AuthenticationService(
         return httpResponse.body()
     }
 
-    suspend fun refreshTokens(refreshTokensParams: RefreshTokensParams, refreshToken: String) = refreshTokensParams.run {
+    override suspend fun refreshTokens(refreshTokensParams: RefreshTokensParams, refreshToken: String) = refreshTokensParams.run {
         client.post("api/auth/refreshtoken") {
             contentType(ContentType.Application.Json)
             setBody(RefreshTokenRequest(refreshToken))
