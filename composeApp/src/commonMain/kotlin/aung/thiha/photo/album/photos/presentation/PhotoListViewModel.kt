@@ -1,7 +1,5 @@
 package aung.thiha.photo.album.photos.presentation
 
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import aung.thiha.coroutines.AppDispatchers
