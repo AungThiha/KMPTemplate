@@ -46,7 +46,7 @@ class SigninViewModel(
         // TODO prevent continuous click
 
         if (isEmailValid(email.value).not()) {
-            viewModelScope.showSnackBar("Invalid Email")
+            showSnackBar("Invalid Email")
             return
         }
 

@@ -53,12 +53,12 @@ class SignupViewModel(
         // TODO prevent continuous click
 
         if (isEmailValid(email.value).not()) {
-            viewModelScope.showSnackBar("Invalid Email")
+            showSnackBar("Invalid Email")
             return
         }
 
         if (password != confirmPassword) {
-            viewModelScope.showSnackBar("Passwords do not match")
+            showSnackBar("Passwords do not match")
             return
         }
 
