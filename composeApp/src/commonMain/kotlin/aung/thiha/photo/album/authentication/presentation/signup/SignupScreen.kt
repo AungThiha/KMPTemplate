@@ -29,10 +29,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
-import aung.thiha.design.coroutines.collectWithLifecycle
-import aung.thiha.design.snackbar.showSnackbar
-import aung.thiha.photo.album.design.AlbumTopAppBar
-import aung.thiha.photo.album.design.LoadingOverlay
+import aung.thiha.compose.coroutines.collectWithLifecycle
+import aung.thiha.compose.snackbar.showSnackbar
+import aung.thiha.compose.AlbumTopAppBar
+import aung.thiha.compose.LoadingOverlay
 import aung.thiha.photo.album.koin.getViewModel
 import aung.thiha.photo.album.navigation.Route
 

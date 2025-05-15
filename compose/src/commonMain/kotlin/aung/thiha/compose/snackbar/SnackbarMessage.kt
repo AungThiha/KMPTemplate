@@ -1,4 +1,4 @@
-package aung.thiha.design.snackbar
+package aung.thiha.compose.snackbar
 
 import org.jetbrains.compose.resources.StringResource
 import kotlin.jvm.JvmInline

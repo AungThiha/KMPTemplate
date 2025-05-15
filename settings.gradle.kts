@@ -34,7 +34,7 @@ include(
 )
 include(":coroutines")
 include(":composeApp")
-include(":design")
+include(":compose")
 include(":operation")
 include(":storage")
 include(
