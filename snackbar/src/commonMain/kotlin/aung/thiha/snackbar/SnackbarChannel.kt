@@ -1,4 +1,4 @@
-package aung.thiha.compose.snackbar
+package aung.thiha.snackbar
 
 import androidx.compose.material.SnackbarDuration
 import kotlinx.coroutines.channels.Channel

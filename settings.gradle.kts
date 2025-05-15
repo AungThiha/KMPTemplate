@@ -37,6 +37,7 @@ include(":composeApp")
 include(":compose")
 include(":operation")
 include(":storage")
+include(":snackbar")
 include(
     ":session:data",
     ":session:domain",
