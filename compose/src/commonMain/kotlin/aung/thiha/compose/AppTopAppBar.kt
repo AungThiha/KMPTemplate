@@ -1,4 +1,4 @@
-package aung.thiha.photo.album.design
+package aung.thiha.compose
 
 import androidx.compose.material.TopAppBar
 import androidx.compose.foundation.layout.RowScope
@@ -8,8 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.painterResource
-import photoalbum.design.generated.resources.Res
-import photoalbum.design.generated.resources.ic_action_arrow_back_ios
+import photoalbum.compose.generated.resources.Res
+import photoalbum.compose.generated.resources.ic_action_arrow_back_ios
 
 @Composable
 fun AlbumTopAppBar(

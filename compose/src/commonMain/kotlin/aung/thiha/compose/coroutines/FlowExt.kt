@@ -1,4 +1,4 @@
-package aung.thiha.design.coroutines
+package aung.thiha.compose.coroutines
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect

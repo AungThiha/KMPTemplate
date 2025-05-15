@@ -42,7 +42,7 @@ kotlin {
             implementation(libs.ktor.client.darwin)
         }
         commonMain.dependencies {
-            implementation(projects.design)
+            implementation(projects.compose)
             implementation(projects.operation)
             implementation(projects.storage)
 

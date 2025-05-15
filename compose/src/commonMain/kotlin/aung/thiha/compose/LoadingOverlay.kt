@@ -1,4 +1,4 @@
-package aung.thiha.photo.album.design
+package aung.thiha.compose
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

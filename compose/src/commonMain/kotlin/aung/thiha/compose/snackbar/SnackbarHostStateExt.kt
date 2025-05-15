@@ -1,4 +1,4 @@
-package aung.thiha.design.snackbar
+package aung.thiha.compose.snackbar
 
 import androidx.compose.material.SnackbarHostState
 import org.jetbrains.compose.resources.getString
