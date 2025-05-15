@@ -44,6 +44,7 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.compose)
             implementation(projects.operation)
+            implementation(projects.snackbar)
             implementation(projects.storage)
 
             implementation(projects.coroutines)

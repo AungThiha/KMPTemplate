@@ -31,7 +31,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import aung.thiha.compose.coroutines.collectWithLifecycle
-import aung.thiha.compose.snackbar.showSnackbar
+import aung.thiha.snackbar.showSnackbar
 import aung.thiha.compose.LoadingOverlay
 import aung.thiha.photo.album.koin.getViewModel
 import aung.thiha.photo.album.navigation.Route

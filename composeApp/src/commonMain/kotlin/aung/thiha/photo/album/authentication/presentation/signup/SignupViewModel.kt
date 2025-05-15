@@ -4,8 +4,8 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import aung.thiha.coroutines.AppDispatchers
-import aung.thiha.compose.snackbar.SnackbarChannel
-import aung.thiha.compose.snackbar.SnackbarChannelOwner
+import aung.thiha.snackbar.SnackbarChannel
+import aung.thiha.snackbar.SnackbarChannelOwner
 import aung.thiha.operation.Outcome
 import aung.thiha.operation.SuspendOperation
 import aung.thiha.photo.album.authentication.model.SignupInput
