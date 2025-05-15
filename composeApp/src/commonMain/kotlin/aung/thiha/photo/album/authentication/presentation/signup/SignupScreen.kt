@@ -29,7 +29,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
-import aung.thiha.design.snackbar.SnackbarHandler
+import aung.thiha.design.coroutines.collectWithLifecycle
+import aung.thiha.design.snackbar.showSnackbar
 import aung.thiha.photo.album.design.AlbumTopAppBar
 import aung.thiha.photo.album.design.LoadingOverlay
 import aung.thiha.photo.album.koin.getViewModel
@@ -50,7 +51,9 @@ fun SignupScreen(
     val keyboard = LocalSoftwareKeyboardController.current
 
     val snackbarHostState = remember { SnackbarHostState() }
-    SnackbarHandler(snackbarHostState, viewModel.snackbarFlow)
+    viewModel.snackbarFlow.collectWithLifecycle {
+        snackbarHostState.showSnackbar(it)
+    }
 
     LaunchedEffect(Unit) {
         viewModel.events.collect { event ->
