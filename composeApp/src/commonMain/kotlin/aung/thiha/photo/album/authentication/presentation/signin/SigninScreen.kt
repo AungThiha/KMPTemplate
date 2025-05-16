@@ -28,6 +28,8 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.LifecycleEventEffect
+import androidx.lifecycle.compose.LifecycleStartEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import aung.thiha.compose.coroutines.collectWithLifecycle
@@ -48,6 +50,7 @@ fun SigninScreen(
     val overlayLoading by viewModel.overlayLoading.collectAsStateWithLifecycle()
 
     val snackbarHostState = remember { SnackbarHostState() }
+
     viewModel.snackbarFlow.collectWithLifecycle {
         snackbarHostState.showSnackbar(it)
     }
