@@ -71,7 +71,6 @@ fun PhotoListScreen(
         }
     ) { contentPadding ->
 
-        LazyColumn {  }
         Box(modifier = Modifier.padding(contentPadding)) {
             when (photoListState) {
                 is PhotoListState.Content -> {
