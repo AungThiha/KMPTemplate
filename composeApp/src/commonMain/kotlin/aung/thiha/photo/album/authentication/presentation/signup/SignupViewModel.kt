@@ -29,8 +29,10 @@ class SignupViewModel(
     private val _events = MutableSharedFlow<SignupEvent>()
     val events: SharedFlow<SignupEvent> = _events
 
+    // TODO when user moves to the second input, if the email is invalid, show error. Hide error when user comes back to the input field
     val email = savedStateHandle.getStateFlow(key = EMAIL, initialValue = "")
     var password = savedStateHandle.getStateFlow(key = PASSWORD, initialValue = "")
+    // TODO when user stops typing for a while and if the password and confirm password don't match, show an error. Once they start typing, remove the error
     var confirmPassword = savedStateHandle.getStateFlow(key = CONFIRM_PASSWORD, initialValue = "")
 
     private val mutableOverlayLoading = MutableStateFlow(false)
