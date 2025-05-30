@@ -8,15 +8,9 @@ import org.jetbrains.compose.resources.StringResource
 
 class SnackbarChannel : SnackbarChannelOwner {
 
-    private val snackbarMessages: Channel<SnackbarModel> = Channel(Channel.BUFFERED)
+    private val snackbarMessages: Channel<SnackbarModel> = Channel(Channel.UNLIMITED)
     override val snackbarFlow = snackbarMessages.receiveAsFlow()
 
-    /**
-     * If the buffer is full, showing Snackbar will fail
-     * If it fails, it's recommended to make sure your UI logic doesn't emit too many snackbars
-     * After all, buffer size is 64. It's impossible to have 64 snackbars in a short period time
-     * unless there's a serious error
-     * */
     override fun showSnackBar(message: String, actionLabel: String?, duration: SnackbarDuration): ChannelResult<Unit> =
         snackbarMessages.trySend(
             SnackbarModel(
@@ -26,12 +20,6 @@ class SnackbarChannel : SnackbarChannelOwner {
             )
         )
 
-    /**
-     * If the buffer is full, showing Snackbar will fail
-     * If it fails, it's recommended to make sure your UI logic doesn't emit too many snackbars
-     * After all, buffer size is 64. It's impossible to have 64 snackbars in a short period time
-     * unless there's a serious error
-     * */
     override fun showSnackBar(message: StringResource, actionLabel: String?, duration: SnackbarDuration): ChannelResult<Unit> =
         snackbarMessages.trySend(
             SnackbarModel(
