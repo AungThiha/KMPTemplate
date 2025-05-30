@@ -84,11 +84,11 @@ class SignupViewModel(
         }
     }
 
-    private inline fun showOverlayLoading() {
+    private fun showOverlayLoading() {
         mutableOverlayLoading.value = true
     }
 
-    private inline fun hideOverlayLoading() {
+    private fun hideOverlayLoading() {
         mutableOverlayLoading.value = false
     }
 }
