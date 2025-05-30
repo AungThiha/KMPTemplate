@@ -8,17 +8,13 @@ import org.jetbrains.compose.resources.StringResource
 interface SnackbarChannelOwner {
     val snackbarFlow: Flow<SnackbarModel>
     /**
-     * If the buffer is full, showing Snackbar will fail
-     * If it fails, it's recommended to make sure your UI logic doesn't emit too many snackbars
-     * After all, buffer size is 64. It's impossible to have 64 snackbars in a short period time
-     * unless there's a serious error
+     * If you're using this [SnackbarChannel] and if you emit too many SnackbarModel, it can lead to OutOfMemoryError
+     * That said, in real-world applications, it's impractical to have more than a few Snackbars.
     * */
     fun showSnackBar(message: String, actionLabel: String? = null, duration: SnackbarDuration = SnackbarDuration.Short): ChannelResult<Unit>
     /**
-     * If the buffer is full, showing Snackbar will fail
-     * If it fails, it's recommended to make sure your UI logic doesn't emit too many snackbars
-     * After all, buffer size is 64. It's impossible to have 64 snackbars in a short period time
-     * unless there's a serious error
+     * If you're using this [SnackbarChannel] and if you emit too many SnackbarModel, it can lead to OutOfMemoryError
+     * That said, in real-world applications, it's impractical to have more than a few Snackbars.
      * */
     fun showSnackBar(message: StringResource, actionLabel: String? = null, duration: SnackbarDuration = SnackbarDuration.Short): ChannelResult<Unit>
 }
