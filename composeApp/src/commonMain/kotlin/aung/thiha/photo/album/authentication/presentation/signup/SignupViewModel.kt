@@ -15,6 +15,10 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import photoalbum.composeapp.generated.resources.Res
+import photoalbum.composeapp.generated.resources.failed
+import photoalbum.composeapp.generated.resources.invalid_email
+import photoalbum.composeapp.generated.resources.passwords_do_not_match
 
 private const val EMAIL = "EMAIL"
 private const val PASSWORD = "PASSWORD"
@@ -55,12 +59,12 @@ class SignupViewModel(
         // TODO prevent continuous click
 
         if (isEmailValid(email.value).not()) {
-            showSnackBar("Invalid Email")
+            showSnackBar(Res.string.invalid_email)
             return
         }
 
         if (password != confirmPassword) {
-            showSnackBar("Passwords do not match")
+            showSnackBar(Res.string.passwords_do_not_match)
             return
         }
 
@@ -70,7 +74,7 @@ class SignupViewModel(
             val result = sigup(SignupInput(email = email.value, password = password.value))
             when (result) {
                 is Outcome.Failure<Unit> -> {
-                    showSnackBar("Failed")
+                    showSnackBar(Res.string.failed)
                     hideOverlayLoading()
                 }
                 is Outcome.Success<Unit> -> {

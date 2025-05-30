@@ -15,6 +15,10 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.stringResource
+import photoalbum.composeapp.generated.resources.Res
+import photoalbum.composeapp.generated.resources.failed
+import photoalbum.composeapp.generated.resources.invalid_email
 
 private const val EMAIL = "EMAIL"
 private const val PASSWORD = "PASSWORD"
@@ -48,7 +52,7 @@ class SigninViewModel(
         // TODO prevent continuous click
 
         if (isEmailValid(email.value).not()) {
-            showSnackBar("Invalid Email")
+            showSnackBar(Res.string.invalid_email)
             return
         }
 
@@ -57,7 +61,7 @@ class SigninViewModel(
             val result = sigin(SigninInput(email = email.value, password = password.value))
             when (result) {
                 is Outcome.Failure<Unit> -> {
-                    showSnackBar("Failed")
+                    showSnackBar(Res.string.failed)
                     hideOverlayLoading()
                 }
 

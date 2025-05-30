@@ -11,19 +11,10 @@ class SnackbarChannel : SnackbarChannelOwner {
     private val snackbarMessages: Channel<SnackbarModel> = Channel(Channel.UNLIMITED)
     override val snackbarFlow = snackbarMessages.receiveAsFlow()
 
-    override fun showSnackBar(message: String, actionLabel: String?, duration: SnackbarDuration): ChannelResult<Unit> =
+    override fun showSnackBar(message: StringResource, actionLabel: StringResource?, duration: SnackbarDuration): ChannelResult<Unit> =
         snackbarMessages.trySend(
             SnackbarModel(
-                message = SnackbarMessage.StringMessage(message),
-                actionLabel = actionLabel,
-                duration = duration
-            )
-        )
-
-    override fun showSnackBar(message: StringResource, actionLabel: String?, duration: SnackbarDuration): ChannelResult<Unit> =
-        snackbarMessages.trySend(
-            SnackbarModel(
-                message = SnackbarMessage.ResourceMessage(message),
+                message = message,
                 actionLabel = actionLabel,
                 duration = duration
             )
