@@ -4,12 +4,12 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import aung.thiha.coroutines.AppDispatchers
-import aung.thiha.snackbar.SnackbarChannel
-import aung.thiha.snackbar.SnackbarChannelOwner
 import aung.thiha.operation.Outcome
 import aung.thiha.operation.SuspendOperation
 import aung.thiha.photo.album.authentication.model.SignupInput
 import aung.thiha.photo.album.authentication.usecase.isEmailValid
+import io.github.aungthiha.snackbar.SnackbarChannel
+import io.github.aungthiha.snackbar.SnackbarChannelOwner
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -63,7 +63,7 @@ class SignupViewModel(
             return
         }
 
-        if (password != confirmPassword) {
+        if (password.value != confirmPassword.value) {
             showSnackBar(Res.string.passwords_do_not_match)
             return
         }
