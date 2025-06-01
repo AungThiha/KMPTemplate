@@ -9,13 +9,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Scaffold
-import androidx.compose.material.SnackbarHost
-import androidx.compose.material.SnackbarHostState
-import androidx.compose.material.Text
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -28,15 +28,13 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.compose.LifecycleEventEffect
-import androidx.lifecycle.compose.LifecycleStartEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
-import aung.thiha.compose.coroutines.collectWithLifecycle
-import aung.thiha.snackbar.showSnackbar
 import aung.thiha.compose.LoadingOverlay
 import aung.thiha.photo.album.koin.getViewModel
 import aung.thiha.photo.album.navigation.Route
+import io.github.aungthiha.snackbar.observeWithLifecycle
+import io.github.aungthiha.snackbar.showSnackbar
 
 @Composable
 fun SigninScreen(
@@ -51,7 +49,7 @@ fun SigninScreen(
 
     val snackbarHostState = remember { SnackbarHostState() }
 
-    viewModel.snackbarFlow.collectWithLifecycle {
+    viewModel.snackbarFlow.observeWithLifecycle {
         snackbarHostState.showSnackbar(it)
     }
 
@@ -78,6 +76,7 @@ fun SigninScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
+                .padding(contentPadding)
                 .padding(16.dp)
                 .imePadding(),
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -136,7 +135,7 @@ fun SigninScreen(
                     .fillMaxWidth()
                     .height(50.dp),
                 colors = ButtonDefaults.buttonColors(
-                    backgroundColor = Color.Gray
+                    containerColor = Color.Gray
                 )
             ) {
                 Text(text = "Sign up", color = Color.White)

@@ -1,8 +1,8 @@
 [versions]
 agp = "8.7.2"
-android-compileSdk = "34"
+android-compileSdk = "35"
 android-minSdk = "24"
-android-targetSdk = "34"
+android-targetSdk = "35"
 androidx-activityCompose = "1.9.1"
 androidx-appcompat = "1.7.0"
 androidx-constraintlayout = "2.1.4"
@@ -21,14 +21,16 @@ coroutines = "1.10.2"
 firebase = "33.6.0"
 junit = "4.13.2"
 kermit = "1.0.0"
-kotlin = "2.0.20"
+kotlin = "2.1.21"
 koin = "3.5.3"
 koin-compose = "1.1.5"
 ktor = "2.3.7"
 google-services = "4.4.2"
 jetbrainsKotlinJvm = "1.9.24"
+snackbarChannelVersion = "1.0.7"
 
 [libraries]
+aungthiha-snackbar-channel = { module = "io.github.aungthiha:snackbar-channel", version.ref = "snackbarChannelVersion" }
 compose-shimmer = { module = "com.valentinilk.shimmer:compose-shimmer", version.ref = "composeShimmer" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
