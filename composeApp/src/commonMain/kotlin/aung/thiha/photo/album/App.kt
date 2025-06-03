@@ -13,7 +13,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import aung.thiha.compose.navigation.Destination
 import aung.thiha.coroutines.AppDispatchers
-import aung.thiha.photo.album.authentication.presentation.navigation.authentication
+import aung.thiha.photo.album.authentication.presentation.signup.navigation.authentication
 import aung.thiha.photo.album.authentication.usecase.AppRestartListener
 import aung.thiha.photo.album.navigation.DefaultNavigationDispatcher
 import aung.thiha.photo.album.navigation.NavigationHandler
