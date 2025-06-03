@@ -1,4 +1,4 @@
-package aung.thiha.photo.album.authentication.presentation.di
+package aung.thiha.photo.album.authentication.presentation.signup.di
 
 import aung.thiha.photo.album.authentication.domain.AuthenticationRepository
 import aung.thiha.photo.album.authentication.presentation.signup.signin.SigninViewModel
