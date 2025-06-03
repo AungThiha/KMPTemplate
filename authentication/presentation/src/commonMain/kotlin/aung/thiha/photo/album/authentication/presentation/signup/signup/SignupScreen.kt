@@ -1,4 +1,4 @@
-package aung.thiha.photo.album.authentication.presentation.signup
+package aung.thiha.photo.album.authentication.presentation.signup.signup
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -32,14 +32,12 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import aung.thiha.compose.AlbumTopAppBar
 import aung.thiha.compose.LoadingOverlay
-import aung.thiha.photo.album.authentication.presentation.signup.signup.SignupScreenListener
-import aung.thiha.photo.album.authentication.presentation.signup.signup.SignupViewModel
 import io.github.aungthiha.snackbar.observeWithLifecycle
 import io.github.aungthiha.snackbar.showSnackbar
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-internal fun SignupContainer() {
+fun SignupContainer() {
     val viewModel = koinViewModel<SignupViewModel>()
 
     val email by viewModel.email.collectAsStateWithLifecycle()
