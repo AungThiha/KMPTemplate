@@ -34,13 +34,13 @@ import aung.thiha.compose.AlbumTopAppBar
 import aung.thiha.compose.LoadingOverlay
 import aung.thiha.photo.album.authentication.presentation.signup.signup.SignupScreenListener
 import aung.thiha.photo.album.authentication.presentation.signup.signup.SignupViewModel
-import aung.thiha.photo.album.koin.getViewModel
 import io.github.aungthiha.snackbar.observeWithLifecycle
 import io.github.aungthiha.snackbar.showSnackbar
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 internal fun SignupContainer() {
-    val viewModel = getViewModel<SignupViewModel>()
+    val viewModel = koinViewModel<SignupViewModel>()
 
     val email by viewModel.email.collectAsStateWithLifecycle()
     val password by viewModel.password.collectAsStateWithLifecycle()
