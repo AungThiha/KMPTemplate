@@ -34,6 +34,7 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.androidx.activity.ktx)
             implementation(libs.koin.android)
             implementation(libs.ktor.client.android)
             implementation(project.dependencies.platform(libs.firebase))

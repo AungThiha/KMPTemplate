@@ -16,8 +16,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import aung.thiha.photo.album.authentication.presentation.navigation.SigninRoute
 import aung.thiha.photo.album.koin.getViewModel
 import aung.thiha.photo.album.navigation.Route
+import aung.thiha.photo.album.photos.navigation.PhotoListRoute
 
 @Composable
 fun SplashScreen(
@@ -30,12 +32,14 @@ fun SplashScreen(
         viewModel.events.collect { event ->
             when (event) {
                 SplashEvent.NavigateToPhotoList -> {
-                    navHostController.navigate(Route.PhotoList.name) {
+                    // TODO use navigator
+                    navHostController.navigate(PhotoListRoute) {
                         popUpTo(0)
                     }
                 }
                 SplashEvent.NavigateToSignin -> {
-                    navHostController.navigate(Route.Signin.name) {
+                    // TODO use navigator
+                    navHostController.navigate(SigninRoute) {
                         popUpTo(0)
                     }
                 }

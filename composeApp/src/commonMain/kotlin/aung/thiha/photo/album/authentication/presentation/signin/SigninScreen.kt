@@ -17,7 +17,6 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -29,18 +28,13 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavHostController
 import aung.thiha.compose.LoadingOverlay
 import aung.thiha.photo.album.koin.getViewModel
-import aung.thiha.photo.album.navigation.Route
 import io.github.aungthiha.snackbar.observeWithLifecycle
 import io.github.aungthiha.snackbar.showSnackbar
 
 @Composable
-fun SigninScreen(
-    navHostController: NavHostController
-) {
-
+fun SinginContainer() {
     val viewModel = getViewModel<SigninViewModel>()
 
     val email by viewModel.email.collectAsStateWithLifecycle()
@@ -53,19 +47,26 @@ fun SigninScreen(
         snackbarHostState.showSnackbar(it)
     }
 
+    SigninScreen(
+        snackbarHostState = snackbarHostState,
+        email = email,
+        password = password,
+        overlayLoading = overlayLoading,
+        listener = viewModel
+    )
+}
+
+@Composable
+fun SigninScreen(
+    snackbarHostState: SnackbarHostState,
+    email: String,
+    password: String,
+    overlayLoading: Boolean,
+    listener: SigninScreenListener
+) {
+
     val keyboard = LocalSoftwareKeyboardController.current
 
-    LaunchedEffect(Unit) {
-        viewModel.events.collect { event ->
-            when (event) {
-                SigninEvent.NavigateToPhotoList -> {
-                    navHostController.navigate(Route.PhotoList.name) {
-                        popUpTo(0)
-                    }
-                }
-            }
-        }
-    }
 
     Scaffold(
         snackbarHost = {
@@ -90,7 +91,7 @@ fun SigninScreen(
 
             OutlinedTextField(
                 value = email,
-                onValueChange = viewModel::updateEmail,
+                onValueChange = listener::updateEmail,
                 label = { Text("email") },
                 placeholder = { Text("example@example.com") },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
@@ -102,7 +103,7 @@ fun SigninScreen(
 
             OutlinedTextField(
                 value = password,
-                onValueChange = viewModel::updatePassword,
+                onValueChange = listener::updatePassword,
                 label = { Text("password") },
                 placeholder = { Text("your password") },
                 modifier = Modifier.fillMaxWidth(),
@@ -116,7 +117,7 @@ fun SigninScreen(
             Button(
                 onClick = {
                     keyboard?.hide()
-                    viewModel.signin()
+                    listener.signin()
                 },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -129,7 +130,7 @@ fun SigninScreen(
 
             Button(
                 onClick = {
-                    navHostController.navigate(Route.Signup.name)
+                    listener.navigateToSignup()
                 },
                 modifier = Modifier
                     .fillMaxWidth()

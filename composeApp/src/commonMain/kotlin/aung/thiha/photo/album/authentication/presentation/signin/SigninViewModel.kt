@@ -7,12 +7,12 @@ import aung.thiha.coroutines.AppDispatchers
 import aung.thiha.operation.Outcome
 import aung.thiha.operation.SuspendOperation
 import aung.thiha.photo.album.authentication.model.SigninInput
+import aung.thiha.photo.album.authentication.presentation.navigation.AuthenticationNavigator
 import aung.thiha.photo.album.authentication.usecase.isEmailValid
+import co.touchlab.kermit.Logger
 import io.github.aungthiha.snackbar.SnackbarChannel
 import io.github.aungthiha.snackbar.SnackbarChannelOwner
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import photoalbum.composeapp.generated.resources.Res
@@ -24,12 +24,10 @@ private const val PASSWORD = "PASSWORD"
 
 class SigninViewModel(
     private val sigin: SuspendOperation<SigninInput, Unit>,
+    private val navigator: AuthenticationNavigator,
     private val savedStateHandle: SavedStateHandle = SavedStateHandle(),
     private val snackbarChannel: SnackbarChannel = SnackbarChannel()
-) : ViewModel(), SnackbarChannelOwner by snackbarChannel {
-
-    private val _events = MutableSharedFlow<SigninEvent>()
-    val events: SharedFlow<SigninEvent> = _events
+) : ViewModel(), SigninScreenListener, SnackbarChannelOwner by snackbarChannel {
 
     // TODO when user moves to the second input, if the email is invalid, show error. Hide error when user comes back to the input field
     val email = savedStateHandle.getStateFlow(key = EMAIL, initialValue = "")
@@ -39,15 +37,20 @@ class SigninViewModel(
     private val mutableOverlayLoading = MutableStateFlow(false)
     val overlayLoading: StateFlow<Boolean> = mutableOverlayLoading
 
-    fun updateEmail(email: String) {
+    override fun updateEmail(email: String) {
         savedStateHandle[EMAIL] = email
     }
 
-    fun updatePassword(password: String) {
+    override fun updatePassword(password: String) {
         savedStateHandle[PASSWORD] = password
     }
 
-    fun signin() {
+    override fun navigateToSignup() {
+        Logger.d("onNavigation to signup")
+        navigator.navigateToSignup()
+    }
+
+    override fun signin() {
         // TODO prevent continuous click
 
         if (isEmailValid(email.value).not()) {
@@ -65,7 +68,7 @@ class SigninViewModel(
                 }
 
                 is Outcome.Success<Unit> -> {
-                    _events.emit(SigninEvent.NavigateToPhotoList)
+                    navigator.navigateToPhotoList()
                 }
             }
         }

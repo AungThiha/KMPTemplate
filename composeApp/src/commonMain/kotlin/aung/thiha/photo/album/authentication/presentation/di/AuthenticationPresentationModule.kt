@@ -9,11 +9,13 @@ val authenticationPresentationModule = module {
     factory {
         SigninViewModel(
             sigin = get<AuthenticationRepository>().signin,
+            navigator = get(),
         )
     }
     factory {
         SignupViewModel(
             sigup = get<AuthenticationRepository>().signup,
+            navigator = get(),
         )
     }
 }
