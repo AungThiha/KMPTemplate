@@ -1,0 +1,23 @@
+package aung.thiha.photo.album.authentication.presentation.navigation
+
+import androidx.navigation.NavGraphBuilder
+import androidx.navigation.compose.composable
+import aung.thiha.compose.navigation.Destination
+import aung.thiha.photo.album.authentication.presentation.signin.SinginContainer
+import aung.thiha.photo.album.authentication.presentation.signup.SignupContainer
+import kotlinx.serialization.Serializable
+
+@Serializable
+data object SignupRoute : Destination
+
+@Serializable
+data object SigninRoute : Destination
+
+fun NavGraphBuilder.authentication() {
+    composable<SignupRoute> {
+        SignupContainer()
+    }
+    composable<SigninRoute> {
+        SinginContainer()
+    }
+}

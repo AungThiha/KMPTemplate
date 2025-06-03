@@ -33,18 +33,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavHostController
 import aung.thiha.photo.album.koin.getViewModel
 import aung.thiha.photo.album.photos.domain.model.Photo
 import coil3.compose.AsyncImagePainter
 import coil3.compose.rememberAsyncImagePainter
 import com.valentinilk.shimmer.shimmer
 
+@Composable
+fun PhotoListContainer() {
+    PhotoListScreen()
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PhotoListScreen(
-    navHostController: NavHostController
-) {
+fun PhotoListScreen() {
+    // TODO move ViewModel up to the container
     val viewModel = getViewModel<PhotoListViewModel>()
     val photoListState by viewModel.photoListState.collectAsStateWithLifecycle()
 

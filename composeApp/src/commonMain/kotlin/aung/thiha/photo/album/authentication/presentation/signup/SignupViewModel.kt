@@ -7,12 +7,11 @@ import aung.thiha.coroutines.AppDispatchers
 import aung.thiha.operation.Outcome
 import aung.thiha.operation.SuspendOperation
 import aung.thiha.photo.album.authentication.model.SignupInput
+import aung.thiha.photo.album.authentication.presentation.navigation.AuthenticationNavigator
 import aung.thiha.photo.album.authentication.usecase.isEmailValid
 import io.github.aungthiha.snackbar.SnackbarChannel
 import io.github.aungthiha.snackbar.SnackbarChannelOwner
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import photoalbum.composeapp.generated.resources.Res
@@ -26,12 +25,10 @@ private const val CONFIRM_PASSWORD = "CONFIRM_PASSWORD"
 
 class SignupViewModel(
     private val sigup: SuspendOperation<SignupInput, Unit>,
+    private val navigator: AuthenticationNavigator,
     private val savedStateHandle: SavedStateHandle = SavedStateHandle(),
     private val snackbarChannel: SnackbarChannel = SnackbarChannel()
-) : ViewModel(), SnackbarChannelOwner by snackbarChannel {
-
-    private val _events = MutableSharedFlow<SignupEvent>()
-    val events: SharedFlow<SignupEvent> = _events
+) : ViewModel(), SignupScreenListener, SnackbarChannelOwner by snackbarChannel {
 
     // TODO when user moves to the second input, if the email is invalid, show error. Hide error when user comes back to the input field
     val email = savedStateHandle.getStateFlow(key = EMAIL, initialValue = "")
@@ -42,19 +39,23 @@ class SignupViewModel(
     private val mutableOverlayLoading = MutableStateFlow(false)
     val overlayLoading: StateFlow<Boolean> = mutableOverlayLoading
 
-    fun updateEmail(email: String) {
+    override fun navigateUp() {
+        navigator.navigateUpFromSignup()
+    }
+
+    override fun updateEmail(email: String) {
         savedStateHandle[EMAIL] = email
     }
 
-    fun updatePassword(password: String) {
+    override fun updatePassword(password: String) {
         savedStateHandle[PASSWORD] = password
     }
 
-    fun updateConfirmPassword(confirmPassword: String) {
+    override fun updateConfirmPassword(confirmPassword: String) {
         savedStateHandle[CONFIRM_PASSWORD] = confirmPassword
     }
 
-    fun signup() {
+    override fun signup() {
 
         // TODO prevent continuous click
 
@@ -78,7 +79,7 @@ class SignupViewModel(
                     hideOverlayLoading()
                 }
                 is Outcome.Success<Unit> -> {
-                    _events.emit(SignupEvent.NavigateToPhotoList)
+                    navigator.navigateToPhotoList()
                 }
             }
         }

@@ -3,11 +3,14 @@ package aung.thiha.photo.album.authentication.presentation.signup
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
@@ -16,7 +19,6 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -28,19 +30,15 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavHostController
 import aung.thiha.compose.AlbumTopAppBar
 import aung.thiha.compose.LoadingOverlay
 import aung.thiha.photo.album.koin.getViewModel
-import aung.thiha.photo.album.navigation.Route
+import co.touchlab.kermit.Logger
 import io.github.aungthiha.snackbar.observeWithLifecycle
 import io.github.aungthiha.snackbar.showSnackbar
 
 @Composable
-fun SignupScreen(
-    navHostController: NavHostController
-) {
-
+internal fun SignupContainer() {
     val viewModel = getViewModel<SignupViewModel>()
 
     val email by viewModel.email.collectAsStateWithLifecycle()
@@ -48,33 +46,45 @@ fun SignupScreen(
     val confirmPassword by viewModel.confirmPassword.collectAsStateWithLifecycle()
     val overlayLoading by viewModel.overlayLoading.collectAsStateWithLifecycle()
 
-    val keyboard = LocalSoftwareKeyboardController.current
-
     val snackbarHostState : SnackbarHostState = remember { SnackbarHostState() }
     viewModel.snackbarFlow.observeWithLifecycle {
         snackbarHostState.showSnackbar(it)
     }
 
-    LaunchedEffect(Unit) {
-        viewModel.events.collect { event ->
-            when (event) {
-                SignupEvent.NavigateToPhotoList -> {
-                    navHostController.navigate(Route.PhotoList.name) {
-                        popUpTo(0)
-                    }
-                }
-            }
-        }
-    }
+    SignupScreen(
+        snackbarHostState = snackbarHostState,
+        email = email,
+        password = password,
+        confirmPassword = confirmPassword,
+        overlayLoading = overlayLoading,
+        eventReceiver = viewModel
+    )
+}
+
+@Composable
+internal fun SignupScreen(
+    snackbarHostState: SnackbarHostState,
+    email: String,
+    password: String,
+    confirmPassword: String,
+    overlayLoading: Boolean,
+    eventReceiver: SignupScreenListener
+) {
+
+    val keyboard = LocalSoftwareKeyboardController.current
 
     Scaffold(
         topBar = {
-            AlbumTopAppBar { navHostController.navigateUp() }
+            AlbumTopAppBar {
+                Logger.d("onNavigation up button clicked")
+                eventReceiver.navigateUp()
+            }
         },
         snackbarHost = {
             SnackbarHost(hostState = snackbarHostState)
         },
-    ) { contentPadding ->
+        modifier = Modifier.windowInsetsPadding(WindowInsets.systemBars),
+        ) { contentPadding ->
 
         Column(
             modifier = Modifier
@@ -93,7 +103,7 @@ fun SignupScreen(
 
             OutlinedTextField(
                 value = email,
-                onValueChange = viewModel::updateEmail,
+                onValueChange = eventReceiver::updateEmail,
                 label = { Text("email") },
                 placeholder = { Text("example@example.com") },
                 modifier = Modifier.fillMaxWidth(),
@@ -105,7 +115,7 @@ fun SignupScreen(
 
             OutlinedTextField(
                 value = password,
-                onValueChange = viewModel::updatePassword,
+                onValueChange = eventReceiver::updatePassword,
                 label = { Text("password") },
                 placeholder = { Text("your password") },
                 modifier = Modifier.fillMaxWidth(),
@@ -118,7 +128,7 @@ fun SignupScreen(
 
             OutlinedTextField(
                 value = confirmPassword,
-                onValueChange = viewModel::updateConfirmPassword,
+                onValueChange = eventReceiver::updateConfirmPassword,
                 label = { Text("confirm password") },
                 placeholder = { Text("confirm your password") },
                 modifier = Modifier.fillMaxWidth(),
@@ -132,7 +142,7 @@ fun SignupScreen(
             Button(
                 onClick = {
                     keyboard?.hide()
-                    viewModel.signup()
+                    eventReceiver.signup()
                 },
                 modifier = Modifier
                     .fillMaxWidth()
