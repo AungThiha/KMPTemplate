@@ -1,4 +1,4 @@
-package aung.thiha.photo.album.authentication.presentation.signin
+package aung.thiha.photo.album.authentication.presentation.signup.signin
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -29,8 +29,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import aung.thiha.compose.LoadingOverlay
-import aung.thiha.photo.album.authentication.presentation.signup.signin.SigninScreenListener
-import aung.thiha.photo.album.authentication.presentation.signup.signin.SigninViewModel
 import io.github.aungthiha.snackbar.observeWithLifecycle
 import io.github.aungthiha.snackbar.showSnackbar
 import org.koin.compose.viewmodel.koinViewModel
