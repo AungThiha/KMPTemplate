@@ -34,7 +34,7 @@ import io.github.aungthiha.snackbar.showSnackbar
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun SinginContainer() {
+internal fun SinginContainer() {
     val viewModel = koinViewModel<SigninViewModel>()
 
     val email by viewModel.email.collectAsStateWithLifecycle()
