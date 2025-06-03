@@ -1,4 +1,4 @@
-package aung.thiha.photo.album.authentication.presentation.signup
+package aung.thiha.photo.album.authentication.presentation.signup.signup
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -8,17 +8,16 @@ import aung.thiha.operation.Outcome
 import aung.thiha.operation.SuspendOperation
 import aung.thiha.photo.album.authentication.model.SignupInput
 import aung.thiha.photo.album.authentication.presentation.signup.navigation.AuthenticationNavigator
-import aung.thiha.photo.album.authentication.presentation.signup.signup.SignupScreenListener
 import aung.thiha.photo.album.authentication.usecase.isEmailValid
 import io.github.aungthiha.snackbar.SnackbarChannel
 import io.github.aungthiha.snackbar.SnackbarChannelOwner
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import photoalbum.composeapp.generated.resources.Res
-import photoalbum.composeapp.generated.resources.failed
-import photoalbum.composeapp.generated.resources.invalid_email
-import photoalbum.composeapp.generated.resources.passwords_do_not_match
+import photoalbum.authentication.presentation.generated.resources.Res
+import photoalbum.authentication.presentation.generated.resources.authentication_failed
+import photoalbum.authentication.presentation.generated.resources.authentication_invalid_email
+import photoalbum.authentication.presentation.generated.resources.authentication_passwords_do_not_match
 
 private const val EMAIL = "EMAIL"
 private const val PASSWORD = "PASSWORD"
@@ -61,12 +60,12 @@ class SignupViewModel(
         // TODO prevent continuous click
 
         if (isEmailValid(email.value).not()) {
-            showSnackBar(Res.string.invalid_email)
+            showSnackBar(Res.string.authentication_invalid_email)
             return
         }
 
         if (password.value != confirmPassword.value) {
-            showSnackBar(Res.string.passwords_do_not_match)
+            showSnackBar(Res.string.authentication_passwords_do_not_match)
             return
         }
 
@@ -76,7 +75,7 @@ class SignupViewModel(
             val result = sigup(SignupInput(email = email.value, password = password.value))
             when (result) {
                 is Outcome.Failure<Unit> -> {
-                    showSnackBar(Res.string.failed)
+                    showSnackBar(Res.string.authentication_failed)
                     hideOverlayLoading()
                 }
                 is Outcome.Success<Unit> -> {

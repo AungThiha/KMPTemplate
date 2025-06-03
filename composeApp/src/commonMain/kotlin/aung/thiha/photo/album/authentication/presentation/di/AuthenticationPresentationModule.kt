@@ -2,7 +2,7 @@ package aung.thiha.photo.album.authentication.presentation.di
 
 import aung.thiha.photo.album.authentication.domain.AuthenticationRepository
 import aung.thiha.photo.album.authentication.presentation.signup.signin.SigninViewModel
-import aung.thiha.photo.album.authentication.presentation.signup.SignupViewModel
+import aung.thiha.photo.album.authentication.presentation.signup.signup.SignupViewModel
 import org.koin.dsl.module
 
 val authenticationPresentationModule = module {

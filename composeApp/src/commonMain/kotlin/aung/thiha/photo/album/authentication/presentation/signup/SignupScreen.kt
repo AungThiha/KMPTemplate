@@ -33,8 +33,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import aung.thiha.compose.AlbumTopAppBar
 import aung.thiha.compose.LoadingOverlay
 import aung.thiha.photo.album.authentication.presentation.signup.signup.SignupScreenListener
+import aung.thiha.photo.album.authentication.presentation.signup.signup.SignupViewModel
 import aung.thiha.photo.album.koin.getViewModel
-import co.touchlab.kermit.Logger
 import io.github.aungthiha.snackbar.observeWithLifecycle
 import io.github.aungthiha.snackbar.showSnackbar
 
