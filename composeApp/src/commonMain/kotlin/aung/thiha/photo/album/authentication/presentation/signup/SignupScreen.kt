@@ -76,7 +76,6 @@ internal fun SignupScreen(
     Scaffold(
         topBar = {
             AlbumTopAppBar {
-                Logger.d("onNavigation up button clicked")
                 eventReceiver.navigateUp()
             }
         },
