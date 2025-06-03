@@ -78,7 +78,7 @@ kotlin {
 
             implementation(libs.koin.core)
             implementation(libs.koin.compose)
-            implementation(libs.koin.composeVM)
+            implementation(libs.koin.composeViewModel)
 
             implementation(libs.kotlinx.coroutines.core)
 
