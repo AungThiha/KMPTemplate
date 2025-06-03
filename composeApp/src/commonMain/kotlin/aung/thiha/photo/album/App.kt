@@ -20,7 +20,6 @@ import aung.thiha.photo.album.navigation.NavigationHandler
 import aung.thiha.photo.album.navigation.Route
 import aung.thiha.photo.album.photos.navigation.photos
 import aung.thiha.photo.album.splash.SplashScreen
-import co.touchlab.kermit.Logger
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -42,10 +41,7 @@ fun App() {
 
         DefaultNavigationDispatcher.setHandler(object : NavigationHandler {
             override fun onNavigateUp(): Deferred<Boolean> = lifecycleScope.async(AppDispatchers.main) {
-                Logger.d("onNavigateUp is called")
-                val done = navController.navigateUp()
-                Logger.d("onNavigateUp is done: $done")
-                done
+                navController.navigateUp()
             }
 
             override fun onNavigation(

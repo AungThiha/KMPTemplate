@@ -9,7 +9,6 @@ import aung.thiha.operation.SuspendOperation
 import aung.thiha.photo.album.authentication.model.SigninInput
 import aung.thiha.photo.album.authentication.presentation.navigation.AuthenticationNavigator
 import aung.thiha.photo.album.authentication.usecase.isEmailValid
-import co.touchlab.kermit.Logger
 import io.github.aungthiha.snackbar.SnackbarChannel
 import io.github.aungthiha.snackbar.SnackbarChannelOwner
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -46,7 +45,6 @@ class SigninViewModel(
     }
 
     override fun navigateToSignup() {
-        Logger.d("onNavigation to signup")
         navigator.navigateToSignup()
     }
 
