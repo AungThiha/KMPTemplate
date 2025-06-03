@@ -31,6 +31,7 @@ dependencyResolutionManagement {
 include(
     ":authentication:data",
     ":authentication:domain",
+    ":authentication:presentation",
 )
 include(":coroutines")
 include(":composeApp")

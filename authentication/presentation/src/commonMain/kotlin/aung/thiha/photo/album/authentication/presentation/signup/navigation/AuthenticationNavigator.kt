@@ -1,4 +1,4 @@
-package aung.thiha.photo.album.authentication.presentation.navigation
+package aung.thiha.photo.album.authentication.presentation.signup.navigation
 
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Job
