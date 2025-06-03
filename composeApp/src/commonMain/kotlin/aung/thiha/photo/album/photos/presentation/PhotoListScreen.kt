@@ -33,11 +33,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import aung.thiha.photo.album.koin.getViewModel
 import aung.thiha.photo.album.photos.domain.model.Photo
 import coil3.compose.AsyncImagePainter
 import coil3.compose.rememberAsyncImagePainter
 import com.valentinilk.shimmer.shimmer
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun PhotoListContainer() {
@@ -48,7 +48,7 @@ fun PhotoListContainer() {
 @Composable
 fun PhotoListScreen() {
     // TODO move ViewModel up to the container
-    val viewModel = getViewModel<PhotoListViewModel>()
+    val viewModel = koinViewModel<PhotoListViewModel>()
     val photoListState by viewModel.photoListState.collectAsStateWithLifecycle()
 
     LaunchedEffect(Unit) {
