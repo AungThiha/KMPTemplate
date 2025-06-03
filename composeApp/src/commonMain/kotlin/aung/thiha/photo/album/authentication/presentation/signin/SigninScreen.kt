@@ -31,13 +31,13 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import aung.thiha.compose.LoadingOverlay
 import aung.thiha.photo.album.authentication.presentation.signup.signin.SigninScreenListener
 import aung.thiha.photo.album.authentication.presentation.signup.signin.SigninViewModel
-import aung.thiha.photo.album.koin.getViewModel
 import io.github.aungthiha.snackbar.observeWithLifecycle
 import io.github.aungthiha.snackbar.showSnackbar
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun SinginContainer() {
-    val viewModel = getViewModel<SigninViewModel>()
+    val viewModel = koinViewModel<SigninViewModel>()
 
     val email by viewModel.email.collectAsStateWithLifecycle()
     val password by viewModel.password.collectAsStateWithLifecycle()
