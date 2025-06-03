@@ -9,21 +9,21 @@ androidx-constraintlayout = "2.1.4"
 androidx-core-ktx = "1.13.1"
 androidx-datastore = "1.1.1"
 androidx-espresso-core = "3.6.1"
-androidx-lifecycle = "2.8.0"
+androidx-lifecycle = "2.9.0"
 androidx-material = "1.12.0"
-androidx-compose-material = "1.7.5"
+androidx-compose-material = "1.8.2"
 androidx-navigation = "2.8.0-alpha10"
 androidx-test-junit = "1.2.1"
 coil = "3.0.2"
-compose-plugin = "1.6.11"
+compose-plugin = "1.8.1"
 composeShimmer = "1.3.1"
 coroutines = "1.10.2"
 firebase = "33.6.0"
 junit = "4.13.2"
 kermit = "1.0.0"
 kotlin = "2.1.21"
-koin = "3.5.3"
-koin-compose = "1.1.5"
+koin = "4.0.4"
+koin-compose = "4.0.4"
 ktor = "2.3.7"
 google-services = "4.4.2"
 jetbrainsKotlinJvm = "1.9.24"
@@ -54,6 +54,7 @@ kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-c
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 koin-compose = { module="io.insert-koin:koin-compose", version.ref = "koin-compose"}
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+koin-composeVM = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin-compose" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor" }
 ktor-client-auth = { module = "io.ktor:ktor-client-auth", version.ref = "ktor" }
