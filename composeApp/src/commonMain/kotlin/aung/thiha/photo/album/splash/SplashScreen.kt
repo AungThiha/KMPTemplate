@@ -17,16 +17,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import aung.thiha.photo.album.authentication.presentation.navigation.SigninRoute
-import aung.thiha.photo.album.koin.getViewModel
-import aung.thiha.photo.album.navigation.Route
 import aung.thiha.photo.album.photos.navigation.PhotoListRoute
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun SplashScreen(
     navHostController: NavHostController
 ) {
 
-    val viewModel = getViewModel<SplashViewModel>()
+    val viewModel = koinViewModel<SplashViewModel>()
 
     LaunchedEffect(Unit) {
         viewModel.events.collect { event ->
