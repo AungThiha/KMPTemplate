@@ -52,6 +52,7 @@ kotlin {
 
             implementation(projects.authentication.data)
             implementation(projects.authentication.domain)
+            implementation(projects.authentication.presentation)
 
             implementation(projects.session.data)
             implementation(projects.session.domain)

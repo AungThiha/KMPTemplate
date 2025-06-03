@@ -7,7 +7,7 @@ import aung.thiha.coroutines.AppDispatchers
 import aung.thiha.operation.Outcome
 import aung.thiha.operation.SuspendOperation
 import aung.thiha.photo.album.authentication.model.SignupInput
-import aung.thiha.photo.album.authentication.presentation.navigation.AuthenticationNavigator
+import aung.thiha.photo.album.authentication.presentation.signup.navigation.AuthenticationNavigator
 import aung.thiha.photo.album.authentication.usecase.isEmailValid
 import io.github.aungthiha.snackbar.SnackbarChannel
 import io.github.aungthiha.snackbar.SnackbarChannelOwner
