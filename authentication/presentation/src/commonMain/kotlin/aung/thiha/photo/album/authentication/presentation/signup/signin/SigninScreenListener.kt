@@ -1,4 +1,4 @@
-package aung.thiha.photo.album.authentication.presentation.signin
+package aung.thiha.photo.album.authentication.presentation.signup.signin
 
 interface SigninScreenListener {
     fun updateEmail(email: String)

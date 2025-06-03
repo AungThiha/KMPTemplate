@@ -1,4 +1,4 @@
-package aung.thiha.photo.album.authentication.presentation.signup
+package aung.thiha.photo.album.authentication.presentation.signup.signup
 
 interface SignupScreenListener {
     fun navigateUp()
