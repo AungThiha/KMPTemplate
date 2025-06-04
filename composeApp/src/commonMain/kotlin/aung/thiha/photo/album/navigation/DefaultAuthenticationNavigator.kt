@@ -12,6 +12,6 @@ class DefaultAuthenticationNavigator(
     override fun navigateToSignup() = navigationDispatcher.navigate(SignupRoute)
 
     override fun navigateToPhotoList() = navigationDispatcher.navigate(PhotoListRoute) {
-        popUpTo(0)
+        popUpToOptions = clearBackStack()
     }
 }
