@@ -36,7 +36,7 @@ class DefaultNavigationDispatcherTest {
     }
 
     @Test
-    fun `navigate should call handler with popUpToRoute = home`() = runTest {
+    fun `navigate should call handler with popUpToRoute = SigninRoute`() = runTest {
         DefaultNavigationDispatcher.setHandler(handler)
         every { handler.onNavigation(any(), any()) } returns Job()
 
