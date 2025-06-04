@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlinxSerialization)
     alias(libs.plugins.googleServices)
+    alias(libs.plugins.dev.mokkery)
 }
 
 kotlin {
@@ -89,7 +90,8 @@ kotlin {
             implementation(libs.ktor.logging)
         }
         commonTest.dependencies {
-            implementation(kotlin("test"))
+            implementation(libs.kotlin.test)
+            implementation(libs.kotlinx.coroutines.test)
         }
     }
 }
