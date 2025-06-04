@@ -9,6 +9,6 @@ import org.koin.dsl.module
 val navigationModule = module {
     factory<AuthenticationNavigator> { DefaultAuthenticationNavigator(navigationDispatcher = get()) }
 
-    // TODO replace this in integration test. Make sure it's scoped to
+    // TODO replace this in integration test. Make sure it's scoped to threadlocal
     single<NavigationDispatcher> { DefaultNavigationDispatcher }
 }
