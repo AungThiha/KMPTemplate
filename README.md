@@ -3,6 +3,18 @@
 > ⚠️ **Project Setup Instructions Outdated**  
 > Instructions provided in the file "How To Set Up and Run the KMP Project.pdf" is outdated. Fleet is no longer a go-to IDE for KMP project. New instructions will be provided before 14 Jun 2025.
 
+A template to jumpstart a KMP/CMP project with modularization, clean architecture, MVVM and UDF.
+
+This project uses:
+- Ktor for networking
+- DataStore for local persistence
+- Kotlin Coroutines for asynchronous tasks
+- Jetpack Navigation for screen transitions
+- Firebase for app distributions
+
+## UI Design
+![UI Design](ui_design.png)
+
 ## Get the Precompiled App
 - [iOS - Setup Instructions](https://aungthiha.github.io/iOSAppAccessAutomation/pages/firebase-setup.html)
 - Android - Compile from the source (for now)
