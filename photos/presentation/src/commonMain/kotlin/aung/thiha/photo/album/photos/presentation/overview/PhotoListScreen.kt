@@ -41,19 +41,24 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun PhotoListContainer() {
-    PhotoListScreen()
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun PhotoListScreen() {
-    // TODO move ViewModel up to the container
     val viewModel = koinViewModel<PhotoListViewModel>()
     val photoListState by viewModel.photoListState.collectAsStateWithLifecycle()
 
     LaunchedEffect(Unit) {
         viewModel.load()
     }
+    PhotoListScreen(
+        photoListState = photoListState,
+        listener = viewModel
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun PhotoListScreen(
+    photoListState: PhotoListState,
+    listener: PhotoListScreenListener,
+) {
 
     Scaffold(
         topBar = {
@@ -65,7 +70,7 @@ fun PhotoListScreen() {
                 actions = {
                     OutlinedButton(
                         shape = RoundedCornerShape(16.dp),
-                        onClick = { viewModel.signout() },
+                        onClick = listener::onSignoutClicked,
                         modifier = Modifier.padding(end = 16.dp)
                     ) {
                         Text("Sign out")
@@ -78,10 +83,10 @@ fun PhotoListScreen() {
         Box(modifier = Modifier.padding(contentPadding)) {
             when (photoListState) {
                 is PhotoListState.Content -> {
-                    if ((photoListState as PhotoListState.Content).photos.isEmpty()) {
+                    if (photoListState.photos.isEmpty()) {
                         EmptyPhotoGrid()
                     } else {
-                        PhotoGrid((photoListState as PhotoListState.Content).photos)
+                        PhotoGrid(photoListState.photos)
                     }
                 }
                 PhotoListState.Loading -> {
@@ -98,7 +103,7 @@ fun PhotoListScreen() {
                     }
                 }
                 PhotoListState.LoadingFailed -> {
-                    PhotoLoadingFailed(onRetry = { viewModel.load() })
+                    PhotoLoadingFailed(onRetry = listener::onSignoutClicked)
                 }
             }
         }
