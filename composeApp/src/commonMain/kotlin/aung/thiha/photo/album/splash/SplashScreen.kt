@@ -15,40 +15,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
-import aung.thiha.photo.album.authentication.presentation.signup.navigation.SigninRoute
-import aung.thiha.photo.album.photos.presentation.navigation.PhotoListRoute
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun SplashScreen(
-    navHostController: NavHostController
-) {
-
+fun SplashContainer() {
     val viewModel = koinViewModel<SplashViewModel>()
-
-    LaunchedEffect(Unit) {
-        viewModel.events.collect { event ->
-            when (event) {
-                SplashEvent.NavigateToPhotoList -> {
-                    // TODO use navigator
-                    navHostController.navigate(PhotoListRoute) {
-                        popUpTo(0)
-                    }
-                }
-                SplashEvent.NavigateToSignin -> {
-                    // TODO use navigator
-                    navHostController.navigate(SigninRoute) {
-                        popUpTo(0)
-                    }
-                }
-            }
-        }
-    }
 
     LaunchedEffect(Unit) {
         viewModel.load()
     }
+
+    SplashScreen()
+}
+
+@Composable
+fun SplashScreen() {
 
     Column(
         modifier = Modifier
