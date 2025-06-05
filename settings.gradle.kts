@@ -36,6 +36,7 @@ include(
 include(
     ":photos:data",
     ":photos:domain",
+    ":photos:presentation",
 )
 include(":coroutines")
 include(":composeApp")

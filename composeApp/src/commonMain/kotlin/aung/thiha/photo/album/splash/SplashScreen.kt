@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import aung.thiha.photo.album.authentication.presentation.signup.navigation.SigninRoute
-import aung.thiha.photo.album.photos.navigation.PhotoListRoute
+import aung.thiha.photo.album.photos.presentation.navigation.PhotoListRoute
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable

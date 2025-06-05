@@ -1,12 +1,12 @@
-package aung.thiha.photo.album.di
+package aung.thiha.photo.album.photos.presentation.di
 
-import aung.thiha.photo.album.authentication.domain.usecase.Signout
 import aung.thiha.photo.album.photos.domain.PhotosRepository
-import aung.thiha.photo.album.photos.presentation.PhotoListViewModel
+import aung.thiha.photo.album.photos.domain.usecase.Signout
+import aung.thiha.photo.album.photos.presentation.overview.PhotoListViewModel
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
-val photosModule = module {
+val photosPresentationModule = module {
     viewModel {
         PhotoListViewModel(
             _signout = get<Signout>(),
