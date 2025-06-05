@@ -16,7 +16,6 @@ import aung.thiha.photo.album.authentication.presentation.signup.navigation.auth
 import aung.thiha.photo.album.navigation.DefaultNavigationDispatcher
 import aung.thiha.photo.album.navigation.NavigationHandler
 import aung.thiha.photo.album.navigation.NavigationOptions
-import aung.thiha.photo.album.navigation.Route
 import aung.thiha.photo.album.navigation.toNavOptions
 import aung.thiha.photo.album.photos.presentation.navigation.photos
 import aung.thiha.photo.album.splash.SplashRoute
