@@ -67,7 +67,6 @@ fun SigninScreen(
 
     val keyboard = LocalSoftwareKeyboardController.current
 
-
     Scaffold(
         snackbarHost = {
             SnackbarHost(hostState = snackbarHostState)
