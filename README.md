@@ -2,6 +2,11 @@
 
 To run the project, refer to the instructions provided in the file "How To Set Up and Run the KMP Project.pdf", located in the root directory of this project.
 
+## Get the Precompiled App
+- [iOS - Setup Instructions](https://aungthiha.github.io/iOSAppAccessAutomation/pages/firebase-setup.html)
+- Android - Compile from the source (for now)
+
+
 ## Roadmap
 - Scope the ViewModels to NavGraph destinations so that they can become garbage collectable when a respective destination exits
 - Move presentation layers into their own respective modules so they can be compiled in parallel with other modules and have clear boundaries with other modules
