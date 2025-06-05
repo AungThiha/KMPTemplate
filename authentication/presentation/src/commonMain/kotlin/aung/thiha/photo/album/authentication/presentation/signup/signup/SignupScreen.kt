@@ -146,7 +146,7 @@ internal fun SignupScreen(
                     .fillMaxWidth()
                     .height(50.dp)
             ) {
-                Text(text = "Sign up", color = Color.White)
+                Text(text = "Sign up")
             }
 
             Spacer(modifier = Modifier.height(16.dp))
