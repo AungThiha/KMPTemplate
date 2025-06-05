@@ -41,10 +41,22 @@ fun App() {
         }
 
         DefaultNavigationDispatcher.setHandler(object : NavigationHandler {
+            /**
+             * onNavigateUp can be called from any thread but
+             * NavHostController needs to be called from main thread
+             * That's why it uses lifecycleScope to ensure the function is main-safe
+             * This separates the concern from the caller
+            * */
             override fun onNavigateUp(): Deferred<Boolean> = lifecycleScope.async(AppDispatchers.main) {
                 navController.navigateUp()
             }
 
+            /**
+             * onNavigation can be called from any thread but
+             * NavHostController needs to be called from main thread
+             * That's why it uses lifecycleScope to ensure the function is main-safe
+             * This separates the concern from the caller
+             * */
             override fun onNavigation(
                 destination: Destination,
                 navigationOptions: NavigationOptions
