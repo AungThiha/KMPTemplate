@@ -1,7 +1,7 @@
-package aung.thiha.photo.album.authentication.di
+package aung.thiha.photo.album.authentication.domain.di
 
-import aung.thiha.photo.album.authentication.usecase.IsSignedIn
-import aung.thiha.photo.album.authentication.usecase.Signout
+import aung.thiha.photo.album.authentication.domain.usecase.IsSignedIn
+import aung.thiha.photo.album.authentication.domain.usecase.Signout
 import org.koin.dsl.module
 
 val authenticationDomainModule = module {

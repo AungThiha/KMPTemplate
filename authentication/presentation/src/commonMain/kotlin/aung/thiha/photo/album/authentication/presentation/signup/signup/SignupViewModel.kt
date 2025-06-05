@@ -6,9 +6,9 @@ import androidx.lifecycle.viewModelScope
 import aung.thiha.coroutines.AppDispatchers
 import aung.thiha.operation.Outcome
 import aung.thiha.operation.SuspendOperation
-import aung.thiha.photo.album.authentication.model.SignupInput
+import aung.thiha.photo.album.authentication.domain.model.SignupInput
 import aung.thiha.photo.album.authentication.presentation.signup.navigation.AuthenticationNavigator
-import aung.thiha.photo.album.authentication.usecase.isEmailValid
+import aung.thiha.photo.album.authentication.domain.usecase.isEmailValid
 import io.github.aungthiha.snackbar.SnackbarChannel
 import io.github.aungthiha.snackbar.SnackbarChannelOwner
 import kotlinx.coroutines.flow.MutableStateFlow

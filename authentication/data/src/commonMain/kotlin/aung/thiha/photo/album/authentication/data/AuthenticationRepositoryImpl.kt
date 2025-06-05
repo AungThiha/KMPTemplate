@@ -5,8 +5,8 @@ import aung.thiha.operation.suspendOperation
 import aung.thiha.photo.album.authentication.data.remote.request.AuthenticationRequest
 import aung.thiha.photo.album.authentication.data.remote.service.AuthenticationDataSource
 import aung.thiha.photo.album.authentication.domain.AuthenticationRepository
-import aung.thiha.photo.album.authentication.model.SigninInput
-import aung.thiha.photo.album.authentication.model.SignupInput
+import aung.thiha.photo.album.authentication.domain.model.SigninInput
+import aung.thiha.photo.album.authentication.domain.model.SignupInput
 import aung.thiha.session.domain.SessionStorage
 import aung.thiha.session.domain.model.Session
 

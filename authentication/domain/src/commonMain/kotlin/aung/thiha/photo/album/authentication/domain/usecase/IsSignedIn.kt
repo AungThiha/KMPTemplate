@@ -1,4 +1,4 @@
-package aung.thiha.photo.album.authentication.usecase
+package aung.thiha.photo.album.authentication.domain.usecase
 
 import aung.thiha.photo.album.authentication.domain.AuthenticationRepository
 import aung.thiha.operation.FailureType
