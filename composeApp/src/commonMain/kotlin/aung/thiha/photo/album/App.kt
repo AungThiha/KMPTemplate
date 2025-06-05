@@ -7,8 +7,6 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavHostController
-import androidx.navigation.NavOptions
-import androidx.navigation.NavOptionsBuilder
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -20,10 +18,10 @@ import aung.thiha.photo.album.navigation.DefaultNavigationDispatcher
 import aung.thiha.photo.album.navigation.NavigationHandler
 import aung.thiha.photo.album.navigation.NavigationOptions
 import aung.thiha.photo.album.navigation.Route
+import aung.thiha.photo.album.navigation.toNavOptions
 import aung.thiha.photo.album.photos.navigation.photos
 import aung.thiha.photo.album.splash.SplashScreen
 import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -51,21 +49,7 @@ fun App() {
                 destination: Destination,
                 navigationOptions: NavigationOptions
             ) = lifecycleScope.launch(AppDispatchers.main) {
-                // TODO move this logic out
-                val navOptions = with(navigationOptions) {
-                    NavOptions.Builder()
-                        .setLaunchSingleTop(launchSingleTop)
-                        .also {
-                           if (popUpToOptions != null) {
-                               if (popUpToOptions.popUpToRoute == null)
-                                   it.setPopUpTo(0, false)
-                               else
-                                   it.setPopUpTo(popUpToOptions.popUpToRoute, inclusive = popUpToOptions.inclusive)
-                           }
-                        }
-                        .build()
-                }
-                navController.navigate(destination, navOptions)
+                navController.navigate(destination, navigationOptions.toNavOptions())
             }
         })
         NavHost(
