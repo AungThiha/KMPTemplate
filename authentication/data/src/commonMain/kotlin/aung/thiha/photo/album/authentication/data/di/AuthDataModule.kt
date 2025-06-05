@@ -5,7 +5,7 @@ import aung.thiha.photo.album.authentication.data.plugin.AuthPlugin
 import aung.thiha.photo.album.authentication.data.remote.service.AuthenticationDataSource
 import aung.thiha.photo.album.authentication.data.remote.service.AuthenticationService
 import aung.thiha.photo.album.authentication.domain.AuthenticationRepository
-import aung.thiha.photo.album.authentication.usecase.Signout
+import aung.thiha.photo.album.authentication.domain.usecase.Signout
 import aung.thiha.session.domain.SessionStorage
 import org.koin.dsl.module
 

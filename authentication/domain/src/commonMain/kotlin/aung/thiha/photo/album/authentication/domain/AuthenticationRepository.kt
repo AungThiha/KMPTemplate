@@ -1,7 +1,7 @@
 package aung.thiha.photo.album.authentication.domain
 
-import aung.thiha.photo.album.authentication.model.SigninInput
-import aung.thiha.photo.album.authentication.model.SignupInput
+import aung.thiha.photo.album.authentication.domain.model.SigninInput
+import aung.thiha.photo.album.authentication.domain.model.SignupInput
 import aung.thiha.operation.SuspendOperation
 
 interface AuthenticationRepository {

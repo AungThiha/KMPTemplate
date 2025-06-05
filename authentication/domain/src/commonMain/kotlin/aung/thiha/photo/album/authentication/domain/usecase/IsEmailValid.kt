@@ -1,4 +1,4 @@
-package aung.thiha.photo.album.authentication.usecase
+package aung.thiha.photo.album.authentication.domain.usecase
 
 
 fun isEmailValid(email: String): Boolean {

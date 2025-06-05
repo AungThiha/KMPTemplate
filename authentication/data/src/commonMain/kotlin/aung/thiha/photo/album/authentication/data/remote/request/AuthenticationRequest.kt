@@ -1,7 +1,7 @@
 package aung.thiha.photo.album.authentication.data.remote.request
 
-import aung.thiha.photo.album.authentication.model.SigninInput
-import aung.thiha.photo.album.authentication.model.SignupInput
+import aung.thiha.photo.album.authentication.domain.model.SigninInput
+import aung.thiha.photo.album.authentication.domain.model.SignupInput
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

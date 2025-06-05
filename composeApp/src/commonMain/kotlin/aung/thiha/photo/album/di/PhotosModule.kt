@@ -1,6 +1,6 @@
 package aung.thiha.photo.album.di
 
-import aung.thiha.photo.album.authentication.usecase.Signout
+import aung.thiha.photo.album.authentication.domain.usecase.Signout
 import aung.thiha.photo.album.photos.data.PhotosRepositoryImpl
 import aung.thiha.photo.album.photos.data.remote.service.PhotosDataSource
 import aung.thiha.photo.album.photos.data.remote.service.PhotosService
