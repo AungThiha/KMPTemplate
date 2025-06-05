@@ -13,7 +13,7 @@ To run the project, refer to the instructions provided in the file "How To Set U
 - Write instrumentation tests to ensure things work as expected on real devices
 - Figure which snapshot test framework would be best suited for the project
 - Set up snapshot tests
-- Implement AES-GCM encryption for session storage for security
+- Implement AES-GCM encryption for session storage to enhance security
 - Unify the jvmToolchain version across all modules to make sure updating java versions easy
 - Use spotless to sort the keys in version catalog to make searching keys easier
 
