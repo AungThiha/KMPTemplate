@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 class PhotoListViewModel(
     private val _signout: SuspendOperation<Unit, Unit>,
     private val photos: SuspendOperation<Unit, List<Photo>>
-) : ViewModel() {
+) : ViewModel(), PhotoListScreenListener {
 
     private val _photoListState = MutableStateFlow<PhotoListState>(PhotoListState.Loading)
     val photoListState: StateFlow<PhotoListState> = _photoListState
@@ -32,7 +32,11 @@ class PhotoListViewModel(
         }
     }
 
-    fun signout() {
+    override fun onRetryClicked() {
+        load()
+    }
+
+    override fun onSignoutClicked() {
         viewModelScope.launch {
             _signout(Unit)
         }
