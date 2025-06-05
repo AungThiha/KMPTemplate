@@ -1,7 +1,7 @@
 # KMP Project
 
 > ⚠️ **Project Setup Instructions Outdated**  
-> Instructions provided in the file "How To Set Up and Run the KMP Project.pdf" is outdated. Fleet is no longer a go-to IDE for KMP project. New instruction will be provided before 14 Jun 2025.
+> Instructions provided in the file "How To Set Up and Run the KMP Project.pdf" is outdated. Fleet is no longer a go-to IDE for KMP project. New instructions will be provided before 14 Jun 2025.
 
 ## Get the Precompiled App
 - [iOS - Setup Instructions](https://aungthiha.github.io/iOSAppAccessAutomation/pages/firebase-setup.html)
