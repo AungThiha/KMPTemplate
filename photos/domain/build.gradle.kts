@@ -12,10 +12,7 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-//                implementation(projects.coroutines)
                 implementation(projects.operation)
-//                implementation(libs.koin.core)
-//                implementation(libs.kotlinx.coroutines.core)
             }
         }
     }
