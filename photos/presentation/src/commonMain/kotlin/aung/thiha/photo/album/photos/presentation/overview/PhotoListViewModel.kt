@@ -32,11 +32,11 @@ class PhotoListViewModel(
         }
     }
 
-    override fun onRetryClicked() {
+    override fun onRetryClick() {
         load()
     }
 
-    override fun onSignoutClicked() {
+    override fun onSignoutClick() {
         viewModelScope.launch {
             _signout(Unit)
         }
