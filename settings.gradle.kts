@@ -33,6 +33,9 @@ include(
     ":authentication:domain",
     ":authentication:presentation",
 )
+include(
+    ":photos:domain",
+)
 include(":coroutines")
 include(":composeApp")
 include(":compose")
