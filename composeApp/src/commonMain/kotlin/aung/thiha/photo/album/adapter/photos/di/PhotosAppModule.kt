@@ -1,4 +1,4 @@
-package aung.thiha.photo.album.photos.di
+package aung.thiha.photo.album.adapter.photos.di
 
 import aung.thiha.photo.album.photos.domain.usecase.Signout as PhotosSignout
 import aung.thiha.photo.album.authentication.domain.usecase.Signout as AuthenticationSignout
