@@ -14,7 +14,7 @@ To run the project, refer to the instructions provided in the file "How To Set U
 - Figure out which snapshot test framework would be best suited for the project
 - Set up snapshot tests
 - Implement AES-GCM encryption for session storage to enhance security
-- Unify the jvmToolchain version across all modules to make sure updating java versions easy
+- Unify the jvmToolchain version across all modules to make updating java versions easy
 - Use spotless to sort the keys in version catalog to make searching keys easier
 
 ## CI/CD
