@@ -70,7 +70,7 @@ fun PhotoListScreen(
                 actions = {
                     OutlinedButton(
                         shape = RoundedCornerShape(16.dp),
-                        onClick = listener::onSignoutClicked,
+                        onClick = listener::onSignoutClick,
                         modifier = Modifier.padding(end = 16.dp)
                     ) {
                         Text("Sign out")
@@ -103,7 +103,7 @@ fun PhotoListScreen(
                     }
                 }
                 PhotoListState.LoadingFailed -> {
-                    PhotoLoadingFailed(onRetry = listener::onSignoutClicked)
+                    PhotoLoadingFailed(onRetry = listener::onSignoutClick)
                 }
             }
         }
