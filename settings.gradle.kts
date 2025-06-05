@@ -34,6 +34,7 @@ include(
     ":authentication:presentation",
 )
 include(
+    ":photos:data",
     ":photos:domain",
 )
 include(":coroutines")
