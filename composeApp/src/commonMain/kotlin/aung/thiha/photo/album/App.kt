@@ -45,7 +45,8 @@ fun App() {
              * [onNavigateUp] can be called from any thread but
              * [NavHostController.navigateUp] needs to be called from main thread
              * That's why it uses [lifecycleScope] to ensure the function is main-safe
-             * This separates the concern from the caller
+             * This separates the concern from the caller,
+             * meaning the caller can use it without worrying about main-safety
             * */
             override fun onNavigateUp(): Deferred<Boolean> = lifecycleScope.async(AppDispatchers.main) {
                 navController.navigateUp()
@@ -55,7 +56,8 @@ fun App() {
              * [onNavigation] can be called from any thread but
              * [NavHostController.navigate] needs to be called from main thread
              * That's why it uses [lifecycleScope] to ensure the function is main-safe
-             * This separates the concern from the caller
+             * This separates the concern from the caller,
+             * meaning the caller can use it without worrying about main-safety
              * */
             override fun onNavigation(
                 destination: Destination,
