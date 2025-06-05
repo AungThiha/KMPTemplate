@@ -36,19 +36,19 @@ class SigninViewModel(
     private val mutableOverlayLoading = MutableStateFlow(false)
     val overlayLoading: StateFlow<Boolean> = mutableOverlayLoading
 
-    override fun updateEmail(email: String) {
+    override fun onEmailChange(email: String) {
         savedStateHandle[EMAIL] = email
     }
 
-    override fun updatePassword(password: String) {
+    override fun onPasswordChange(password: String) {
         savedStateHandle[PASSWORD] = password
     }
 
-    override fun navigateToSignup() {
+    override fun onSignupClick() {
         navigator.navigateToSignup()
     }
 
-    override fun signin() {
+    override fun onSigninClick() {
         // TODO prevent continuous click
 
         if (isEmailValid(email.value).not()) {

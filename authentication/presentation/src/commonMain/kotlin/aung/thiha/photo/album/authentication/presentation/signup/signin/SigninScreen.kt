@@ -90,7 +90,7 @@ fun SigninScreen(
 
             OutlinedTextField(
                 value = email,
-                onValueChange = listener::updateEmail,
+                onValueChange = listener::onEmailChange,
                 label = { Text("email") },
                 placeholder = { Text("example@example.com") },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
@@ -102,7 +102,7 @@ fun SigninScreen(
 
             OutlinedTextField(
                 value = password,
-                onValueChange = listener::updatePassword,
+                onValueChange = listener::onPasswordChange,
                 label = { Text("password") },
                 placeholder = { Text("your password") },
                 modifier = Modifier.fillMaxWidth(),
@@ -116,7 +116,7 @@ fun SigninScreen(
             Button(
                 onClick = {
                     keyboard?.hide()
-                    listener.signin()
+                    listener.onSigninClick()
                 },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -129,7 +129,7 @@ fun SigninScreen(
 
             Button(
                 onClick = {
-                    listener.navigateToSignup()
+                    listener.onSignupClick()
                 },
                 modifier = Modifier
                     .fillMaxWidth()
