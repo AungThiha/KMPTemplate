@@ -35,3 +35,9 @@ This project uses:
 ## CI/CD
 - [iOS](https://github.com/AungThiha/iOSAppAccessAutomation)
 - Android (Pending)
+- 
+## Contributing
+PRs and feedback welcome!
+
+## License
+Apache 2.0
