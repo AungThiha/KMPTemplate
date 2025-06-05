@@ -11,9 +11,9 @@ To run the project, refer to the instructions provided in the file "How To Set U
 - Update setup instruction because Fleet is no longer a go-to IDE for KMP project
 - Write integration tests to ensure new changes don't break the existing ones
 - Write instrumentation tests to ensure things work as expected on real devices
+- Use paging3 in PhotoListScreen to support pagination
 - Figure out which snapshot test framework would be best suited for the project
 - Set up snapshot tests
-- Use paging3 in PhotoListScreen to support pagination
 - Implement AES-GCM encryption for session storage to enhance security
 - Unify the jvmToolchain version across all modules to make updating java versions easy
 - Use spotless to sort the keys in version catalog to make searching keys easier
