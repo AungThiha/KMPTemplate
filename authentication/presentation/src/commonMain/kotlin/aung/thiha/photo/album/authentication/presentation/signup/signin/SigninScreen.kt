@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
@@ -122,23 +123,20 @@ fun SigninScreen(
                     .fillMaxWidth()
                     .height(50.dp)
             ) {
-                Text(text = "Sign in", color = Color.White)
+                Text(text = "Sign in")
             }
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            Button(
+            FilledTonalButton(
                 onClick = {
                     listener.onSignupClick()
                 },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(50.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.Gray
-                )
+                    .height(50.dp)
             ) {
-                Text(text = "Sign up", color = Color.White)
+                Text(text = "Sign up")
             }
 
             Spacer(modifier = Modifier.height(16.dp))

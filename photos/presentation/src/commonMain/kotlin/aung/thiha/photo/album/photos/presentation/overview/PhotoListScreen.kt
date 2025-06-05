@@ -66,7 +66,7 @@ fun PhotoListScreen(
                 title = {
                     Text("Photos")
                 },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.White),
+//                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.White),
                 actions = {
                     OutlinedButton(
                         shape = RoundedCornerShape(16.dp),
@@ -159,7 +159,7 @@ fun PhotoLoadingFailed(onRetry: () -> Unit) {
                 .fillMaxWidth()
                 .height(50.dp)
         ) {
-            Text(text = "Retry", color = Color.White)
+            Text(text = "Retry")
         }
     }
 }
