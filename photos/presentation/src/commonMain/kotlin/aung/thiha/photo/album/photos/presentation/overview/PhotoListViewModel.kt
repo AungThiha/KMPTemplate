@@ -2,7 +2,6 @@ package aung.thiha.photo.album.photos.presentation.overview
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import aung.thiha.coroutines.AppDispatchers
 import aung.thiha.operation.Outcome
 import aung.thiha.operation.SuspendOperation
 import aung.thiha.photo.album.photos.domain.model.Photo
@@ -19,7 +18,7 @@ class PhotoListViewModel(
     val photoListState: StateFlow<PhotoListState> = _photoListState
 
     fun load() {
-        viewModelScope.launch(AppDispatchers.io) {
+        viewModelScope.launch {
             _photoListState.value = PhotoListState.Loading
             when (val result = photos.invoke(Unit)) {
                 is Outcome.Failure<*> -> {

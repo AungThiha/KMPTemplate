@@ -3,7 +3,6 @@ package aung.thiha.photo.album.authentication.presentation.signup.signin
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import aung.thiha.coroutines.AppDispatchers
 import aung.thiha.operation.Outcome
 import aung.thiha.operation.SuspendOperation
 import aung.thiha.photo.album.authentication.domain.model.SigninInput
@@ -56,7 +55,7 @@ class SigninViewModel(
             return
         }
 
-        viewModelScope.launch(AppDispatchers.io) {
+        viewModelScope.launch {
             showOverlayLoading()
             val result = sigin(SigninInput(email = email.value, password = password.value))
             when (result) {
