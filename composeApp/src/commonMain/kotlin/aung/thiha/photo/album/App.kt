@@ -8,19 +8,19 @@ import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import aung.thiha.compose.navigation.Destination
 import aung.thiha.coroutines.AppDispatchers
-import aung.thiha.photo.album.authentication.presentation.signup.navigation.authentication
 import aung.thiha.photo.album.authentication.domain.usecase.AppRestartListener
+import aung.thiha.photo.album.authentication.presentation.signup.navigation.authentication
 import aung.thiha.photo.album.navigation.DefaultNavigationDispatcher
 import aung.thiha.photo.album.navigation.NavigationHandler
 import aung.thiha.photo.album.navigation.NavigationOptions
 import aung.thiha.photo.album.navigation.Route
 import aung.thiha.photo.album.navigation.toNavOptions
 import aung.thiha.photo.album.photos.presentation.navigation.photos
-import aung.thiha.photo.album.splash.SplashScreen
+import aung.thiha.photo.album.splash.SplashRoute
+import aung.thiha.photo.album.splash.splash
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -35,7 +35,7 @@ fun App() {
         val lifecycleScope = lifecycleOwner.lifecycleScope
 
         AppRestartListener.listener = {
-            navController.navigate(Route.Splash.name) {
+            navController.navigate(SplashRoute) {
                 popUpTo(0)
             }
         }
@@ -68,13 +68,11 @@ fun App() {
         })
         NavHost(
             navController = navController,
-            startDestination = Route.Splash.name,
+            startDestination = SplashRoute,
             modifier = Modifier
                 .fillMaxSize()
         ) {
-            composable(route = Route.Splash.name) {
-                SplashScreen(navController)
-            }
+            splash()
             authentication()
             photos()
         }
