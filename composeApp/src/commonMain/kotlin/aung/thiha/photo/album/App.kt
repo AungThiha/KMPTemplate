@@ -19,7 +19,7 @@ import aung.thiha.photo.album.navigation.NavigationHandler
 import aung.thiha.photo.album.navigation.NavigationOptions
 import aung.thiha.photo.album.navigation.Route
 import aung.thiha.photo.album.navigation.toNavOptions
-import aung.thiha.photo.album.photos.navigation.photos
+import aung.thiha.photo.album.photos.presentation.navigation.photos
 import aung.thiha.photo.album.splash.SplashScreen
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async

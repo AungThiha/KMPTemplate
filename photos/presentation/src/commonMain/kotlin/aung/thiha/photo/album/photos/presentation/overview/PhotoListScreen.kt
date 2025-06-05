@@ -1,4 +1,4 @@
-package aung.thiha.photo.album.photos.presentation
+package aung.thiha.photo.album.photos.presentation.overview
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

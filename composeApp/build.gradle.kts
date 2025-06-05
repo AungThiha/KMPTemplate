@@ -57,6 +57,7 @@ kotlin {
 
             implementation(projects.photos.data)
             implementation(projects.photos.domain)
+            implementation(projects.photos.presentation)
 
             implementation(projects.session.data)
             implementation(projects.session.domain)
@@ -68,15 +69,10 @@ kotlin {
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
 
-            implementation(libs.compose.shimmer)
-
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
             implementation(libs.androidx.navigation)
             implementation(libs.androidx.datastore)
-
-            implementation(libs.coil.compose)
-            implementation(libs.coil.network)
 
             implementation(libs.kermit)
 

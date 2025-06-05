@@ -1,9 +1,9 @@
-package aung.thiha.photo.album.photos.navigation
+package aung.thiha.photo.album.photos.presentation.navigation
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import aung.thiha.compose.navigation.Destination
-import aung.thiha.photo.album.photos.presentation.PhotoListContainer
+import aung.thiha.photo.album.photos.presentation.overview.PhotoListContainer
 import kotlinx.serialization.Serializable
 
 @Serializable

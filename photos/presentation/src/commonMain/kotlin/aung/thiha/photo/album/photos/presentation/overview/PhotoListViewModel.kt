@@ -1,4 +1,4 @@
-package aung.thiha.photo.album.photos.presentation
+package aung.thiha.photo.album.photos.presentation.overview
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
