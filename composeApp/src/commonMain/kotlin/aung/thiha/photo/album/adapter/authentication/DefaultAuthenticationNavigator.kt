@@ -1,7 +1,9 @@
-package aung.thiha.photo.album.navigation
+package aung.thiha.photo.album.adapter.authentication
 
-import aung.thiha.photo.album.authentication.presentation.signup.navigation.SignupRoute
 import aung.thiha.photo.album.authentication.presentation.signup.navigation.AuthenticationNavigator
+import aung.thiha.photo.album.authentication.presentation.signup.navigation.SignupRoute
+import aung.thiha.photo.album.navigation.NavigationDispatcher
+import aung.thiha.photo.album.navigation.clearBackStack
 import aung.thiha.photo.album.photos.presentation.navigation.PhotoListRoute
 
 class DefaultAuthenticationNavigator(
