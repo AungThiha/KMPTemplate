@@ -11,7 +11,7 @@ To run the project, refer to the instructions provided in the file "How To Set U
 - Update setup instruction because Fleet is no longer a go-to IDE for KMP project
 - Write integration tests to ensure new changes don't break the existing ones
 - Write instrumentation tests to ensure things work as expected on real devices
-- Figure which snapshot test framework would be best suited for the project
+- Figure out which snapshot test framework would be best suited for the project
 - Set up snapshot tests
 - Implement AES-GCM encryption for session storage to enhance security
 - Unify the jvmToolchain version across all modules to make sure updating java versions easy
