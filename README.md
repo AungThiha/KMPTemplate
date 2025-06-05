@@ -13,6 +13,7 @@ This project uses:
 - Firebase for app distributions
 
 ## UI Design
+This is not a full-fledged photo album. It’s just a simple photo viewer to help you jumpstart setting up your own project.
 ![UI Design](ui_design.png)
 
 ## Get the Precompiled App
