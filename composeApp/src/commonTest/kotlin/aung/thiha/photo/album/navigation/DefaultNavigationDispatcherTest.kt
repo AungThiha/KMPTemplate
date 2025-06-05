@@ -9,7 +9,6 @@ import dev.mokkery.matcher.any
 import dev.mokkery.mock
 import dev.mokkery.verify
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 
 class DefaultNavigationDispatcherTest {
@@ -17,7 +16,7 @@ class DefaultNavigationDispatcherTest {
     private val handler = mock<NavigationHandler>()
 
     @Test
-    fun `navigate should call handler with launchSingleTop = true`() = runTest {
+    fun `navigate should call handler with launchSingleTop = true`() {
         DefaultNavigationDispatcher.setHandler(handler)
         every { handler.onNavigation(any(), any()) } returns Job()
 
@@ -36,7 +35,7 @@ class DefaultNavigationDispatcherTest {
     }
 
     @Test
-    fun `navigate should call handler with popUpToRoute = SigninRoute`() = runTest {
+    fun `navigate should call handler with popUpToRoute = SigninRoute`() {
         DefaultNavigationDispatcher.setHandler(handler)
         every { handler.onNavigation(any(), any()) } returns Job()
 
@@ -55,7 +54,7 @@ class DefaultNavigationDispatcherTest {
     }
 
     @Test
-    fun `navigate should call handler with inclusive = true`() = runTest {
+    fun `navigate should call handler with inclusive = true`() {
         DefaultNavigationDispatcher.setHandler(handler)
         every { handler.onNavigation(any(), any()) } returns Job()
 
@@ -74,7 +73,7 @@ class DefaultNavigationDispatcherTest {
     }
 
     @Test
-    fun `navigate should call handler with null popup destination`() = runTest {
+    fun `navigate should call handler with null popup destination`() {
         DefaultNavigationDispatcher.setHandler(handler)
         every { handler.onNavigation(any(), any()) } returns Job()
 
