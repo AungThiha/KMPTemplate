@@ -56,7 +56,7 @@ internal fun SignupContainer() {
         password = password,
         confirmPassword = confirmPassword,
         overlayLoading = overlayLoading,
-        eventReceiver = viewModel
+        listener = viewModel
     )
 }
 
@@ -67,7 +67,7 @@ internal fun SignupScreen(
     password: String,
     confirmPassword: String,
     overlayLoading: Boolean,
-    eventReceiver: SignupScreenListener
+    listener: SignupScreenListener,
 ) {
 
     val keyboard = LocalSoftwareKeyboardController.current
@@ -75,7 +75,7 @@ internal fun SignupScreen(
     Scaffold(
         topBar = {
             AlbumTopAppBar {
-                eventReceiver.navigateUp()
+                listener.onUpClick()
             }
         },
         snackbarHost = {
@@ -101,7 +101,7 @@ internal fun SignupScreen(
 
             OutlinedTextField(
                 value = email,
-                onValueChange = eventReceiver::updateEmail,
+                onValueChange = listener::onEmailChange,
                 label = { Text("email") },
                 placeholder = { Text("example@example.com") },
                 modifier = Modifier.fillMaxWidth(),
@@ -113,7 +113,7 @@ internal fun SignupScreen(
 
             OutlinedTextField(
                 value = password,
-                onValueChange = eventReceiver::updatePassword,
+                onValueChange = listener::onPasswordChange,
                 label = { Text("password") },
                 placeholder = { Text("your password") },
                 modifier = Modifier.fillMaxWidth(),
@@ -126,7 +126,7 @@ internal fun SignupScreen(
 
             OutlinedTextField(
                 value = confirmPassword,
-                onValueChange = eventReceiver::updateConfirmPassword,
+                onValueChange = listener::onConfirmPasswordChange,
                 label = { Text("confirm password") },
                 placeholder = { Text("confirm your password") },
                 modifier = Modifier.fillMaxWidth(),
@@ -140,7 +140,7 @@ internal fun SignupScreen(
             Button(
                 onClick = {
                     keyboard?.hide()
-                    eventReceiver.signup()
+                    listener.onSignupClick()
                 },
                 modifier = Modifier
                     .fillMaxWidth()
