@@ -14,7 +14,7 @@ val authenticationDomainModule = module {
     factory {
         Signout(
             sessionStorage = get(),
-            navigator = get(),
+            navigateToSplash = get(),
         )
     }
 }
