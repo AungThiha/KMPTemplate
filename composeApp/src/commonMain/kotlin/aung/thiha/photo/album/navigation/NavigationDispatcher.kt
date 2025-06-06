@@ -5,7 +5,7 @@ import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Job
 
 /**
- * The navigation abstraction layer is designed after to Jetpack Navigation so engineers can pick it up quickly.
+ * The navigation abstraction layer is designed after Jetpack Navigation so engineers can pick it up quickly.
  * Then, why abstract at all? Mainly to make it easy to swap in another library if needed.
  * When needed to swap in another library, might require a bit of adapter logic
  * but the change will all be isolated inside the abstraction.
