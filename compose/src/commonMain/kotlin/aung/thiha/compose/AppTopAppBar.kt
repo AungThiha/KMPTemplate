@@ -20,7 +20,6 @@ fun AlbumTopAppBar(
 ) {
     TopAppBar(
         title = { },
-//        colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.White),
         navigationIcon = {
             IconButton(onClick = onUpButtonClick) {
                 Icon(
