@@ -31,8 +31,9 @@ This is not a full-fledged photo album. It’s just a simple photo viewer to hel
 - Research the benefits of `com.android.kotlin.multiplatform.library` over `com.android.library`
 - Implement [Talaiot](https://github.com/cdsap/Talaiot) to analyze Gradle tasks
 - Implement AES-GCM encryption for session storage to enhance security
+- Implement remote Gradle cache
 - Unify the jvmToolchain version across all modules to make updating java versions easy
-- Use spotless to sort the keys in version catalog to make searching keys easier
+- Use [Spotless](https://github.com/diffplug/spotless) to sort the keys in version catalog to make searching keys easier
 
 ## CI/CD
 - [iOS](https://github.com/AungThiha/iOSAppAccessAutomation)
