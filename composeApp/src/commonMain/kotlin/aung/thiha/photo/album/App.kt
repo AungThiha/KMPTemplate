@@ -26,7 +26,6 @@ import kotlinx.coroutines.launch
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-@Preview
 fun App() {
     MaterialTheme {
         val navController: NavHostController = rememberNavController()

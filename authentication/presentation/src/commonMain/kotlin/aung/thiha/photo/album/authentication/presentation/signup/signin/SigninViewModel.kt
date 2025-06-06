@@ -30,7 +30,7 @@ class SigninViewModel(
     // TODO when user moves to the second input, if the email is invalid, show error. Hide error when user comes back to the input field
     val email = savedStateHandle.getStateFlow(key = EMAIL, initialValue = "")
     // TODO when user moves to password input field, show minimum password length
-    var password = savedStateHandle.getStateFlow(key = PASSWORD, initialValue = "")
+    val password = savedStateHandle.getStateFlow(key = PASSWORD, initialValue = "")
 
     private val mutableOverlayLoading = MutableStateFlow(false)
     val overlayLoading: StateFlow<Boolean> = mutableOverlayLoading
