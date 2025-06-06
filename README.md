@@ -19,7 +19,7 @@ This is not a full-fledged photo album. It’s just a simple photo viewer to hel
 
 ## Get the Precompiled App
 - [iOS](https://aungthiha.github.io/iOSAppAccessAutomation/pages/firebase-setup.html) - Automatically compiled and distributed after email registration (usually within 20 minutes)
-- Android - Compile from the source (for now)
+- Android - Please, manually compile from the source (for now)
 
 ## Roadmap
 - Update setup instruction because Fleet IDE is no longer supported 
