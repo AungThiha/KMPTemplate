@@ -11,7 +11,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import aung.thiha.compose.navigation.Destination
 import aung.thiha.coroutines.AppDispatchers
-import aung.thiha.photo.album.authentication.domain.usecase.AppRestartListener
 import aung.thiha.photo.album.authentication.presentation.signup.navigation.authentication
 import aung.thiha.photo.album.navigation.DefaultNavigationDispatcher
 import aung.thiha.photo.album.navigation.NavigationHandler
@@ -26,17 +25,12 @@ import kotlinx.coroutines.launch
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
+@Preview
 fun App() {
     MaterialTheme {
         val navController: NavHostController = rememberNavController()
         val lifecycleOwner = LocalLifecycleOwner.current
         val lifecycleScope = lifecycleOwner.lifecycleScope
-
-        AppRestartListener.listener = {
-            navController.navigate(SplashRoute) {
-                popUpTo(0)
-            }
-        }
 
         DefaultNavigationDispatcher.setHandler(object : NavigationHandler {
             /**
