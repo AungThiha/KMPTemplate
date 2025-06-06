@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import aung.thiha.operation.Outcome
 import aung.thiha.operation.SuspendOperation
 import aung.thiha.photo.album.authentication.domain.model.SigninInput
-import aung.thiha.photo.album.authentication.domain.AuthenticationNavigator
+import aung.thiha.photo.album.authentication.presentation.signup.navigation.AuthenticationNavigator
 import aung.thiha.photo.album.authentication.domain.usecase.isEmailValid
 import io.github.aungthiha.snackbar.SnackbarChannel
 import io.github.aungthiha.snackbar.SnackbarChannelOwner
