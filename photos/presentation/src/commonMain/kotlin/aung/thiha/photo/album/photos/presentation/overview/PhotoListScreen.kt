@@ -66,7 +66,6 @@ fun PhotoListScreen(
                 title = {
                     Text("Photos")
                 },
-//                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.White),
                 actions = {
                     OutlinedButton(
                         shape = RoundedCornerShape(16.dp),
