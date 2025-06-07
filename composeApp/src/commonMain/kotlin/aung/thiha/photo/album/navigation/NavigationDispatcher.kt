@@ -9,10 +9,10 @@ import kotlinx.coroutines.Job
  * Then, why abstract at all? Mainly to make it easy to swap in another library if needed.
  * When needed to swap in another library, might require a bit of adapter logic
  * but the change will all be isolated inside the abstraction.
-* */
+ * */
 interface NavigationHandler {
-    fun onNavigateUp() : Deferred<Boolean>
-    fun onNavigation(destination: Destination, navigationOptions: NavigationOptions) : Job
+    fun onNavigateUp(): Deferred<Boolean>
+    fun onNavigation(destination: Destination, navigationOptions: NavigationOptions): Job
 }
 
 interface NavigationDispatcher {
@@ -20,15 +20,30 @@ interface NavigationDispatcher {
 
     fun navigate(
         destination: Destination,
-        builder: NavigationOptionsBuilder.() -> Unit = {}
-    ) : Job
+        launchSingleTop: Boolean = false,
+        clearBackStack: Boolean = false
+    ): Job
 
-    fun navigateUp() : Deferred<Boolean>
+    fun navigate(
+        destination: Destination,
+        popUpTo: Destination,
+        isInclusive: Boolean = false
+    ): Job
+
+    fun navigate(
+        destination: Destination,
+        launchSingleTop: Boolean,
+        popUpTo: Destination,
+        isInclusive: Boolean = false
+    ): Job
+
+
+    fun navigateUp(): Deferred<Boolean>
 }
 
 object DefaultNavigationDispatcher : NavigationDispatcher {
 
-    private lateinit var handler : NavigationHandler
+    private lateinit var handler: NavigationHandler
 
     override fun setHandler(handler: NavigationHandler) {
         this.handler = handler
@@ -36,8 +51,40 @@ object DefaultNavigationDispatcher : NavigationDispatcher {
 
     override fun navigate(
         destination: Destination,
-        builder: NavigationOptionsBuilder.() -> Unit
-    ) : Job = handler.onNavigation(destination, navigationOptions(builder))
+        launchSingleTop: Boolean,
+        clearBackStack: Boolean,
+    ): Job = handler.onNavigation(
+        destination = destination,
+        NavigationOptions(
+            launchSingleTop = launchSingleTop,
+            backStackOptions = if (clearBackStack) BackStackOptions.Clear else null
+        )
+    )
 
-    override fun navigateUp() : Deferred<Boolean> = handler.onNavigateUp()
+    override fun navigate(
+        destination: Destination,
+        popUpTo: Destination,
+        isInclusive: Boolean
+    ): Job = handler.onNavigation(
+        destination = destination,
+        NavigationOptions(
+            launchSingleTop = false,
+            backStackOptions = BackStackOptions.PopUpTo(destination, isInclusive)
+        )
+    )
+
+    override fun navigate(
+        destination: Destination,
+        launchSingleTop: Boolean,
+        popUpTo: Destination,
+        isInclusive: Boolean
+    ): Job = handler.onNavigation(
+        destination = destination,
+        NavigationOptions(
+            launchSingleTop = launchSingleTop,
+            backStackOptions = BackStackOptions.PopUpTo(destination, isInclusive)
+        )
+    )
+
+    override fun navigateUp(): Deferred<Boolean> = handler.onNavigateUp()
 }

@@ -10,9 +10,9 @@ class DefaultAuthenticationNavigator(
 ) : AuthenticationNavigator {
     override fun navigateUpFromSignup() = navigationDispatcher.navigateUp()
 
-    override fun navigateToSignup() = navigationDispatcher.navigate(SignupRoute)
+    override fun navigateToSignup() = navigationDispatcher.navigate(
+        destination = SignupRoute
+    )
 
-    override fun navigateToPhotoList() = navigationDispatcher.navigate(PhotoListRoute) {
-        clearBackStack()
-    }
+    override fun navigateToPhotoList() = navigationDispatcher.navigate(destination = PhotoListRoute, clearBackStack = true)
 }

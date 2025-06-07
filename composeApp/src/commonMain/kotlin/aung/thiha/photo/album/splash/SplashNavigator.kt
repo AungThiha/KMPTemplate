@@ -13,11 +13,7 @@ interface SplashNavigator {
 class DefaultSplashNavigator(
     private val navigationDispatcher: NavigationDispatcher
 ) : SplashNavigator {
-    override fun toPhotoList() = navigationDispatcher.navigate(PhotoListRoute) {
-        clearBackStack()
-    }
+    override fun toPhotoList() = navigationDispatcher.navigate(destination = PhotoListRoute, clearBackStack = true)
 
-    override fun toSignin() = navigationDispatcher.navigate(SigninRoute) {
-        clearBackStack()
-    }
+    override fun toSignin() = navigationDispatcher.navigate(destination = SigninRoute, clearBackStack = true)
 }
