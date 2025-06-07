@@ -1,6 +1,8 @@
 # KMP Project
 
-To run the project, refer to the instructions provided in the file "How To Set Up and Run the KMP Project.pdf", located in the root directory of this project.
+> ⚠️ **Project Setup Instructions Outdated**    
+> The instructions in *How To Set Up and Run the KMP Project.pdf* are outdated. Fleet IDE is no longer supported. Updated setup steps will be available before 14 June 2025.     
+> **Side note:** Normally, setup instructions would be included in the README. However, because this project was originally submitted as a university assignment (where professors were unfamiliar with Markdown), the instructions were written in a PDF instead. The updated setup guide will be included directly in the README.
 
-## Apache License 2.0
-License content can be found in `LICENSE-2.0.txt` in the root folder.
+## License
+Apache 2.0
