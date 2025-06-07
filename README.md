@@ -24,6 +24,11 @@ This is not a full-fledged photo album. It’s just a simple photo viewer to hel
 - [iOS](https://aungthiha.github.io/iOSAppAccessAutomation/pages/firebase-setup.html) - Automatically compiled and distributed after email registration (usually within 20 minutes)
 - Android - Please, manually compile from the source (for now)
 
+## Testing
+Sample unit tests can be found in [DefaultNavigationDispatcherTest.kt](aung/thiha/photo/album/navigation/DefaultNavigationDispatcherTest.kt).
+
+More test coverage and additional testing strategies (such as integration tests, instrumentation tests and snapshot tests) are on the roadmap.
+
 ## Roadmap
 - Update setup instruction because Fleet IDE is no longer supported 
 - Write integration tests to ensure new changes don't break the existing ones
