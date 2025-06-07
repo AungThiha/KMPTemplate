@@ -69,7 +69,7 @@ object DefaultNavigationDispatcher : NavigationDispatcher {
         destination = destination,
         NavigationOptions(
             launchSingleTop = false,
-            backStackOptions = BackStackOptions.PopUpTo(destination, isInclusive)
+            backStackOptions = BackStackOptions.PopUpTo(popUpTo, isInclusive)
         )
     )
 
@@ -82,7 +82,7 @@ object DefaultNavigationDispatcher : NavigationDispatcher {
         destination = destination,
         NavigationOptions(
             launchSingleTop = launchSingleTop,
-            backStackOptions = BackStackOptions.PopUpTo(destination, isInclusive)
+            backStackOptions = BackStackOptions.PopUpTo(popUpTo, isInclusive)
         )
     )
 

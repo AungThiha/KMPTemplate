@@ -20,9 +20,7 @@ class DefaultNavigationDispatcherTest {
         DefaultNavigationDispatcher.setHandler(handler)
         every { handler.onNavigation(any(), any()) } returns Job()
 
-        DefaultNavigationDispatcher.navigate(PhotoListRoute) {
-            launchSingleTop = true
-        }
+        DefaultNavigationDispatcher.navigate(PhotoListRoute, launchSingleTop = true)
 
         verify {
             handler.onNavigation(
@@ -39,15 +37,13 @@ class DefaultNavigationDispatcherTest {
         DefaultNavigationDispatcher.setHandler(handler)
         every { handler.onNavigation(any(), any()) } returns Job()
 
-        DefaultNavigationDispatcher.navigate(PhotoListRoute) {
-            popUpToOptions = PopUpToOptions(SigninRoute)
-        }
+        DefaultNavigationDispatcher.navigate(PhotoListRoute, popUpTo = SigninRoute)
 
         verify {
             handler.onNavigation(
                 PhotoListRoute,
                 NavigationOptions(
-                    popUpToOptions = PopUpToOptions(SigninRoute)
+                    backStackOptions = BackStackOptions.PopUpTo(SigninRoute)
                 )
             )
         }
@@ -58,15 +54,13 @@ class DefaultNavigationDispatcherTest {
         DefaultNavigationDispatcher.setHandler(handler)
         every { handler.onNavigation(any(), any()) } returns Job()
 
-        DefaultNavigationDispatcher.navigate(PhotoListRoute) {
-            popUpToOptions = PopUpToOptions(SignupRoute, true)
-        }
+        DefaultNavigationDispatcher.navigate(PhotoListRoute, popUpTo = SigninRoute, isInclusive = true)
 
         verify {
             handler.onNavigation(
                 PhotoListRoute,
                 NavigationOptions(
-                    popUpToOptions = PopUpToOptions(SignupRoute, true)
+                    backStackOptions = BackStackOptions.PopUpTo(SigninRoute, true)
                 )
             )
         }
@@ -77,15 +71,13 @@ class DefaultNavigationDispatcherTest {
         DefaultNavigationDispatcher.setHandler(handler)
         every { handler.onNavigation(any(), any()) } returns Job()
 
-        DefaultNavigationDispatcher.navigate(PhotoListRoute) {
-            popUpToOptions = clearBackStack()
-        }
+        DefaultNavigationDispatcher.navigate(PhotoListRoute, clearBackStack = true)
 
         verify {
             handler.onNavigation(
                 PhotoListRoute,
                 NavigationOptions(
-                    popUpToOptions = PopUpToOptions(null, false)
+                    backStackOptions = BackStackOptions.Clear
                 )
             )
         }
