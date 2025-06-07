@@ -1,7 +1,8 @@
 # KMP Project
 
-> ⚠️ **Project Setup Instructions Outdated**  
-> Instructions provided in the file "How To Set Up and Run the KMP Project.pdf" is outdated. Fleet IDE is no longer supported. New instructions will be available before 14 Jun 2025
+> ⚠️ **Project Setup Instructions Outdated**
+> The instructions in *How To Set Up and Run the KMP Project.pdf* are outdated. Fleet IDE is no longer supported. Updated setup steps will be available before 14 June 2025.
+> **Side note:** Normally, setup instructions would be included in the README. However, because this project was originally submitted as a university assignment (where professors were unfamiliar with Markdown), the instructions were written in a PDF instead. The updated setup guide will be included directly in the README.
 
 A template to jumpstart a KMP/CMP project with modularization, clean architecture, MVVM and UDF.
 
