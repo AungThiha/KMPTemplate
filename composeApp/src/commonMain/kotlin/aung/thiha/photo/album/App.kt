@@ -15,7 +15,7 @@ import aung.thiha.photo.album.authentication.presentation.signup.navigation.auth
 import aung.thiha.photo.album.navigation.DefaultNavigationDispatcher
 import aung.thiha.photo.album.navigation.NavigationHandler
 import aung.thiha.photo.album.navigation.NavigationOptions
-import aung.thiha.photo.album.navigation.toNavOptions
+import aung.thiha.photo.album.navigation.applyNavigationOptions
 import aung.thiha.photo.album.photos.presentation.navigation.photos
 import aung.thiha.photo.album.splash.SplashRoute
 import aung.thiha.photo.album.splash.splash
@@ -55,7 +55,9 @@ fun App() {
                 destination: Destination,
                 navigationOptions: NavigationOptions
             ) = lifecycleScope.launch(AppDispatchers.main) {
-                navController.navigate(destination, navigationOptions.toNavOptions())
+                navController.navigate(destination) {
+                    applyNavigationOptions(navigationOptions)
+                }
             }
         })
         NavHost(

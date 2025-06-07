@@ -5,7 +5,5 @@ import aung.thiha.photo.album.navigation.NavigationDispatcher
 import aung.thiha.photo.album.splash.SplashRoute
 
 fun createNavigateToSplash(navigationDispatcher: NavigationDispatcher) = NavigateToSplash {
-    navigationDispatcher.navigate(SplashRoute) {
-        clearBackStack()
-    }
+    navigationDispatcher.navigate(destination = SplashRoute, clearBackStack = true)
 }
