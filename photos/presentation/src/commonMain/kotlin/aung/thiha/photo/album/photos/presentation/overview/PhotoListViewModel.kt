@@ -17,7 +17,21 @@ class PhotoListViewModel(
     private val _photoListState = MutableStateFlow<PhotoListState>(PhotoListState.Loading)
     val photoListState: StateFlow<PhotoListState> = _photoListState
 
-    fun load() {
+    init {
+        load()
+    }
+
+    override fun onRetryClick() {
+        load()
+    }
+
+    override fun onSignoutClick() {
+        viewModelScope.launch {
+            _signout(Unit)
+        }
+    }
+
+    private fun load() {
         viewModelScope.launch {
             _photoListState.value = PhotoListState.Loading
             when (val result = photos.invoke(Unit)) {
@@ -31,13 +45,4 @@ class PhotoListViewModel(
         }
     }
 
-    override fun onRetryClick() {
-        load()
-    }
-
-    override fun onSignoutClick() {
-        viewModelScope.launch {
-            _signout(Unit)
-        }
-    }
 }
