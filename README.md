@@ -6,7 +6,7 @@
 > 
 > **Side note:** Normally, setup instructions would be included in the README. However, because this project was originally submitted as a university assignment (where professors were unfamiliar with Markdown), the instructions were written in a PDF instead. The updated setup guide will be included directly in the README.    
 
-A template to jumpstart a KMP/CMP project with modularization, clean architecture, MVVM and UDF.
+A template to jumpstart KMP/CMP projects with modularization, clean architecture, MVVM and UDF.
 
 This project uses:
 - Ktor for networking
