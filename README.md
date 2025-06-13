@@ -33,7 +33,7 @@ Sample unit tests can be found in [DefaultNavigationDispatcherTest.kt](composeAp
 More test coverage and additional testing strategies (such as integration tests, instrumentation tests and snapshot tests) are on the roadmap.
 
 ## Roadmap
-- Update setup instruction because Fleet IDE is no longer supported 
+- Set up spacer sizes in terms of XXS, XS, S, M, L, XL and so on instead of hardcoded DPs to easily unify sizes
 - Write integration tests to ensure new changes don't break the existing ones
 - Write instrumentation tests to ensure things work as expected on real devices
 - Use paging3 in PhotoListScreen to support pagination
