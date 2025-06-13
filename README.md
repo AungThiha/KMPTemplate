@@ -24,6 +24,15 @@ This is not a full-fledged photo album. It’s just a simple photo viewer to hel
 - [iOS](https://aungthiha.github.io/iOSAppAccessAutomation/pages/firebase-setup.html) - Automatically compiled and distributed after email registration (usually within 20 minutes)
 - Android - Please, manually compile from the source (for now)
 
+## Set up the Project
+1. Follow [the official guide](https://www.jetbrains.com/help/kotlin-multiplatform-dev/quickstart.html#set-up-the-environment) to set up the KMP development environment.
+2. Clone the repo.
+3. Open the project in Android Studio, assuming you already have the Android development environment set up.
+4. If you get a `NoToolchainAvailableException`, install [JDK 11](https://formulae.brew.sh/cask/zulu@11) using Homebrew. If you don’t get this error, you can skip this step.
+5. Swift packages should be automatically resolved by Android Studio. If not, please update your Android Studio.
+6. There’s a dropdown menu beside the Run button in Android Studio. That’s where you choose the target platform.
+7. Enjoy!
+
 ## Testing
 Sample unit tests can be found in [DefaultNavigationDispatcherTest.kt](composeApp/src/commonTest/kotlin/aung/thiha/photo/album/navigation/DefaultNavigationDispatcherTest.kt).
 
