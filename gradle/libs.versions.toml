@@ -1,5 +1,5 @@
 [versions]
-agp = "8.7.2"
+agp = "8.9.2"
 android-compileSdk = "35"
 android-minSdk = "24"
 android-targetSdk = "35"
@@ -68,6 +68,7 @@ firebase = { module = "com.google.firebase:firebase-bom", version.ref = "firebas
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
+androidKotlinMultiplatformLibrary = { id = "com.android.kotlin.multiplatform.library", version.ref ="agp" }
 javaLibrary = { id = "java-library"}
 jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
