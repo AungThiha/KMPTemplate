@@ -11,7 +11,7 @@ class SplashViewModel(
     private val navigator: SplashNavigator,
 ) : ViewModel() {
 
-    fun init() {
+    init {
         viewModelScope.launch {
             when (val result = isSignedIn.invoke(Unit)) {
                 is Outcome.Failure<*> -> {
