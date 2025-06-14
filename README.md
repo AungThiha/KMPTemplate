@@ -41,7 +41,6 @@ More test coverage and additional testing strategies (such as integration tests,
 - Use paging3 in PhotoListScreen to support pagination
 - Figure out which snapshot test framework would be best suited for the project
 - Set up snapshot tests
-- Research the benefits of `com.android.kotlin.multiplatform.library` over `com.android.library`
 - Implement [Talaiot](https://github.com/cdsap/Talaiot) to analyze Gradle tasks
 - Implement AES-GCM encryption for session storage to enhance security
 - Implement remote Gradle cache
