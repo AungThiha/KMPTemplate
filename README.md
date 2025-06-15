@@ -24,7 +24,7 @@ This is not a full-fledged photo album. It’s just a simple photo viewer to hel
 3. Setup Firebase for Android by following [the official guide](https://firebase.google.com/docs/android/setup). Place `google-services.json` in `composeApp` directory.
 4. Setup Firebase for iOS by following [the official guide](https://firebase.google.com/docs/ios/setup). The initialization code is already added. Just place `GoogleService-Info.plist` into `iosApp/iosApp/` directory. 
 5. Open the project in Android Studio. 
-6. If you get a `NoToolchainAvailableException`, install [JDK 11](https://formulae.brew.sh/cask/zulu@11) using Homebrew. If you don’t get this error, you can skip this step. 
+6. If you get a `NoToolchainAvailableException`, install JDK 24. If you don’t get this error, you can skip this step. 
 7. Swift packages should be automatically resolved by Android Studio. If not, please update your Android Studio. 
 8. There’s a dropdown menu beside the Run button in Android Studio. That’s where you choose the target platform. 
 9. Enjoy!

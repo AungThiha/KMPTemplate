@@ -9,8 +9,7 @@ plugins {
 }
 
 kotlin {
-    // TODO unify the jvmToolchain version across all modules
-    jvmToolchain(11)
+    jvmToolchain(libs.versions.jvm.toolchain.get().toInt())
     androidLibrary {
         namespace = "aung.thiha.photo.album.authentication.presentation"
         compileSdk = libs.versions.android.compileSdk.get().toInt()

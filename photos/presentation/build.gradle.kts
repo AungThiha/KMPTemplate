@@ -1,6 +1,4 @@
 import com.android.build.api.dsl.androidLibrary
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.androidKotlinMultiplatformLibrary)
@@ -11,8 +9,7 @@ plugins {
 }
 
 kotlin {
-    // TODO unify the jvmToolchain version across all modules
-    jvmToolchain(11)
+    jvmToolchain(libs.versions.jvm.toolchain.get().toInt())
     androidLibrary {
         namespace = "aung.thiha.photo.album.photos.presentation"
         compileSdk = libs.versions.android.compileSdk.get().toInt()

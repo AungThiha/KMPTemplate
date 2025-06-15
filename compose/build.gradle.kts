@@ -5,8 +5,7 @@ plugins {
 }
 
 kotlin {
-    // TODO unify the jvmToolchain version across all modules
-    jvmToolchain(11)
+    jvmToolchain(libs.versions.jvm.toolchain.get().toInt())
     jvm()
     iosX64()
     iosArm64()
