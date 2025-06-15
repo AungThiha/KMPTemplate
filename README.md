@@ -44,7 +44,6 @@ More test coverage and additional testing strategies (such as integration tests,
 - Implement [Talaiot](https://github.com/cdsap/Talaiot) to analyze Gradle tasks
 - Implement AES-GCM encryption for session storage to enhance security
 - Implement remote Gradle cache
-- Unify the jvmToolchain version across all modules to make updating java versions easy
 - Use [Spotless](https://github.com/diffplug/spotless) to sort the keys in version catalog to make searching keys easier
 
 ## CI/CD
