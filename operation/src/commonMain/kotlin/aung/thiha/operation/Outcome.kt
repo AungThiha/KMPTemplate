@@ -12,3 +12,7 @@ enum class FailureType {
 inline fun <reified T> Outcome<T>.getOrNull(): T? {
     return (this as? Outcome.Success)?.data
 }
+
+inline fun <reified T> Outcome<T>.rethrowIfFailure() {
+    (this as? Outcome.Failure)?.e?.let { throw it }
+}
