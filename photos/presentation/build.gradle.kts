@@ -10,6 +10,9 @@ plugins {
 
 kotlin {
     jvmToolchain(libs.versions.jvm.toolchain.get().toInt())
+
+    jvm()
+
     androidLibrary {
         namespace = "aung.thiha.photo.album.photos.presentation"
         compileSdk = libs.versions.android.compileSdk.get().toInt()
@@ -21,7 +24,7 @@ kotlin {
             }
         }
     }
-    jvm()
+
     iosX64()
     iosArm64()
     iosSimulatorArm64()

@@ -7,6 +7,7 @@ plugins {
 
 kotlin {
 
+    jvm()
     androidLibrary {
         namespace = "aung.thiha.storage"
         compileSdk = libs.versions.android.compileSdk.get().toInt()

@@ -11,6 +11,7 @@ plugins {
 kotlin {
     jvmToolchain(libs.versions.jvm.toolchain.get().toInt())
 
+    jvm()
     androidTarget()
     
     listOf(
@@ -82,7 +83,7 @@ kotlin {
             implementation(libs.ktor.serialization.kotlinx.json)
             implementation(libs.ktor.logging)
         }
-        commonTest.dependencies {
+        jvmTest.dependencies {
             implementation(libs.kotlin.test)
             implementation(libs.kotlinx.coroutines.test)
         }

@@ -1,6 +1,4 @@
 import com.android.build.api.dsl.androidLibrary
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -8,6 +6,9 @@ plugins {
 }
 
 kotlin {
+
+    jvm()
+
     androidLibrary {
         namespace = "aung.thiha.session"
         compileSdk = libs.versions.android.compileSdk.get().toInt()

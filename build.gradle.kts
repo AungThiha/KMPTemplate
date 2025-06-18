@@ -9,3 +9,11 @@ plugins {
     alias(libs.plugins.googleServices) apply false
     alias(libs.plugins.jetbrains.kotlin.jvm) apply false
 }
+
+subprojects {
+    tasks {
+        withType<Test>().configureEach {
+            useJUnitPlatform()
+        }
+    }
+}

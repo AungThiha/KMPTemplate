@@ -30,7 +30,7 @@ This is not a full-fledged photo album. It’s just a simple photo viewer to hel
 9. Enjoy!
 
 ## Testing
-Sample unit tests can be found in [DefaultNavigationDispatcherTest.kt](composeApp/src/commonTest/kotlin/aung/thiha/photo/album/navigation/DefaultNavigationDispatcherTest.kt).
+Sample unit tests can be found in [DefaultNavigationDispatcherTest.kt](composeApp/src/jvmTest/kotlin/aung/thiha/photo/album/navigation/DefaultNavigationDispatcherTest.kt).
 
 More test coverage and additional testing strategies (such as integration tests, instrumentation tests and snapshot tests) are on the roadmap.
 
