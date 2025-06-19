@@ -44,7 +44,7 @@ This is not a full-fledged photo album. It’s just a simple photo viewer to hel
 - Set up snapshot tests
 - Implement [Talaiot](https://github.com/cdsap/Talaiot) to analyze Gradle tasks
 - Implement AES-GCM encryption for session storage to enhance security
-- Implement remote Gradle cache
+- Implement remote Gradle cache for the iOS CI/CD pipeline
 - Use [Spotless](https://github.com/diffplug/spotless) to sort the keys in version catalog to make searching keys easier
 
 ## CI/CD
