@@ -12,14 +12,15 @@ import kotlin.test.Test
 
 class DefaultNavigationDispatcherTest {
 
+    private val navigationDispatcher = DefaultNavigationDispatcher()
     private val handler = mock<NavigationHandler>()
 
     @Test
     fun `navigate should call handler with launchSingleTop = true`() {
-        DefaultNavigationDispatcher.setHandler(handler)
+        navigationDispatcher.setHandler(handler)
         every { handler.onNavigation(any(), any()) } returns Job()
 
-        DefaultNavigationDispatcher.navigate(PhotoListRoute, launchSingleTop = true)
+        navigationDispatcher.navigate(PhotoListRoute, launchSingleTop = true)
 
         verify {
             handler.onNavigation(
@@ -33,10 +34,10 @@ class DefaultNavigationDispatcherTest {
 
     @Test
     fun `navigate should call handler with popUpToRoute = SigninRoute`() {
-        DefaultNavigationDispatcher.setHandler(handler)
+        navigationDispatcher.setHandler(handler)
         every { handler.onNavigation(any(), any()) } returns Job()
 
-        DefaultNavigationDispatcher.navigate(PhotoListRoute, popUpTo = SigninRoute)
+        navigationDispatcher.navigate(PhotoListRoute, popUpTo = SigninRoute)
 
         verify {
             handler.onNavigation(
@@ -50,10 +51,10 @@ class DefaultNavigationDispatcherTest {
 
     @Test
     fun `navigate should call handler with inclusive = true`() {
-        DefaultNavigationDispatcher.setHandler(handler)
+        navigationDispatcher.setHandler(handler)
         every { handler.onNavigation(any(), any()) } returns Job()
 
-        DefaultNavigationDispatcher.navigate(PhotoListRoute, popUpTo = SigninRoute, isInclusive = true)
+        navigationDispatcher.navigate(PhotoListRoute, popUpTo = SigninRoute, isInclusive = true)
 
         verify {
             handler.onNavigation(
@@ -67,10 +68,10 @@ class DefaultNavigationDispatcherTest {
 
     @Test
     fun `navigate should call handler with null popup destination`() {
-        DefaultNavigationDispatcher.setHandler(handler)
+        navigationDispatcher.setHandler(handler)
         every { handler.onNavigation(any(), any()) } returns Job()
 
-        DefaultNavigationDispatcher.navigate(PhotoListRoute, clearBackStack = true)
+        navigationDispatcher.navigate(PhotoListRoute, clearBackStack = true)
 
         verify {
             handler.onNavigation(

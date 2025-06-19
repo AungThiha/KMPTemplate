@@ -41,7 +41,7 @@ interface NavigationDispatcher {
     fun navigateUp(): Deferred<Boolean>
 }
 
-object DefaultNavigationDispatcher : NavigationDispatcher {
+class DefaultNavigationDispatcher : NavigationDispatcher {
 
     private lateinit var handler: NavigationHandler
 

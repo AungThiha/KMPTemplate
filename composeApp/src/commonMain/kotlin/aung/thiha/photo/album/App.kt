@@ -13,6 +13,7 @@ import aung.thiha.compose.navigation.Destination
 import aung.thiha.coroutines.AppDispatchers
 import aung.thiha.photo.album.authentication.presentation.signup.navigation.authentication
 import aung.thiha.photo.album.navigation.DefaultNavigationDispatcher
+import aung.thiha.photo.album.navigation.NavigationDispatcher
 import aung.thiha.photo.album.navigation.NavigationHandler
 import aung.thiha.photo.album.navigation.NavigationOptions
 import aung.thiha.photo.album.navigation.applyNavigationOptions
@@ -23,6 +24,9 @@ import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.koin.compose.getKoin
+import org.koin.compose.koinInject
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 @Preview
@@ -32,7 +36,7 @@ fun App() {
         val lifecycleOwner = LocalLifecycleOwner.current
         val lifecycleScope = lifecycleOwner.lifecycleScope
 
-        DefaultNavigationDispatcher.setHandler(object : NavigationHandler {
+        koinInject<NavigationDispatcher>().setHandler(object : NavigationHandler {
             /**
              * [onNavigateUp] can be called from any thread but
              * [NavHostController.navigateUp] needs to be called from main thread
