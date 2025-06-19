@@ -31,7 +31,7 @@ This is not a full-fledged photo album. It’s just a simple photo viewer to hel
 
 ## Testing
 - Sample unit tests can be found in [DefaultNavigationDispatcherTest.kt](composeApp/src/jvmTest/kotlin/aung/thiha/photo/album/navigation/DefaultNavigationDispatcherTest.kt).
-- Sample integration tests can be found in [SplashViewModelTest](composeApp/src/jvmTest/kotlin/aung/thiha/photo/album/splash/SplashViewModelTest.kt)
+- Sample integration tests can be found in [SplashViewModelTest.kt](composeApp/src/jvmTest/kotlin/aung/thiha/photo/album/splash/SplashViewModelTest.kt)
 - More test coverage and additional testing strategies (such as instrumentation tests and snapshot tests) are on the roadmap.
 
 ## Roadmap
