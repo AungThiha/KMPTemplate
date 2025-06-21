@@ -4,7 +4,6 @@ plugins {
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlinxSerialization)
-    alias(libs.plugins.googleServices)
     alias(libs.plugins.dev.mokkery)
 }
 
@@ -33,7 +32,6 @@ kotlin {
             implementation(libs.androidx.activity.ktx)
             implementation(libs.koin.android)
             implementation(libs.ktor.client.android)
-            implementation(project.dependencies.platform(libs.firebase))
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
