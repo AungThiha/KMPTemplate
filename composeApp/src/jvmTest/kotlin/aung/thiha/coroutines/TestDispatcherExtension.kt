@@ -12,6 +12,13 @@ import org.junit.jupiter.api.extension.AfterEachCallback
 import org.junit.jupiter.api.extension.BeforeEachCallback
 import org.junit.jupiter.api.extension.ExtensionContext
 
+/**
+ * ⚠️ All TestDispatchers must share the same TestCoroutineScheduler
+ * Otherwise, virtual time won't be in sync.
+ *
+ * Refer to Google’s guide on TestCoroutineScheduler and virtual time:
+ * https://developer.android.com/kotlin/coroutines/test
+* */
 @OptIn(ExperimentalCoroutinesApi::class)
 class TestDispatcherExtension(
     private val main: TestDispatcher = UnconfinedTestDispatcher(),

@@ -11,7 +11,7 @@
 
 ## Integration Tests
 
-> **Note:** Integration tests must live in [`composeApp/src/jvmTest`](composeApp/src/jvmTest) as they involve dependencies across multiple modules.
+> 💡 Integration tests must live in [`composeApp/src/jvmTest`](composeApp/src/jvmTest) as they involve dependencies across multiple modules.
 
 ---
 
@@ -33,7 +33,7 @@
         }
     }
     ```   
-   > Use the `fake` API as shown above. This allows you to provide the interface to the production code and inject the concrete implementation to your test. With the concrete implementation, you can stub responses.
+   > 💡 Use the `fake` API as shown above. This allows you to provide the interface to the production code and inject the concrete implementation to your test. With the concrete implementation, you can stub responses.
 
 3. **Add the override module to your test overrides list**  
    Update [KoinModuleOverrides.kt](composeApp/src/jvmTest/kotlin/aung/thiha/photo/album/di/KoinModuleOverrides.kt):
@@ -68,8 +68,8 @@
 
 ### Override Coroutine Dispatchers for Integration Tests
 
-> **Important:** Production code must always use `CoroutineDispatchers` from [`AppDispatchers`](coroutines/src/commonMain/kotlin/aung/thiha/coroutines/AppDispatchers.kt).  
-> **Do not** use `kotlinx.coroutines.Dispatchers` directly.
+> ⚠️ **Do not** use `kotlinx.coroutines.Dispatchers` directly like `Dispatchers.Main`, `Dispatchers.IO`, etc.   
+> Production code must always use `CoroutineDispatchers` from [`AppDispatchers`](coroutines/src/commonMain/kotlin/aung/thiha/coroutines/AppDispatchers.kt).
 
 There are two main ways to override dispatchers during testing:
 
@@ -109,8 +109,8 @@ class SplashViewModelTest : KoinTest {
 
     /**
      * Option B: Override specific dispatchers
-     * 
-     * All TestDispatchers must share the same TestCoroutineScheduler!
+     *
+     * ⚠️ All TestDispatchers must share the same TestCoroutineScheduler!
      * Otherwise, virtual time won't be in sync and may lead to flaky tests
      *
      * Refer to Google’s guide on TestCoroutineScheduler and virtual time:
@@ -174,7 +174,7 @@ class SplashViewModelTest : KoinTest {
         backgroundScope.launch {
             // simulate background work
         }
-        
+
         val dispatcher = StandardTestDispatcher(testScheduler)
         val job = launch(dispatcher) {
             delay(100)
