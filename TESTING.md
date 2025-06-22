@@ -13,7 +13,9 @@
 
 > **Note:** Integration tests must live in [`composeApp/src/jvmTest`](composeApp/src/jvmTest) as they involve dependencies across multiple modules.
 
-### Set Up Fakes
+---
+
+### Set Up Fakes for Integration Tests
 
 1. **Implement a fake**  
    Take [`FakeAuthenticationDataSource.kt`](composeApp/src/jvmTest/kotlin/aung/thiha/photo/album/authentication/data/remote/service/FakeAuthenticationDataSource.kt) as a reference and implement the interface you want to fake.
@@ -39,7 +41,7 @@
     )
    ```
 
-4. **Annotate your test with the Koin extension and inject your fake**
+4. **Annotate your test with the Koin test extension and inject your fake**
    ```kotlin
     @ExtendWith(KoinTestExtension::class)
     class SplashViewModelTest : KoinTest {
@@ -101,7 +103,9 @@ class SplashViewModelTest : KoinTest {
 }
 ```
 
-### Override Coroutine Dispatchers
+---
+
+### Override Coroutine Dispatchers for Integration Tests
 
 > **Important:** Production code must always use `CoroutineDispatchers` from [`AppDispatchers`](coroutines/src/commonMain/kotlin/aung/thiha/coroutines/AppDispatchers.kt).  
 > **Do not** use `kotlinx.coroutines.Dispatchers` directly.
