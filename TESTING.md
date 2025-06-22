@@ -7,7 +7,7 @@ While it's ok to test only on Android during coding, it's important to test on b
 
 Think of it like this: before you open a PR, you do a final test. That final test should always include both Android and iOS.
 
-After the PR is merged, QA engineers should also ensure their test coverage includes both platforms.
+After the PR is merged, QA engineers should also make sure their test coverage includes both platforms.
 
 ## Unit Tests
 
