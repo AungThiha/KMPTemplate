@@ -14,18 +14,51 @@ import org.junit.jupiter.api.extension.ExtensionContext
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class TestDispatcherExtension(
-    private val testCoroutineScheduler: TestCoroutineScheduler? = null,
-    private val main: TestDispatcher? = null,
-    private val io: CoroutineDispatcher? = null,
-    private val default: CoroutineDispatcher? = null,
+    private val main: TestDispatcher = UnconfinedTestDispatcher(),
+    private val io: CoroutineDispatcher = main,
+    private val default: CoroutineDispatcher = main,
 ) : BeforeEachCallback, AfterEachCallback {
 
+    constructor(
+        testCoroutineScheduler: TestCoroutineScheduler
+    ) : this(
+        main = UnconfinedTestDispatcher(testCoroutineScheduler),
+        io = UnconfinedTestDispatcher(testCoroutineScheduler),
+        default = UnconfinedTestDispatcher(testCoroutineScheduler)
+    )
+
     override fun beforeEach(context: ExtensionContext) {
-        TestDispatcherHolder.testMain = (this.main ?: UnconfinedTestDispatcher(testCoroutineScheduler ?: TestCoroutineScheduler())).also {
-            Dispatchers.setMain(it)
+
+        val schedulers = listOf(main, io, default)
+            .filterIsInstance<TestDispatcher>()
+            .map { it.scheduler }
+            .distinct()
+
+        if (schedulers.size > 1) {
+            throw IllegalStateException(
+                "All TestDispatchers must share the same TestCoroutineScheduler. " +
+                        "Otherwise, virtual time won't be in sync.\n" +
+                        "Refer to Google’s guide on TestCoroutineScheduler and virtual time:\n" +
+                        "https://developer.android.com/kotlin/coroutines/test"
+            )
         }
-        TestDispatcherHolder.testIo = this.io ?: TestDispatcherHolder.testMain
-        TestDispatcherHolder.testDefault = this.default ?: TestDispatcherHolder.testMain
+
+        TestDispatcherHolder.testMain = main
+        TestDispatcherHolder.testIo = io
+        TestDispatcherHolder.testDefault = default
+
+        /**
+         * Quote from Google:
+         * If the Main dispatcher has been replaced with a TestDispatcher,
+         * any newly-created TestDispatchers will automatically use the scheduler from the Main dispatcher,
+         * including the StandardTestDispatcher created by runTest if no other dispatcher is passed to it.
+         *
+         * Reference: https://developer.android.com/kotlin/coroutines/test#setting-main-dispatcher
+         *
+         * This also applies to runNavTest from this project.
+         * StandardTestDispatcher created by runNavTest will automatically use the scheduler from the Main dispatcher
+        * */
+        Dispatchers.setMain(main)
     }
 
     override fun afterEach(context: ExtensionContext) {
