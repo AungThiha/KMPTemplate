@@ -130,4 +130,60 @@ class SplashViewModelTest : KoinTest {
 ---
 
 ### Assert Navigation in Integration Tests
+Use `runNavTest` to assert navigation behavior in integration tests. This gives you:
 
+- Access to `TestScope`, just like `runTest`
+- A `SpyNavigationHandler` (`spyNav`) to assert navigation outcomes
+- Declarative and readable assertions
+
+```kotlin
+import aung.thiha.photo.album.navigation.runNavTest
+
+class SplashViewModelTest : KoinTest {
+    @Test
+    fun simpleNavTest() = runNavTest { spyNav ->
+        spyNav shouldNavigateTo PhotoListRoute.withClearBackStack
+    }
+
+    @Test
+    fun withClearBackStack() = runNavTest { spyNav ->
+        spyNav shouldNavigateTo PhotoListRoute.withClearBackStack
+    }
+
+    @Test
+    fun withLaunchSingleTop() = runNavTest { spyNav ->
+        spyNav shouldNavigateTo PhotoListRoute.withLaunchSingleTop
+    }
+
+    @Test
+    fun withPopupToNonInclusive() = runNavTest { spyNav ->
+        spyNav shouldNavigateTo PhotoListRoute.withPopUpTo(SplashRoute)
+    }
+
+    @Test
+    fun withPopupToInclusive() = runNavTest { spyNav ->
+        spyNav shouldNavigateTo PhotoListRoute.withPopUpTo(
+            popUpTo = SplashRoute,
+            isInclusive = true
+        )
+    }
+
+    @Test
+    @OptIn(ExperimentalCoroutinesApi::class)
+    fun useTestScope() = runNavTest { spyNav ->
+        backgroundScope.launch {
+            // simulate background work
+        }
+        
+        val dispatcher = StandardTestDispatcher(testScheduler)
+        val job = launch(dispatcher) {
+            delay(100)
+        }
+        job.join()
+
+        runCurrent()
+        advanceTimeBy(100)
+        advanceUntilIdle()
+    }
+}
+```

@@ -8,8 +8,12 @@ data class DestinationWithOptions(
     val backStackOptions: BackStackOptions? = null,
 )
 
-infix fun Destination.withLaunchSingleTop(value: Boolean) =
-    DestinationWithOptions(this, launchSingleTop = value)
+val Destination.withLaunchSingleTop: DestinationWithOptions
+    get() = DestinationWithOptions(
+        destination = this,
+        launchSingleTop = true
+    )
+
 
 val Destination.withClearBackStack: DestinationWithOptions
     get() = DestinationWithOptions(
