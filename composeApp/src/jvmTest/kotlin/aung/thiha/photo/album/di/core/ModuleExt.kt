@@ -1,12 +1,10 @@
 package aung.thiha.photo.album.di.core
 
 import org.koin.core.module.Module
+import org.koin.dsl.binds
 
 inline fun <reified I : Any, reified C : I> Module.fake(noinline factory: () -> C) {
-    val scoped = ThreadScoped(factory)
-
-    single<I> { scoped.instance }
-    single<C> { scoped.instance }
+    single { ThreadScoped(factory).instance } binds arrayOf(I::class, C::class)
 }
 
 class ThreadScoped<T>(private val factory: () -> T) {
