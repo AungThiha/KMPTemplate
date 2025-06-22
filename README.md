@@ -34,8 +34,7 @@ Refer to [the dedicated page](TESTING.md) for testing.
 
 ## Roadmap
 - Set up spacer sizes in terms of XXS, XS, S, M, L, XL and so on instead of hardcoded DPs to easily unify sizes
-- Write instructions on how to create fakes(test doubles) to use with integration tests
-- Write instructions on how to test navigation in integration tests
+- Write an Android Studio plugin help developers easily generate fakes(test doubles) to use with integration tests
 - Write instrumentation tests to ensure things work as expected on real devices
 - Use paging3 in PhotoListScreen to support pagination
 - Figure out which snapshot test framework would be best suited for the project
