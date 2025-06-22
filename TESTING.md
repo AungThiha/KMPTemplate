@@ -96,7 +96,7 @@ class SplashViewModelTest : KoinTest {
 
 Use this approach if you need:
 - A custom `TestCoroutineScheduler`
-- Different `TestDispatchers` for `Main`, `IO`, or `Default`
+- Different `TestDispatchers` for `Main`, `IO` or `Default`
 ```kotlin
 import aung.thiha.coroutines.TestDispatcherExtension
 
