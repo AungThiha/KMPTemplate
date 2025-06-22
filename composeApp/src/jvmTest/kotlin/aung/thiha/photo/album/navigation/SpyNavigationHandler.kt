@@ -76,3 +76,15 @@ fun KoinTest.runNavTest(
         testBody(spyNavigationHandler)
     }
 }
+
+fun KoinTest.runNavTest(
+    testScope: TestScope,
+    timeout: Duration = 60.seconds,
+    testBody: suspend TestScope.(SpyNavigationHandler) -> Unit
+): TestResult {
+    val spyNavigationHandler = SpyNavigationHandler(testScope)
+    get<NavigationDispatcher>().setHandler(spyNavigationHandler)
+    return testScope.runTest(timeout) {
+        testBody(spyNavigationHandler)
+    }
+}
