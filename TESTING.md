@@ -24,6 +24,9 @@
    For example, in [`AuthenticationDataModuleOverride.kt`](composeApp/src/jvmTest/kotlin/aung/thiha/photo/album/di/AuthenticationDataModuleOverride.kt):
 
     ```kotlin
+    import aung.thiha.photo.album.di.core.fake
+    import org.koin.dsl.module
+   
     val authenticationDataModuleOverride = module {
         fake<AuthenticationDataSource, FakeAuthenticationDataSource> {
             FakeAuthenticationDataSource()
@@ -43,6 +46,10 @@
 
 4. **Annotate your test with the Koin test extension and inject your fake**
    ```kotlin
+    import aung.thiha.photo.album.di.core.KoinTestExtension
+    import org.koin.test.KoinTest
+    import org.koin.test.inject
+    
     @ExtendWith(KoinTestExtension::class)
     class SplashViewModelTest : KoinTest {
     
@@ -71,6 +78,8 @@ There are two main ways to override dispatchers during testing:
 If you only need to use the same `UnconfinedTestDispatcher` for everything, simply annotate your test class:
 
 ```kotlin
+import aung.thiha.coroutines.TestDispatcherExtension
+
 @ExtendWith(TestDispatcherExtension::class)
 class SplashViewModelTest : KoinTest {
     // Tests here will run with UnconfinedTestDispatcher
@@ -82,6 +91,8 @@ Use this approach if you need:
 - A custom `TestCoroutineScheduler`
 - Different `TestDispatchers` for `Main`, `IO`, or `Default`
 ```kotlin
+import aung.thiha.coroutines.TestDispatcherExtension
+
 class SplashViewModelTest : KoinTest {
 
     val testScope = TestScope()
