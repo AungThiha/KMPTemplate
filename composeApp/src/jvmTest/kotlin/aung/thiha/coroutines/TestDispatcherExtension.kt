@@ -70,15 +70,25 @@ class TestDispatcherExtension(
         TestDispatcherHolder.testDefault = default
 
         /**
-         * Quote from Google:
+         * Quotes from Google:
+         *
+         * In local unit tests, the Main dispatcher that wraps the Android UI thread will be unavailable,
+         * as these tests are executed on a local JVM and not an Android device
+         *
+         * some APIs such as viewModelScope use a hardcoded Main dispatcher under the hood.
+         *
+         * To replace the Main dispatcher with a TestDispatcher in all cases,
+         * use the Dispatchers.setMain and Dispatchers.resetMain functions
+         *
          * If the Main dispatcher has been replaced with a TestDispatcher,
          * any newly-created TestDispatchers will automatically use the scheduler from the Main dispatcher,
          * including the StandardTestDispatcher created by runTest if no other dispatcher is passed to it.
          *
          * Reference: https://developer.android.com/kotlin/coroutines/test#setting-main-dispatcher
-         *
-         * This also applies to runNavTest from this project.
-         * StandardTestDispatcher created by runNavTest will automatically use the scheduler from the Main dispatcher
+         * =================================================================
+         * runNavTest from this project is written with this design in mind.
+         * StandardTestDispatcher created by runNavTest will also automatically use the scheduler \
+         * from the Main dispatcher
         * */
         Dispatchers.setMain(main)
     }
