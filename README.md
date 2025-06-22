@@ -20,7 +20,7 @@ This is not a full-fledged photo album. It’s just a simple photo viewer to hel
 
 ## Set up the Project
 
-> 💡If you prefer to try this project **without Firebase**, switch to the `remove-firebase` branch. Eliminating the need for this separate branch is on the roadmap.
+> 💡 If you prefer to try this project **without Firebase**, switch to the `remove-firebase` branch. Eliminating the need for this separate branch is on the roadmap.
 
 1. Follow [the official guide](https://www.jetbrains.com/help/kotlin-multiplatform-dev/quickstart.html#set-up-the-environment) to set up the KMP development environment.
 2. Clone the repo.
