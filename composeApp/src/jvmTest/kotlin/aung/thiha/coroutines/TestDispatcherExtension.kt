@@ -13,12 +13,27 @@ import org.junit.jupiter.api.extension.BeforeEachCallback
 import org.junit.jupiter.api.extension.ExtensionContext
 
 /**
- * ⚠️ All TestDispatchers must share the same TestCoroutineScheduler
- * Otherwise, virtual time won't be in sync.
+ * This class offers two mutually exclusive ways to control dispatcher behavior:
  *
- * Refer to Google’s guide on TestCoroutineScheduler and virtual time:
+ * 1. Use the primary constructor to manually provide one or all of [main], [io], and [default] dispatchers.
+ *
+ * 2. Use the secondary constructor with a shared [TestCoroutineScheduler]
+ *   -> Automatically sets [main], [io] and [default] dispatchers using that scheduler.
+ *
+ * The intent is to prevent developers from mixing both approaches.
+ * For example, passing a shared [TestCoroutineScheduler] while also overriding individual dispatchers \
+ * could lead to inconsistent virtual time due to different schedulers being used.
+ *
+ * This restriction is **enforced** at the API level by not exposing a constructor that takes both.
+ *
+ * However, the primary constructor is still public,
+ * so developers can manually pass in dispatchers that use **different** [TestCoroutineScheduler] instances.
+ * To guard against this, [beforeEach] performs a **runtime validation**,
+ * which throws an [IllegalStateException] if dispatchers use different schedulers.
+ *
+ * For more information why all TestDispatchers must share the same TestCoroutineScheduler, see:
  * https://developer.android.com/kotlin/coroutines/test
-* */
+ */
 @OptIn(ExperimentalCoroutinesApi::class)
 class TestDispatcherExtension(
     private val main: TestDispatcher = UnconfinedTestDispatcher(),
