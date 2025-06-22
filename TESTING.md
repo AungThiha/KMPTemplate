@@ -57,52 +57,6 @@
 
 5. **Enjoy!**
 
-### Override CoroutineDispatchers
-
-> **Note:** the production code must always use CoroutineDispatchers from [AppDispatchers](coroutines/src/commonMain/kotlin/aung/thiha/coroutines/AppDispatchers.kt) and should not directly acess `kotlinx.coroutines.Dispatchers`
-
-There are two main ways to override CoroutineDispatchers.
-
-If you only need to use `UnconfinedTestDispatcher`, simple annotate your test class like this:
-```kotlin
-@ExtendWith(TestDispatcherExtension::class)
-class SplashViewModelTest : KoinTest {
-}
-``` 
-
-If you need fine-grained control:
-```kotlin
-class SplashViewModelTest : KoinTest {
-
-    val testScope = TestScope()
-
-    /**
-     * If you only need to override the testScheduler
-     * This overrides the testScheduler for all dispatchers
-    * */
-    @JvmField
-    @RegisterExtension
-    val testDispatcherExtensionOverrideTestScheduler: TestDispatcherExtension = TestDispatcherExtension(
-        testCoroutineScheduler = testScope.testScheduler
-    )
-
-    /**
-     * If you need to use different TestDispatcher for different CoroutineDispatcher
-     * Make sure all TestDispatchers share the same testScheduler. Otherwise, virtual time won't be in sync
-     * Refer to the documentation by Google to learn how testScheduler affects your test:
-     * https://developer.android.com/kotlin/coroutines/test
-    * */
-    @OptIn(ExperimentalCoroutinesApi::class)
-    @JvmField
-    @RegisterExtension
-    val testDispatcherExtensionOverrideDispatchers: TestDispatcherExtension = TestDispatcherExtension(
-        main = StandardTestDispatcher(testScope.testScheduler),
-        io = StandardTestDispatcher(testScope.testScheduler),
-        default = UnconfinedTestDispatcher(testScope.testScheduler),
-    )
-}
-```
-
 ---
 
 ### Override Coroutine Dispatchers for Integration Tests
@@ -161,3 +115,8 @@ class SplashViewModelTest : KoinTest {
     )
 }
 ```
+
+---
+
+### Assert Navigation in Integration Tests
+
