@@ -1,0 +1,159 @@
+# Testing
+
+## Unit Tests
+
+- Sample unit tests can be found in [`DefaultNavigationDispatcherTest.kt`](composeApp/src/jvmTest/kotlin/aung/thiha/photo/album/navigation/DefaultNavigationDispatcherTest.kt).
+- Refer to the following official documentation:
+    - [JUnit 5 Docs](https://junit.org/)
+    - [Mokkery Docs](https://mokkery.dev/)
+
+---
+
+## Integration Tests
+
+> **Note:** Integration tests must live in [`composeApp/src/jvmTest`](composeApp/src/jvmTest) as they involve dependencies across multiple modules.
+
+### Set Up Fakes
+
+1. **Implement a fake**  
+   Take [`FakeAuthenticationDataSource.kt`](composeApp/src/jvmTest/kotlin/aung/thiha/photo/album/authentication/data/remote/service/FakeAuthenticationDataSource.kt) as a reference and implement the interface you want to fake.
+
+2. **Create a Koin module to override the interface provision**  
+   For example, in [`AuthenticationDataModuleOverride.kt`](composeApp/src/jvmTest/kotlin/aung/thiha/photo/album/di/AuthenticationDataModuleOverride.kt):
+
+    ```kotlin
+    val authenticationDataModuleOverride = module {
+        fake<AuthenticationDataSource, FakeAuthenticationDataSource> {
+            FakeAuthenticationDataSource()
+        }
+    }
+    ```   
+   > Use the `fake` API as shown above. This allows you to provide the interface to the production code and inject the concrete implementation to your test. With the concrete implementation, you can stub responses.
+
+3. **Add the override module to your test overrides list**  
+   Update [KoinModuleOverrides.kt](composeApp/src/jvmTest/kotlin/aung/thiha/photo/album/di/KoinModuleOverrides.kt):
+   ```kotlin
+    val overrides = listOf(
+        sessionStorageModule,
+        authenticationDataModuleOverride
+    )
+   ```
+
+4. **Annotate your test with the Koin extension and inject your fake**
+   ```kotlin
+    @ExtendWith(KoinTestExtension::class)
+    class SplashViewModelTest : KoinTest {
+    
+        private val authDataSource: FakeAuthenticationDataSource by inject()
+    
+        @Test
+        fun stubrResponse() {
+            authDataSource.tokenCheckResponses += TokenCheckResponse(message = "all good")
+        }
+    }
+    ```
+
+5. **Enjoy!**
+
+### Override CoroutineDispatchers
+
+> **Note:** the production code must always use CoroutineDispatchers from [AppDispatchers](coroutines/src/commonMain/kotlin/aung/thiha/coroutines/AppDispatchers.kt) and should not directly acess `kotlinx.coroutines.Dispatchers`
+
+There are two main ways to override CoroutineDispatchers.
+
+If you only need to use `UnconfinedTestDispatcher`, simple annotate your test class like this:
+```kotlin
+@ExtendWith(TestDispatcherExtension::class)
+class SplashViewModelTest : KoinTest {
+}
+``` 
+
+If you need fine-grained control:
+```kotlin
+class SplashViewModelTest : KoinTest {
+
+    val testScope = TestScope()
+
+    /**
+     * If you only need to override the testScheduler
+     * This overrides the testScheduler for all dispatchers
+    * */
+    @JvmField
+    @RegisterExtension
+    val testDispatcherExtensionOverrideTestScheduler: TestDispatcherExtension = TestDispatcherExtension(
+        testCoroutineScheduler = testScope.testScheduler
+    )
+
+    /**
+     * If you need to use different TestDispatcher for different CoroutineDispatcher
+     * Make sure all TestDispatchers share the same testScheduler. Otherwise, virtual time won't be in sync
+     * Refer to the documentation by Google to learn how testScheduler affects your test:
+     * https://developer.android.com/kotlin/coroutines/test
+    * */
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @JvmField
+    @RegisterExtension
+    val testDispatcherExtensionOverrideDispatchers: TestDispatcherExtension = TestDispatcherExtension(
+        main = StandardTestDispatcher(testScope.testScheduler),
+        io = StandardTestDispatcher(testScope.testScheduler),
+        default = UnconfinedTestDispatcher(testScope.testScheduler),
+    )
+}
+```
+
+### Override Coroutine Dispatchers
+
+> **Important:** Production code must always use `CoroutineDispatchers` from [`AppDispatchers`](coroutines/src/commonMain/kotlin/aung/thiha/coroutines/AppDispatchers.kt).  
+> **Do not** use `kotlinx.coroutines.Dispatchers` directly.
+
+There are two main ways to override dispatchers during testing:
+
+#### Option 1: Quick Setup with `UnconfinedTestDispatcher`
+
+If you only need to use the same `UnconfinedTestDispatcher` for everything, simply annotate your test class:
+
+```kotlin
+@ExtendWith(TestDispatcherExtension::class)
+class SplashViewModelTest : KoinTest {
+    // Tests here will run with UnconfinedTestDispatcher
+}
+```
+#### Option 2: Fine-Grained Dispatcher Control
+
+Use this approach if you need:
+- A custom `TestCoroutineScheduler`
+- Different `TestDispatchers` for `Main`, `IO`, or `Default`
+```kotlin
+class SplashViewModelTest : KoinTest {
+
+    val testScope = TestScope()
+
+    /**
+     * Option A: Override only the test scheduler
+     * This automatically makes all dispatchers share the same scheduler.
+     */
+    @JvmField
+    @RegisterExtension
+    val testDispatcherExtensionOverrideTestScheduler = TestDispatcherExtension(
+        testCoroutineScheduler = testScope.testScheduler
+    )
+
+    /**
+     * Option B: Override specific dispatchers
+     * 
+     * All TestDispatchers must share the same TestCoroutineScheduler!
+     * Otherwise, virtual time won't be in sync and may lead to flaky tests
+     *
+     * Refer to Google’s guide on TestCoroutineScheduler and virtual time:
+     * https://developer.android.com/kotlin/coroutines/test
+     */
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @JvmField
+    @RegisterExtension
+    val testDispatcherExtensionOverrideDispatchers = TestDispatcherExtension(
+        main = StandardTestDispatcher(testScope.testScheduler),
+        io = StandardTestDispatcher(testScope.testScheduler),
+        default = UnconfinedTestDispatcher(testScope.testScheduler)
+    )
+}
+```

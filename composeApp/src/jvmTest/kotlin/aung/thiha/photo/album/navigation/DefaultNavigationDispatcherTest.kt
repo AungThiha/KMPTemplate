@@ -8,7 +8,7 @@ import dev.mokkery.matcher.any
 import dev.mokkery.mock
 import dev.mokkery.verify
 import kotlinx.coroutines.Job
-import kotlin.test.Test
+import org.junit.jupiter.api.Test
 
 class DefaultNavigationDispatcherTest {
 

@@ -30,9 +30,7 @@ This is not a full-fledged photo album. It’s just a simple photo viewer to hel
 9. Enjoy!
 
 ## Testing
-- Sample unit tests can be found in [DefaultNavigationDispatcherTest.kt](composeApp/src/jvmTest/kotlin/aung/thiha/photo/album/navigation/DefaultNavigationDispatcherTest.kt).
-- Sample integration tests can be found in [SplashViewModelTest.kt](composeApp/src/jvmTest/kotlin/aung/thiha/photo/album/splash/SplashViewModelTest.kt)
-- More test coverage and additional testing strategies (such as instrumentation tests and snapshot tests) are on the roadmap.
+Refer to [the dedicated page](TESTING.md) for testing.
 
 ## Roadmap
 - Set up spacer sizes in terms of XXS, XS, S, M, L, XL and so on instead of hardcoded DPs to easily unify sizes
