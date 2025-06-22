@@ -19,14 +19,17 @@ This is not a full-fledged photo album. It’s just a simple photo viewer to hel
 - Android - Please, manually compile from the source (for now)
 
 ## Set up the Project
+
+> If you prefer to try this project **without Firebase**, switch to the `remove-firebase` branch.
+
 1. Follow [the official guide](https://www.jetbrains.com/help/kotlin-multiplatform-dev/quickstart.html#set-up-the-environment) to set up the KMP development environment.
 2. Clone the repo.
-3. Setup Firebase for Android by following [the official guide](https://firebase.google.com/docs/android/setup). Place `google-services.json` in `composeApp` directory.
-4. Setup Firebase for iOS by following [the official guide](https://firebase.google.com/docs/ios/setup). The initialization code is already added. Just place `GoogleService-Info.plist` into `iosApp/iosApp/` directory. 
-5. Open the project in Android Studio. 
-6. If you get a `NoToolchainAvailableException`, install JDK 24. If you don’t get this error, you can skip this step. 
-7. Swift packages should be automatically resolved by Android Studio. If not, please update your Android Studio. 
-8. There’s a dropdown menu beside the Run button in Android Studio. That’s where you choose the target platform. 
+3. (Only for `main` branch) Setup Firebase for Android by following [the official guide](https://firebase.google.com/docs/android/setup). Place `google-services.json` in the `composeApp` directory.
+4. (Only for `main` branch) Setup Firebase for iOS by following [the official guide](https://firebase.google.com/docs/ios/setup). The initialization code is already added—just place `GoogleService-Info.plist` into the `iosApp/iosApp/` directory.
+5. Open the project in Android Studio.
+6. If you get a `NoToolchainAvailableException`, install JDK 24. If you don't get this error, you can skip this step.
+7. Swift packages should be automatically resolved by Android Studio. If not, please update your Android Studio.
+8. There's a dropdown menu beside the Run button in Android Studio. That's where you choose the target platform.
 9. Enjoy!
 
 ## Testing
