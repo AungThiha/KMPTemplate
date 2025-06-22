@@ -27,7 +27,7 @@ class SpyNavigationHandler(
 
     override fun onNavigateUp(): CompletableDeferred<Boolean> {
         navigateUpCallCount++
-        return CompletableDeferred(true) // Always return success
+        return CompletableDeferred(true)
     }
 
     override fun onNavigation(destination: Destination, navigationOptions: NavigationOptions): Job {
