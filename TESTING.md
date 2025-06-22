@@ -1,14 +1,5 @@
 # Testing
 
-## Manual Tests
-> 💡 Take this part with a grain salt. There's no perfect approach here. This is simply what I recommend based on my experience.
-
-While it's ok to test only on Android during coding, it's important to test on both Android and iOS before marking a task **done**. A task isn't really done if it hasn't been tested on both platforms because what works on Android may not work on iOS.
-
-Think of it like this: before you open a PR, you do a final test. That final test should always include both Android and iOS.
-
-After the PR is merged, QA engineers should also make sure their test coverage includes both platforms.
-
 ## Unit Tests
 
 - Sample unit tests can be found in [`DefaultNavigationDispatcherTest.kt`](composeApp/src/jvmTest/kotlin/aung/thiha/photo/album/navigation/DefaultNavigationDispatcherTest.kt).
@@ -194,3 +185,14 @@ class SplashViewModelTest : KoinTest {
     }
 }
 ```
+
+---
+
+## Manual Tests
+> 💡 Take this part with a grain salt. There's no perfect approach here. This is simply what I recommend based on my experience.
+
+While it's ok to test only on Android during coding, it's important to test on both Android and iOS before marking a task **done**. A task isn't really done if it hasn't been tested on both platforms because what works on Android may not work on iOS.
+
+Think of it like this: before you open a PR, you do a final test. That final test should always include both Android and iOS.
+
+After the PR is merged, QA engineers should also make sure their test coverage includes both platforms.
