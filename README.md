@@ -51,7 +51,7 @@ Refer to [the dedicated page](TESTING.md) for testing.
 
 ## CI/CD
 - [iOS](https://github.com/AungThiha/iOSAppAccessAutomation)
-- Android (Pending)
+- Android (Coming Soon)
 
 ## Contributing
 PRs and feedback welcome!
