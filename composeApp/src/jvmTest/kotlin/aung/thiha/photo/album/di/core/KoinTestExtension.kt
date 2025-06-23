@@ -8,6 +8,10 @@ import org.koin.core.context.GlobalContext.startKoin
 import org.koin.core.context.GlobalContext.stopKoin
 import org.koin.core.module.Module
 
+/**
+ * @param extraOverrides - if the override is applicable only to a particular test class,
+ * use this param in that particular test class. This leaves the overrides unchanged for other test classes.
+ * */
 class KoinTestExtension(
     private val extraOverrides: List<Module> = emptyList()
 ) : BeforeEachCallback, AfterEachCallback {
