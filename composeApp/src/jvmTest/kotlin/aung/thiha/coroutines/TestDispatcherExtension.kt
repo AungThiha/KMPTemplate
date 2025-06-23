@@ -15,7 +15,7 @@ import org.junit.jupiter.api.extension.ExtensionContext
 /**
  * This class offers two mutually exclusive ways to control dispatcher behavior:
  *
- * 1. Use the primary constructor to manually provide one or all of [main], [io], and [default] dispatchers.
+ * 1. Use the primary constructor to manually provide one or all of [main], [io] and [default] dispatchers.
  *
  * 2. Use the secondary constructor with a shared [TestCoroutineScheduler]
  *   -> Automatically sets [main], [io] and [default] dispatchers using that scheduler.
@@ -37,8 +37,8 @@ import org.junit.jupiter.api.extension.ExtensionContext
 @OptIn(ExperimentalCoroutinesApi::class)
 class TestDispatcherExtension(
     private val main: TestDispatcher = UnconfinedTestDispatcher(),
-    private val io: CoroutineDispatcher = main,
-    private val default: CoroutineDispatcher = main,
+    private val io: TestDispatcher = main,
+    private val default: TestDispatcher = main,
 ) : BeforeEachCallback, AfterEachCallback {
 
     constructor(
@@ -52,7 +52,6 @@ class TestDispatcherExtension(
     override fun beforeEach(context: ExtensionContext) {
 
         val schedulers = listOf(main, io, default)
-            .filterIsInstance<TestDispatcher>()
             .map { it.scheduler }
             .distinct()
 
