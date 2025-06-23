@@ -8,6 +8,7 @@ This project uses:
 - Jetpack Navigation for screen transitions
 - Jetpack DataStore for local persistence
 - Firebase for app distributions
+- [JUnit5](https://junit.org/) and [Mokkery](https://mokkery.dev/) for testing
 
 ## UI Design
 This is not a full-fledged photo album. It’s just a simple photo viewer to help you jumpstart setting up your own project.
