@@ -77,8 +77,10 @@ If you only need to use the same `UnconfinedTestDispatcher` for everything, simp
 
 ```kotlin
 import aung.thiha.coroutines.TestDispatcherExtension
+import aung.thiha.photo.album.di.core.KoinTestExtension
 
 @ExtendWith(TestDispatcherExtension::class)
+@ExtendWith(KoinTestExtension::class)
 class SplashViewModelTest : KoinTest {
     // Tests here will run with UnconfinedTestDispatcher
 }
@@ -90,7 +92,9 @@ Use this approach if you need:
 - Different `TestDispatchers` for `Main`, `IO` or `Default`
 ```kotlin
 import aung.thiha.coroutines.TestDispatcherExtension
+import aung.thiha.photo.album.di.core.KoinTestExtension
 
+@ExtendWith(KoinTestExtension::class)
 class SplashViewModelTest : KoinTest {
 
     val testScope = TestScope()
