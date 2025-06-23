@@ -33,7 +33,7 @@
     ```   
    > 💡 Use the `fake` API as shown above. This allows you to provide the interface to the production code and inject the concrete implementation to your test. With the concrete implementation, you can stub responses.
 
-3. **Add the override module to your test overrides list**  
+3. **Add your override module to the `overrides` list**  
    Update [KoinModuleOverrides.kt](composeApp/src/jvmTest/kotlin/aung/thiha/photo/album/di/KoinModuleOverrides.kt):
    ```kotlin
     val overrides = listOf(
