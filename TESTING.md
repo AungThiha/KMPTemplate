@@ -198,3 +198,9 @@ Think of it like this: before you open a PR, you do a final test. That final tes
 
 After the PR is merged, QA engineers should also make sure their test coverage includes both platforms.
 Unlike developer testing, this should cover multiple device configurations on each platform, depending on the affected areas.
+
+## Snapshot Tests
+Coming Soon
+
+## Instrumentation Tests
+Coming Soon
