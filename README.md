@@ -1,4 +1,4 @@
-# KMP Project
+# KMP/CMP Template
 
 A template to jumpstart KMP/CMP projects with modularization, clean architecture, MVVM and UDF.
 
