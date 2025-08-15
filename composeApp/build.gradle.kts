@@ -41,7 +41,7 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.compose)
             implementation(projects.operation)
-            implementation(libs.aungthiha.snackbar.channel)
+            implementation(libs.aungthiha.snackbarStateflowHandle)
             implementation(projects.storage)
 
             implementation(projects.coroutines)

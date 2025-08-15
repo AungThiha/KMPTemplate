@@ -17,6 +17,7 @@ kotlin {
         namespace = "aung.thiha.photo.album.authentication.presentation"
         compileSdk = libs.versions.android.compileSdk.get().toInt()
         minSdk = libs.versions.android.minSdk.get().toInt()
+        androidResources.enable = true
 
         packaging {
             resources {
@@ -37,7 +38,7 @@ kotlin {
 
                 implementation(projects.coroutines)
 
-                implementation(libs.aungthiha.snackbar.channel)
+                implementation(libs.aungthiha.snackbarStateflowHandle)
 
                 implementation(libs.koin.core)
                 implementation(libs.koin.compose)

@@ -8,8 +8,8 @@ import aung.thiha.operation.SuspendOperation
 import aung.thiha.photo.album.authentication.domain.model.SigninInput
 import aung.thiha.photo.album.authentication.presentation.signup.navigation.AuthenticationNavigator
 import aung.thiha.photo.album.authentication.domain.usecase.isEmailValid
-import io.github.aungthiha.snackbar.SnackbarChannel
-import io.github.aungthiha.snackbar.SnackbarChannelOwner
+import io.github.aungthiha.snackbar.SnackbarStateFlowHandle
+import io.github.aungthiha.snackbar.SnackbarStateFlowOwner
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -24,8 +24,8 @@ class SigninViewModel(
     private val sigin: SuspendOperation<SigninInput, Unit>,
     private val navigator: AuthenticationNavigator,
     private val savedStateHandle: SavedStateHandle = SavedStateHandle(),
-    private val snackbarChannel: SnackbarChannel = SnackbarChannel()
-) : ViewModel(), SigninScreenListener, SnackbarChannelOwner by snackbarChannel {
+    private val snackbarStateFlowHandle: SnackbarStateFlowHandle = SnackbarStateFlowHandle()
+) : ViewModel(), SigninScreenListener, SnackbarStateFlowOwner by snackbarStateFlowHandle {
 
     // TODO when user moves to the second input, if the email is invalid, show error. Hide error when user comes back to the input field
     val email = savedStateHandle.getStateFlow(key = EMAIL, initialValue = "")
@@ -51,7 +51,7 @@ class SigninViewModel(
         // TODO prevent continuous click
 
         if (isEmailValid(email.value).not()) {
-            showSnackBar(Res.string.authentication_invalid_email)
+            snackbarStateFlowHandle.showSnackBar(Res.string.authentication_invalid_email)
             return
         }
 
@@ -60,7 +60,7 @@ class SigninViewModel(
             val result = sigin(SigninInput(email = email.value, password = password.value))
             when (result) {
                 is Outcome.Failure<Unit> -> {
-                    showSnackBar(Res.string.authentication_failed)
+                    snackbarStateFlowHandle.showSnackBar(Res.string.authentication_failed)
                     hideOverlayLoading()
                 }
 

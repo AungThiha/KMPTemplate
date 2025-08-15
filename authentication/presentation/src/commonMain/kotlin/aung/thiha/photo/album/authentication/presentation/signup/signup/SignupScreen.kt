@@ -45,7 +45,7 @@ internal fun SignupContainer() {
     val overlayLoading by viewModel.overlayLoading.collectAsStateWithLifecycle()
 
     val snackbarHostState : SnackbarHostState = remember { SnackbarHostState() }
-    viewModel.snackbarFlow.observeWithLifecycle {
+    viewModel.snackbarStateFlow.observeWithLifecycle {
         snackbarHostState.showSnackbar(it)
     }
 

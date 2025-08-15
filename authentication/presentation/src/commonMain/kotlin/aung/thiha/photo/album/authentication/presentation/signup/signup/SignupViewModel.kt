@@ -8,8 +8,8 @@ import aung.thiha.operation.SuspendOperation
 import aung.thiha.photo.album.authentication.domain.model.SignupInput
 import aung.thiha.photo.album.authentication.presentation.signup.navigation.AuthenticationNavigator
 import aung.thiha.photo.album.authentication.domain.usecase.isEmailValid
-import io.github.aungthiha.snackbar.SnackbarChannel
-import io.github.aungthiha.snackbar.SnackbarChannelOwner
+import io.github.aungthiha.snackbar.SnackbarStateFlowHandle
+import io.github.aungthiha.snackbar.SnackbarStateFlowOwner
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -26,8 +26,8 @@ class SignupViewModel(
     private val sigup: SuspendOperation<SignupInput, Unit>,
     private val navigator: AuthenticationNavigator,
     private val savedStateHandle: SavedStateHandle = SavedStateHandle(),
-    private val snackbarChannel: SnackbarChannel = SnackbarChannel()
-) : ViewModel(), SignupScreenListener, SnackbarChannelOwner by snackbarChannel {
+    private val snackbarStateFlowHandle: SnackbarStateFlowHandle = SnackbarStateFlowHandle()
+) : ViewModel(), SignupScreenListener, SnackbarStateFlowOwner by snackbarStateFlowHandle {
 
     // TODO when user moves to the second input, if the email is invalid, show error. Hide error when user comes back to the input field
     val email = savedStateHandle.getStateFlow(key = EMAIL, initialValue = "")
@@ -59,12 +59,12 @@ class SignupViewModel(
         // TODO prevent continuous click
 
         if (isEmailValid(email.value).not()) {
-            showSnackBar(Res.string.authentication_invalid_email)
+            snackbarStateFlowHandle.showSnackBar(Res.string.authentication_invalid_email)
             return
         }
 
         if (password.value != confirmPassword.value) {
-            showSnackBar(Res.string.authentication_passwords_do_not_match)
+            snackbarStateFlowHandle.showSnackBar(Res.string.authentication_passwords_do_not_match)
             return
         }
 
@@ -74,7 +74,7 @@ class SignupViewModel(
             val result = sigup(SignupInput(email = email.value, password = password.value))
             when (result) {
                 is Outcome.Failure<Unit> -> {
-                    showSnackBar(Res.string.authentication_failed)
+                    snackbarStateFlowHandle.showSnackBar(Res.string.authentication_failed)
                     hideOverlayLoading()
                 }
                 is Outcome.Success<Unit> -> {

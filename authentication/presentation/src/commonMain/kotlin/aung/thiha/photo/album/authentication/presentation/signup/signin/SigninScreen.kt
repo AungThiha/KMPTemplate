@@ -42,7 +42,7 @@ internal fun SinginContainer() {
 
     val snackbarHostState = remember { SnackbarHostState() }
 
-    viewModel.snackbarFlow.observeWithLifecycle {
+    viewModel.snackbarStateFlow.observeWithLifecycle {
         snackbarHostState.showSnackbar(it)
     }
 

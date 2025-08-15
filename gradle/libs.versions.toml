@@ -1,7 +1,7 @@
 [versions]
-agp = "8.10.1"
+agp = "8.12.0"
 jvm-toolchain = "24"
-android-compileSdk = "35"
+android-compileSdk = "36"
 android-minSdk = "24"
 android-targetSdk = "35"
 androidx-activity = "1.10.1"
@@ -22,16 +22,16 @@ coroutines = "1.10.2"
 firebase = "33.14.0"
 junit = "4.13.2"
 kermit = "1.0.0"
-kotlin = "2.1.21"
+kotlin = "2.2.10"
 koin = "4.1.0-RC1"
 ktor = "2.3.12"
 google-services = "4.4.2"
 jetbrainsKotlinJvm = "2.0.21"
-snackbarChannelVersion = "1.0.7"
+snackbarStateFlowHandle = "1.0.0"
 
 [libraries]
 androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "androidx-activity" }
-aungthiha-snackbar-channel = { module = "io.github.aungthiha:snackbar-channel", version.ref = "snackbarChannelVersion" }
+aungthiha-snackbarStateflowHandle = { module = "io.github.aungthiha:snackbar-stateflow-handle", version.ref = "snackbarStateFlowHandle" }
 compose-shimmer = { module = "com.valentinilk.shimmer:compose-shimmer", version.ref = "composeShimmer" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
@@ -79,4 +79,4 @@ kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref =
 kotlinxSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 googleServices = { id = "com.google.gms.google-services", version.ref = "google-services"}
 jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
-dev-mokkery = { id = "dev.mokkery", version = "2.8.0" }
+dev-mokkery = { id = "dev.mokkery", version = "2.9.0" }
